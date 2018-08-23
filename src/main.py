@@ -2,14 +2,13 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
-mainwindow_class = uic.loadUiType("mainwindow.ui")[0]
+mainwindow_class = uic.loadUiType("../gui/mainwindow.ui")[0]
 
 
 class MyMainWindow(QMainWindow, mainwindow_class):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.btn_push
 
 
 if __name__ == "__main__":
