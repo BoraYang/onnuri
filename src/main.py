@@ -1,14 +1,16 @@
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
+from mainwindow import Ui_MainWindow
 
-mainwindow_class = uic.loadUiType("../gui/add_family.ui")[0]
+mainwindow_class = Ui_MainWindow
 
 
 class MyMainWindow(QMainWindow, mainwindow_class):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
 
 
 if __name__ == "__main__":
