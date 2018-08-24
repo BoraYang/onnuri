@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>599</width>
-    <height>662</height>
+    <height>711</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -276,7 +276,7 @@
           <item row="3" column="0">
            <widget class="QLabel" name="lbl_baptism_by">
             <property name="text">
-             <string>Baptism</string>
+             <string>Baptizer</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
