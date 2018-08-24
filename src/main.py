@@ -1,17 +1,14 @@
 import sys
 from PyQt5.QtWidgets import *
-from PyQt5 import uic
-from mainwindow import Ui_MainWindow
+
 from PyQt5.QtCore import pyqtSlot
-mainwindow_class = Ui_MainWindow
 
 
 class MyMainWindow(QMainWindow, mainwindow_class):
-
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.btn_cancel.released.connect(self.close)
+        self.chk_john.setEnable(false)
 
     @pyqtSlot()
     def close(self):
@@ -19,6 +16,7 @@ class MyMainWindow(QMainWindow, mainwindow_class):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    mainwindow_class = uic.loadUi("../gui/newmember.ui")[0]
     mywin = MyMainWindow()
     mywin.show()
     app.exec_()
