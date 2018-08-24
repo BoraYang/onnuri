@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from mainwindow import Ui_MainWindow
-
+from PyQt5.QtCore import pyqtSlot
 mainwindow_class = Ui_MainWindow
 
 
