@@ -34,7 +34,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <item row="4" column="0">
-           <widget class="QLabel" name="label_6">
+           <widget class="QLabel" name="lbl_mid_name">
             <property name="text">
              <string>Middle Name</string>
             </property>
@@ -44,7 +44,7 @@
            </widget>
           </item>
           <item row="4" column="3">
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="lbl_last_name">
             <property name="text">
              <string>Last Name</string>
             </property>
@@ -54,7 +54,7 @@
            </widget>
           </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="lbl_first_name">
             <property name="text">
              <string>First Name</string>
             </property>
@@ -64,7 +64,7 @@
            </widget>
           </item>
           <item row="7" column="3">
-           <widget class="QLabel" name="label_5">
+           <widget class="QLabel" name="lbl_email">
             <property name="text">
              <string>E-Mail</string>
             </property>
@@ -74,7 +74,7 @@
            </widget>
           </item>
           <item row="7" column="0">
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="lbl_phone">
             <property name="text">
              <string> Phone</string>
             </property>
@@ -110,7 +110,7 @@
            </widget>
           </item>
           <item row="3" column="3">
-           <widget class="QLabel" name="label_8">
+           <widget class="QLabel" name="lbl_birthday">
             <property name="text">
              <string>Date of Birth</string>
             </property>
@@ -120,7 +120,7 @@
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QLabel" name="label_3">
+           <widget class="QLabel" name="lbl_kor_name">
             <property name="text">
              <string>Korean Name</string>
             </property>
@@ -130,7 +130,7 @@
            </widget>
           </item>
           <item row="0" column="3">
-           <widget class="QLabel" name="label_7">
+           <widget class="QLabel" name="lbl_gender">
             <property name="text">
              <string>Gender</string>
             </property>
@@ -140,7 +140,7 @@
            </widget>
           </item>
           <item row="3" column="4">
-           <widget class="QDateEdit" name="dateEdit">
+           <widget class="QDateEdit" name="de_dob">
             <property name="displayFormat">
              <string>MM/dd/yyyy</string>
             </property>
@@ -150,22 +150,22 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEdit"/>
+           <widget class="QLineEdit" name="tb_kor_name"/>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEdit_2"/>
+           <widget class="QLineEdit" name="tb_first_name"/>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEdit_3"/>
+           <widget class="QLineEdit" name="tb_mid_name"/>
           </item>
           <item row="7" column="1">
-           <widget class="QLineEdit" name="lineEdit_4"/>
+           <widget class="QLineEdit" name="tb_phone"/>
           </item>
           <item row="4" column="4">
-           <widget class="QLineEdit" name="lineEdit_5"/>
+           <widget class="QLineEdit" name="tb_last_name"/>
           </item>
           <item row="7" column="4">
-           <widget class="QLineEdit" name="lineEdit_6"/>
+           <widget class="QLineEdit" name="tb_email"/>
           </item>
          </layout>
         </widget>
@@ -177,7 +177,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="1" column="0">
-           <widget class="QLabel" name="label_13">
+           <widget class="QLabel" name="lbl_baptism_date">
             <property name="text">
              <string>Baptism Date</string>
             </property>
@@ -197,7 +197,7 @@
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QLabel" name="label_9">
+           <widget class="QLabel" name="lbl_register_date">
             <property name="text">
              <string>Registration Date</string>
             </property>
@@ -217,7 +217,7 @@
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QLabel" name="label_14">
+           <widget class="QLabel" name="lbl_baptism_place">
             <property name="text">
              <string>Baptism Site</string>
             </property>
@@ -227,7 +227,7 @@
            </widget>
           </item>
           <item row="6" column="0">
-           <widget class="QLabel" name="label_11">
+           <widget class="QLabel" name="lbl_new_family_study">
             <property name="text">
              <string>New Family Study</string>
             </property>
@@ -251,7 +251,7 @@
            </widget>
           </item>
           <item row="5" column="0">
-           <widget class="QLabel" name="label_10">
+           <widget class="QLabel" name="lbl_new_comer_study">
             <property name="text">
              <string>Newcomer Study</string>
             </property>
@@ -261,7 +261,7 @@
            </widget>
           </item>
           <item row="4" column="0">
-           <widget class="QLabel" name="label_16">
+           <widget class="QLabel" name="lbl_duty">
             <property name="text">
              <string>Duty</string>
             </property>
@@ -274,7 +274,7 @@
            <widget class="QComboBox" name="comboBox"/>
           </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="label_15">
+           <widget class="QLabel" name="lbl_baptism_by">
             <property name="text">
              <string>Baptism</string>
             </property>
