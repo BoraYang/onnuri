@@ -11,8 +11,12 @@ class MyMainWindow(QMainWindow, mainwindow_class):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.btn_cancel.released.connect(self.close)
 
-    
+    @pyqtSlot()
+    def close(self):
+        self.close()
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     mywin = MyMainWindow()
