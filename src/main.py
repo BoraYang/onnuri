@@ -15,7 +15,7 @@ class MyMainWindow(QMainWindow, mainwindow_class):
 
     @pyqtSlot()
     def close(self):
-        self.close()
+        exit()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
