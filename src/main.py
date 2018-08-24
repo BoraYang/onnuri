@@ -7,12 +7,12 @@ mainwindow_class = Ui_MainWindow
 
 
 class MyMainWindow(QMainWindow, mainwindow_class):
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
 
-
-
+    
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     mywin = MyMainWindow()
