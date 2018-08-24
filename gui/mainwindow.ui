@@ -34,7 +34,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <item row="4" column="0">
-           <widget class="QLabel" name="label_6">
+           <widget class="QLabel" name="lbl_mid_name">
             <property name="text">
              <string>Middle Name</string>
             </property>
@@ -44,7 +44,7 @@
            </widget>
           </item>
           <item row="4" column="3">
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="lbl_last_name">
             <property name="text">
              <string>Last Name</string>
             </property>
@@ -54,7 +54,7 @@
            </widget>
           </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="lbl_first_name">
             <property name="text">
              <string>First Name</string>
             </property>
@@ -64,7 +64,7 @@
            </widget>
           </item>
           <item row="7" column="3">
-           <widget class="QLabel" name="label_5">
+           <widget class="QLabel" name="lbl_email">
             <property name="text">
              <string>E-Mail</string>
             </property>
@@ -74,7 +74,7 @@
            </widget>
           </item>
           <item row="7" column="0">
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="lbl_phone">
             <property name="text">
              <string> Phone</string>
             </property>
@@ -82,6 +82,54 @@
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLabel" name="lbl_birthday">
+            <property name="text">
+             <string>Date of Birth</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_kor_name">
+            <property name="text">
+             <string>Korean Name</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="4">
+           <widget class="QDateEdit" name="de_dob">
+            <property name="displayFormat">
+             <string>MM/dd/yyyy</string>
+            </property>
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="tb_kor_name"/>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="tb_first_name"/>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="tb_mid_name"/>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLineEdit" name="tb_phone"/>
+          </item>
+          <item row="4" column="4">
+           <widget class="QLineEdit" name="tb_last_name"/>
+          </item>
+          <item row="7" column="4">
+           <widget class="QLineEdit" name="tb_email"/>
           </item>
           <item row="0" column="4">
            <widget class="QFrame" name="frame_3">
@@ -93,14 +141,14 @@
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
-              <widget class="QRadioButton" name="radioButton_2">
+              <widget class="QRadioButton" name="rb_gender_male">
                <property name="text">
                 <string>Male</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton">
+              <widget class="QRadioButton" name="rb_gender_female">
                <property name="text">
                 <string>Female</string>
                </property>
@@ -109,28 +157,8 @@
             </layout>
            </widget>
           </item>
-          <item row="3" column="3">
-           <widget class="QLabel" name="label_8">
-            <property name="text">
-             <string>Date of Birth</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Korean Name</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="3">
-           <widget class="QLabel" name="label_7">
+           <widget class="QLabel" name="lbl_gender">
             <property name="text">
              <string>Gender</string>
             </property>
@@ -138,34 +166,6 @@
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
-          </item>
-          <item row="3" column="4">
-           <widget class="QDateEdit" name="dateEdit">
-            <property name="displayFormat">
-             <string>MM/dd/yyyy</string>
-            </property>
-            <property name="calendarPopup">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEdit"/>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEdit_2"/>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEdit_3"/>
-          </item>
-          <item row="7" column="1">
-           <widget class="QLineEdit" name="lineEdit_4"/>
-          </item>
-          <item row="4" column="4">
-           <widget class="QLineEdit" name="lineEdit_5"/>
-          </item>
-          <item row="7" column="4">
-           <widget class="QLineEdit" name="lineEdit_6"/>
           </item>
          </layout>
         </widget>
@@ -177,7 +177,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="1" column="0">
-           <widget class="QLabel" name="label_13">
+           <widget class="QLabel" name="lbl_baptism_date">
             <property name="text">
              <string>Baptism Date</string>
             </property>
@@ -197,7 +197,7 @@
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QLabel" name="label_9">
+           <widget class="QLabel" name="lbl_register_date">
             <property name="text">
              <string>Registration Date</string>
             </property>
@@ -207,7 +207,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QDateEdit" name="dateEdit_2">
+           <widget class="QDateEdit" name="de_reg">
             <property name="displayFormat">
              <string>MM/dd/yyyy</string>
             </property>
@@ -217,7 +217,7 @@
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QLabel" name="label_14">
+           <widget class="QLabel" name="lbl_baptism_place">
             <property name="text">
              <string>Baptism Site</string>
             </property>
@@ -227,7 +227,7 @@
            </widget>
           </item>
           <item row="6" column="0">
-           <widget class="QLabel" name="label_11">
+           <widget class="QLabel" name="lbl_new_family_study">
             <property name="text">
              <string>New Family Study</string>
             </property>
@@ -237,21 +237,21 @@
            </widget>
           </item>
           <item row="6" column="1">
-           <widget class="QCheckBox" name="checkBox_2">
+           <widget class="QCheckBox" name="chk_new_family_study">
             <property name="text">
              <string>complete</string>
             </property>
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QCheckBox" name="checkBox">
+           <widget class="QCheckBox" name="chk_new_comer_study">
             <property name="text">
              <string>complete</string>
             </property>
            </widget>
           </item>
           <item row="5" column="0">
-           <widget class="QLabel" name="label_10">
+           <widget class="QLabel" name="lbl_new_comer_study">
             <property name="text">
              <string>Newcomer Study</string>
             </property>
@@ -261,7 +261,7 @@
            </widget>
           </item>
           <item row="4" column="0">
-           <widget class="QLabel" name="label_16">
+           <widget class="QLabel" name="lbl_duty">
             <property name="text">
              <string>Duty</string>
             </property>
@@ -271,10 +271,10 @@
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QComboBox" name="comboBox"/>
+           <widget class="QComboBox" name="cb_duty"/>
           </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="label_15">
+           <widget class="QLabel" name="lbl_baptism_by">
             <property name="text">
              <string>Baptism</string>
             </property>
@@ -284,7 +284,7 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QDateEdit" name="dateEdit_3">
+           <widget class="QDateEdit" name="de_bap">
             <property name="displayFormat">
              <string>MM/dd/yyyy</string>
             </property>
@@ -294,10 +294,10 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEdit_7"/>
+           <widget class="QLineEdit" name="tb_baptism_place"/>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEdit_8"/>
+           <widget class="QLineEdit" name="tb_baptism_by"/>
           </item>
           <item row="7" column="1">
            <widget class="QFrame" name="frame_4">
@@ -309,21 +309,21 @@
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
-              <widget class="QCheckBox" name="checkBox_5">
+              <widget class="QCheckBox" name="chk_john">
                <property name="text">
                 <string>John</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="checkBox_4">
+              <widget class="QCheckBox" name="chk_romans">
                <property name="text">
                 <string>Romans</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="checkBox_3">
+              <widget class="QCheckBox" name="chk_timothy">
                <property name="text">
                 <string>Timothy</string>
                </property>
@@ -342,7 +342,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="btn_show">
             <property name="text">
              <string>Show</string>
             </property>
@@ -383,14 +383,14 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="btn_cancel">
             <property name="text">
              <string>Cancel</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="btn_save">
             <property name="text">
              <string>Save</string>
             </property>
