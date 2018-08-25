@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import *
 from ui_newmember import *
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtCore import QDate
+
+
 class NewMember(QMainWindow, Ui_NewMember):
 
     def __init__(self):
