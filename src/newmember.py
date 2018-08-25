@@ -9,6 +9,7 @@ class NewMember(QMainWindow, Ui_NewMember):
         self.setupUi(self)
         self.btn_cancel.released.connect(self.close)
         self.tb_kor_name.setReadOnly(False)
+
     @pyqtSlot()
     def close(self):
         exit()
