@@ -1,25 +1,10 @@
 import sys
 from PyQt5.QtWidgets import *
 from ui_newmember import *
-from PyQt5.QtCore import pyqtSlot
-
-
-class MyMainWindow(QMainWindow, Ui_NewMember):
-
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.btn_cancel.released.connect(self.close)
-        self.tb_kor_name.setReadOnly(False)
-
-
-
-    @pyqtSlot()
-    def close(self):
-        exit()
+from newmember import *
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mywin = MyMainWindow()
+    mywin = NewMember()
     mywin.show()
     app.exec_()
