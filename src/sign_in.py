@@ -11,13 +11,16 @@ class Singin(QMainWindow,Ui_SignIn):
         self.setupUi(self)
         self.btn_cancel.released.connect(self.cancelClicked)
         self.btn_sign_in.released.connect(self.signinClicked)
+
         self.tb_password.textChanged.connect(self.chkpasswd)
         self.tb_password.setEchoMode(QLineEdit.Password)
-        self.regex = re.compile("""^[A-za-z0-9_!@#$%^&*-]{6,18}$""")
+
+        self.regex = re.compile("""^[A-Za-z0-9_!@#$%^&*-]{6,18}$""")
         self.btn_sign_in.setEnabled(False)
 
     @pyqtSlot(str)
     def chkpasswd(self,passwd):
+        print(passwd)
         if not self.regex.match(passwd):
             self.btn_sign_in.setEnabled(False)
         else:
