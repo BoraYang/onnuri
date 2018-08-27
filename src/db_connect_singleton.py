@@ -98,17 +98,11 @@ class DBConnectSingleton:
             query = QtSql.QSqlQuery(self.db)
             query.prepare("SELECT num FROM ChurchGroup WHERE name = '" + input_group + "';")
             query.exec()
-<<<<<<< HEAD
             returnVal = None
-=======
-            returnVal = -1
->>>>>>> 8ad4f0ab0cbdf2f06ece7b07f3205fe91a449fca
             while query.next():
                 returnVal = query.value(0)
             return returnVal
 
-
-<<<<<<< HEAD
         # Return name list of Duty
         def getDutyName(self):
             query = QtSql.QSqlQuery(self.db)
@@ -128,8 +122,6 @@ class DBConnectSingleton:
             while query.next():
                 returnVal.append(query.value(0))
             return returnVal
-=======
->>>>>>> 8ad4f0ab0cbdf2f06ece7b07f3205fe91a449fca
 
         # def getFirstName(self, input_id):
         #     query = QtSql.QSqlQuery(self.db)
@@ -288,12 +280,9 @@ class DBConnectSingleton:
         #     while query.next():
         #         returnVal = query.value(0)
         #     return returnVal
-<<<<<<< HEAD
 
     instance = None
-=======
-    instance: __DBConnectSingleton = None
->>>>>>> 8ad4f0ab0cbdf2f06ece7b07f3205fe91a449fca
+
     def __init__(self, db):
         if not DBConnectSingleton.instance:
             DBConnectSingleton.instance = DBConnectSingleton.__DBConnectSingleton(db)
