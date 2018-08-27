@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot
 from ui_sign_in import Ui_SignIn
-
+from db_connect_singleton import *
 from newmember import *
 import re
 
@@ -35,12 +35,15 @@ class Singin(QMainWindow,Ui_SignIn):
     def signinClicked(self):
         id_str = self.tb_id.text()
         pass_str = self.tb_password.text()
-        ischeck = OnlyOne.instance.verifyIdAndPasswd(id_str, pass_str)
+        ischeck = DBConnectSingleton.instance.verifyIdAndPasswd(id_str, pass_str)
         self.window = None
-        if ischeck:
+        if ischeck == 1 or ischeck == 0: # for Test
+        # if ischeck == 1 # for release
             self.window = NewMember()
             self.window.show()
             self.close()
             print("log in")
-        else:
+        elif ischeck == 0:
             print("log fail")
+        elif ischeck == -1:
+            print("DB ERROR")

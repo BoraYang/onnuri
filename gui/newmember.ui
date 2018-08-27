@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>599</width>
-    <height>711</height>
+    <height>747</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,10 +33,30 @@
           <string>Personal Information</string>
          </property>
          <layout class="QGridLayout" name="gridLayout">
+          <item row="7" column="3">
+           <widget class="QLabel" name="lbl_email">
+            <property name="text">
+             <string>E-Mail</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
           <item row="4" column="0">
            <widget class="QLabel" name="lbl_mid_name">
             <property name="text">
              <string>Middle Name</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Photo</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -63,15 +83,11 @@
             </property>
            </widget>
           </item>
-          <item row="7" column="3">
-           <widget class="QLabel" name="lbl_email">
-            <property name="text">
-             <string>E-Mail</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="tb_first_name"/>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="tb_mid_name"/>
           </item>
           <item row="7" column="0">
            <widget class="QLabel" name="lbl_phone">
@@ -82,6 +98,9 @@
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="tb_kor_name"/>
           </item>
           <item row="3" column="3">
            <widget class="QLabel" name="lbl_birthday">
@@ -103,6 +122,9 @@
             </property>
            </widget>
           </item>
+          <item row="4" column="4">
+           <widget class="QLineEdit" name="tb_last_name"/>
+          </item>
           <item row="3" column="4">
            <widget class="QDateEdit" name="de_dob">
             <property name="locale">
@@ -116,23 +138,21 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="tb_kor_name"/>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="tb_first_name"/>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="tb_mid_name"/>
-          </item>
           <item row="7" column="1">
            <widget class="QLineEdit" name="tb_phone"/>
           </item>
-          <item row="4" column="4">
-           <widget class="QLineEdit" name="tb_last_name"/>
-          </item>
           <item row="7" column="4">
            <widget class="QLineEdit" name="tb_email"/>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="lbl_gender">
+            <property name="text">
+             <string>Gender</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
           </item>
           <item row="0" column="4">
            <widget class="QFrame" name="frame_3">
@@ -160,13 +180,20 @@
             </layout>
            </widget>
           </item>
-          <item row="0" column="3">
-           <widget class="QLabel" name="lbl_gender">
+          <item row="9" column="4">
+           <widget class="QPushButton" name="pushButton">
             <property name="text">
-             <string>Gender</string>
+             <string>Select Photo</string>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </widget>
+          </item>
+          <item row="8" column="1" rowspan="3">
+           <widget class="QGraphicsView" name="graphicsView"/>
+          </item>
+          <item row="8" column="3" colspan="2">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>photo location</string>
             </property>
            </widget>
           </item>
@@ -179,33 +206,102 @@
           <string>Additional Information</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="1" column="0">
-           <widget class="QLabel" name="lbl_baptism_date">
+          <item row="5" column="0">
+           <widget class="QLabel" name="label">
             <property name="text">
-             <string>Baptism Date</string>
+             <string>Group</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="label_12">
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="tb_baptism_by"/>
+          </item>
+          <item row="5" column="1">
+           <widget class="QComboBox" name="cb_group"/>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="tb_baptism_place"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDateEdit" name="de_bap">
+            <property name="locale">
+             <locale language="English" country="UnitedStates"/>
+            </property>
+            <property name="displayFormat">
+             <string>MM/dd/yyyy</string>
+            </property>
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="lbl_new_family_study">
             <property name="text">
-             <string>Bible Study</string>
+             <string>New Family Study</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="lbl_register_date">
+          <item row="3" column="0">
+           <widget class="QLabel" name="lbl_baptism_by">
             <property name="text">
-             <string>Registration Date</string>
+             <string>Baptizer</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QComboBox" name="cb_duty"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="lbl_duty">
+            <property name="text">
+             <string>Duty</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="lbl_new_comer_study">
+            <property name="text">
+             <string>Newcomer Study</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QCheckBox" name="chk_new_comer_study">
+            <property name="text">
+             <string>complete</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="lbl_baptism_place">
+            <property name="text">
+             <string>Baptism Site</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QCheckBox" name="chk_new_family_study">
+            <property name="text">
+             <string>complete</string>
             </property>
            </widget>
           </item>
@@ -222,91 +318,35 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="lbl_baptism_place">
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_register_date">
             <property name="text">
-             <string>Baptism Site</string>
+             <string>Registration Date</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="7" column="0">
-           <widget class="QLabel" name="lbl_new_family_study">
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_12">
             <property name="text">
-             <string>New Family Study</string>
+             <string>Bible Study</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="7" column="1">
-           <widget class="QCheckBox" name="chk_new_family_study">
+          <item row="1" column="0">
+           <widget class="QLabel" name="lbl_baptism_date">
             <property name="text">
-             <string>complete</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QCheckBox" name="chk_new_comer_study">
-            <property name="text">
-             <string>complete</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="lbl_new_comer_study">
-            <property name="text">
-             <string>Newcomer Study</string>
+             <string>Baptism Date</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="lbl_duty">
-            <property name="text">
-             <string>Duty</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QComboBox" name="cb_duty"/>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="lbl_baptism_by">
-            <property name="text">
-             <string>Baptizer</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QDateEdit" name="de_bap">
-            <property name="locale">
-             <locale language="English" country="UnitedStates"/>
-            </property>
-            <property name="displayFormat">
-             <string>MM/dd/yyyy</string>
-            </property>
-            <property name="calendarPopup">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="tb_baptism_place"/>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="tb_baptism_by"/>
           </item>
           <item row="8" column="1">
            <widget class="QFrame" name="frame_4">
@@ -340,19 +380,6 @@
              </item>
             </layout>
            </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Group</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QComboBox" name="cb_group"/>
           </item>
          </layout>
         </widget>
