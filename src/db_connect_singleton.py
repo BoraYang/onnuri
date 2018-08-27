@@ -48,6 +48,9 @@ class DBConnectSingleton:
                 else:
                     return 0
 
+
+
+
         # Add data to Person table
         def addPerson(self, first_name="", last_name="", mid_name="", kor_name="", gender="", b_date="", r_date="",
                       email="", phone="", group=-1, duty=-1, baptism=-1, family=-1, c_study="", m_study="", b_study=-1):
