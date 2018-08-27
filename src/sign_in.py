@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot
 from ui_sign_in import Ui_SignIn
-from DBSingleton import *
+
 from newmember import *
 import re
 
