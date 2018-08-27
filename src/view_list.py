@@ -4,14 +4,14 @@ from ui_view_list import *
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtSql import QSqlTableModel
 from db_connect_singleton import *
-
+from newmember import NewMember
 class ViewList(QMainWindow , Ui_ViewList):
 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         # self.btn_cancel.released.connect()
-        # self.btn_add.released.connect()
+        self.btn_add.released.connect(self.btnAddClicked)
         # self.btn_delete.released.connect()
         # self.btn_edit.released.connect()
         # self.btn_search.released.connect()
@@ -48,7 +48,9 @@ class ViewList(QMainWindow , Ui_ViewList):
 
     @pyqtSlot()
     def btnAddClicked(self):
-        print("add btn click")
+        self.childWindow = NewMember()
+        self.childWindow.myWindowCloseSignal.connect(self.tableViewUpdate)
+        self.childWindow.show()
         return
 
     @pyqtSlot()
@@ -65,3 +67,7 @@ class ViewList(QMainWindow , Ui_ViewList):
     def btnSearchClicked(self):
         print("search btn click")
         return
+
+    @pyqtSlot()
+    def tableViewUpdate(self):
+        self.tv_list.model().select()
