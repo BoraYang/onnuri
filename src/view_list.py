@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMainWindow , QHeaderView
 from ui_view_list import *
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtSql import QSqlTableModel
-from DBSingleton import *
+from db_connect_singleton import *
 
 class ViewList(QMainWindow , Ui_ViewList):
 
@@ -15,7 +15,7 @@ class ViewList(QMainWindow , Ui_ViewList):
         # self.btn_delete.released.connect()
         # self.btn_edit.released.connect()
         # self.btn_search.released.connect()
-        self.model = QSqlTableModel(self,OnlyOne.instance.getDB())
+        self.model = QSqlTableModel(self,DBConnectSingleton.instance.getDB())
         self.model.setTable("Person")
         self.model.select()
 

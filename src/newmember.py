@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import *
 from ui_newmember import *
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtCore import QDate
-from DBSingleton import *
+from db_connect_singleton import *
 
 class NewMember(QMainWindow, Ui_NewMember):
 
@@ -59,18 +59,18 @@ class NewMember(QMainWindow, Ui_NewMember):
 
 
 
-    def insrtBiptismInfo(self, dobap , biptism_site , biptism_by):
-        id_ = OnlyOne.instance.insertBiptismInfo(dobap ,biptism_site,biptism_by)
-        return id_
+    # def insrtBiptismInfo(self, dobap , biptism_site , biptism_by):
+    #     id_ = DBConnectSingleton.instance.insertBiptismInfo(dobap ,biptism_site,biptism_by)
+    #     return id_
 
     def getDutyId(self , duty_str):
-        id_ = OnlyOne.instance.getDutyID(duty_str)
+        id_ = DBConnectSingleton.instance.getDutyID(duty_str)
         if -1 == id_:
             print("Duty ID could not searched")
         return id_
 
     def getGroupId(self , group_str):
-        id_ = OnlyOne.instance.getGroupID(group_str)
+        id_ = DBConnectSingleton.instance.getGroupID(group_str)
         if -1 == id_:
             print("Group ID could not searched")
         return id_
