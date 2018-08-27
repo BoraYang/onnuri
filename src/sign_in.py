@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot
 from ui_sign_in import Ui_SignIn
+from DBSingleton import *
+from newmember import *
 import re
 
 
@@ -11,12 +13,11 @@ class Singin(QMainWindow,Ui_SignIn):
         self.setupUi(self)
         self.btn_cancel.released.connect(self.cancelClicked)
         self.btn_sign_in.released.connect(self.signinClicked)
-
         self.tb_password.textChanged.connect(self.chkpasswd)
         self.tb_password.setEchoMode(QLineEdit.Password)
-
         self.regex = re.compile("""^[A-Za-z0-9_!@#$%^&*-]{6,18}$""")
         self.btn_sign_in.setEnabled(False)
+
 
     @pyqtSlot(str)
     def chkpasswd(self,passwd):
@@ -34,4 +35,12 @@ class Singin(QMainWindow,Ui_SignIn):
     def signinClicked(self):
         id_str = self.tb_id.text()
         pass_str = self.tb_password.text()
-        print("sign in btn clicked " , id_str , pass_str);
+        ischeck = OnlyOne.instance.verifyIdAndPasswd(id_str, pass_str)
+        self.window = None
+        if ischeck:
+            self.window = NewMember()
+            self.window.show()
+            self.close()
+            print("log in")
+        else:
+            print("log fail")
