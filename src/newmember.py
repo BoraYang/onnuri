@@ -65,12 +65,17 @@ class NewMember(QMainWindow, Ui_NewMember):
         s_timothy = self.chk_timothy.isChecked()  # boolean
 
         duty_id = self.getDutyId(duty)
-
-        p_id = DBConnectSingleton.instance.addPerson(first_name=first_name, last_name=last_name, mid_name=mid_name,
-                                              gender=gender, email=email,
-                                              b_date=dob, r_date=doreg, kor_name=kor_name, phone=phone, group=group,
-                                              duty=duty_id, baptism=-1,
-                                              family=-1, c_study=new_c_s, m_study=new_f_s, b_study=-1)
+        # add to db with no baptism id and get personal id
+        p_id = DBConnectSingleton.instance.addPerson(first_name=first_name, last_name=last_name,
+                                                     mid_name=mid_name,gender=gender, email=email,
+                                                     b_date=dob, r_date=doreg, kor_name=kor_name, phone=phone,
+                                                     group=group,duty=duty_id, baptism=-1,
+                                                     family=-1, c_study=new_c_s, m_study=new_f_s, b_study=-1)
+        # add baptism id to db anf get baptism id
+        b_id = DBConnectSingleton.instance.addBaptism(input_id=p_id, bap_date=dobap, location=biptism_site,
+                                                      admin=biptism_by)
+        # update personal information with baptism id
+        DBConnectSingleton.instance.updateBaptism(input_id=p_id, baptism_num=b_id)
 
 
     @pyqtSlot()
