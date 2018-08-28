@@ -49,8 +49,6 @@ class DBConnectSingleton:
                     return 0
 
 
-
-
         # Add data to Person table
         def addPerson(self, first_name="", last_name="", mid_name="", kor_name="", gender="", b_date="", r_date="",
                       email="", phone="", group=-1, duty=-1, baptism=-1, family=-1, c_study="", m_study="", b_study=-1):
@@ -60,7 +58,13 @@ class DBConnectSingleton:
             if not query.exec():
                 return -1
             query.clear()
-            query.prepare("select id from User where ")
+            query.prepare("select id from Person where first_name ='"+first_name+"' AND last_name ='"+last_name + "' AND mid_name = '" + mid_name + "'")
+            if not query.exec():
+                return -1
+            p_id = -1
+            while query.next():
+                p_id = query.value(0)
+            return p_id
 
         # Add data to Baptism Table
         def addBaptism(self, input_id, bap_date, location, admin):
@@ -69,6 +73,15 @@ class DBConnectSingleton:
                 "INSERT INTO Baptism (id, bap_date, location, admin) VALUES (" + input_id + ", " + bap_date + ", " + location + ", " + admin + ");")
             if not query.exec():
                 return -1
+            query.clear()
+            query.prepare("select num from Baptism where id = '" + input_id + "'")
+            if not query.exec():
+                return -1
+            b_id = -1
+            while query.next():
+                b_id = query.value(0)
+            return b_id
+
 
         # Add data to Family Table
         def addFamily(self):
@@ -111,25 +124,25 @@ class DBConnectSingleton:
                 returnVal = query.value(0)
             return returnVal
 
-            # Return name list of Duty
-            def getDutyName(self):
-                query = QtSql.QSqlQuery(self.db)
-                query.prepare("SELECT name FROM Duty;")
-                query.exec()
-                returnVal = []
-                while query.next():
-                    returnVal.append(query.value(0))
-                return returnVal
+        # Return name list of Duty
+        def getDutyName(self):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT name FROM Duty;")
+            query.exec()
+            returnVal = []
+            while query.next():
+                returnVal.append(query.value(0))
+            return returnVal
 
-            # Return name list of Department
-            def getDepartmentName(self):
-                query = QtSql.QSqlQuery(self.db)
-                query.prepare("SELECT name FROM Department;")
-                query.exec()
-                returnVal = []
-                while query.next():
-                    returnVal.append(query.value(0))
-                return returnVal
+        # Return name list of Department
+        def getDepartmentName(self):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT name FROM Department;")
+            query.exec()
+            returnVal = []
+            while query.next():
+                returnVal.append(query.value(0))
+            return returnVal
 
 
         # def getFirstName(self, input_id):
