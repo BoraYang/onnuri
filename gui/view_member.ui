@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>NewMember</class>
- <widget class="QMainWindow" name="NewMember">
+ <class>ViewMember</class>
+ <widget class="QMainWindow" name="ViewMember">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>599</width>
-    <height>711</height>
+    <height>815</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,7 +59,7 @@
              <string>MM/dd/yyyy</string>
             </property>
             <property name="calendarPopup">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -175,53 +175,106 @@
           <string>Additional Information</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="7" column="1">
-           <widget class="QFrame" name="frame_4">
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
+          <item row="4" column="1">
+           <widget class="QComboBox" name="cb_duty">
+            <property name="enabled">
+             <bool>true</bool>
             </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+            <property name="editable">
+             <bool>false</bool>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item>
-              <widget class="QCheckBox" name="chk_john">
-               <property name="text">
-                <string>John</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="chk_romans">
-               <property name="text">
-                <string>Romans</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="chk_timothy">
-               <property name="text">
-                <string>Timothy</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="lbl_duty">
+          <item row="5" column="1">
+           <widget class="QCheckBox" name="chk_new_comer_study">
             <property name="text">
-             <string>Duty</string>
+             <string>complete</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="lbl_new_comer_study">
+            <property name="text">
+             <string>Newcomer Study</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="lbl_register_date">
+          <item row="1" column="1">
+           <widget class="QDateEdit" name="de_bap">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="displayFormat">
+             <string>MM/dd/yyyy</string>
+            </property>
+            <property name="calendarPopup">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="tb_baptism_place">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="label_12">
             <property name="text">
-             <string>Registration Date</string>
+             <string>Bible Study</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QCheckBox" name="chk_new_family_study">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>complete</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="lbl_baptism_date">
+            <property name="text">
+             <string>Baptism Date</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QDateEdit" name="de_reg">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="displayFormat">
+             <string>MM/dd/yyyy</string>
+            </property>
+            <property name="calendarPopup">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="lbl_new_family_study">
+            <property name="text">
+             <string>New Family Study</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -238,29 +291,6 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="tb_baptism_by">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="readOnly">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QDateEdit" name="de_bap">
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="displayFormat">
-             <string>MM/dd/yyyy</string>
-            </property>
-            <property name="calendarPopup">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="0">
            <widget class="QLabel" name="lbl_baptism_place">
             <property name="text">
@@ -271,84 +301,92 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
-           <widget class="QComboBox" name="cb_duty">
-            <property name="editable">
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="tb_baptism_by">
+            <property name="enabled">
              <bool>true</bool>
             </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QDateEdit" name="de_reg">
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="displayFormat">
-             <string>MM/dd/yyyy</string>
-            </property>
-            <property name="calendarPopup">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="tb_baptism_place">
             <property name="readOnly">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="lbl_baptism_date">
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_register_date">
             <property name="text">
-             <string>Baptism Date</string>
+             <string>Registration Date</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="lbl_new_family_study">
+          <item row="4" column="0">
+           <widget class="QLabel" name="lbl_duty">
             <property name="text">
-             <string>New Family Study</string>
+             <string>Duty</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="7" column="0">
-           <widget class="QLabel" name="label_12">
+          <item row="8" column="1">
+           <widget class="QLabel" name="lbl_group_info">
             <property name="text">
-             <string>Bible Study</string>
+             <string>Group Info</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QFrame" name="frame_4">
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QCheckBox" name="chk_john">
+               <property name="text">
+                <string>John</string>
+               </property>
+               <property name="checkable">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="chk_romans">
+               <property name="text">
+                <string>Romans</string>
+               </property>
+               <property name="checkable">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="chk_timothy">
+               <property name="text">
+                <string>Timothy</string>
+               </property>
+               <property name="checkable">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Group</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="lbl_new_comer_study">
-            <property name="text">
-             <string>Newcomer Study</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QCheckBox" name="chk_new_comer_study">
-            <property name="text">
-             <string>complete</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QCheckBox" name="chk_new_family_study">
-            <property name="text">
-             <string>complete</string>
             </property>
            </widget>
           </item>

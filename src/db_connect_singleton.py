@@ -51,10 +51,10 @@ class DBConnectSingleton:
 
         # Add data to Person table
         def addPerson(self, first_name="", last_name="", mid_name="", kor_name="", gender="", b_date="", r_date="",
-                      email="", phone="", group=-1, duty=-1, baptism=-1, family=-1, c_study="", m_study="", b_study=-1):
+                      email="", phone="", group=-1, duty=-1, baptism=-1, family=-1, c_study="", m_study=""):
             query = QtSql.QSqlQuery(self.db)
             query.prepare(
-                "INSERT INTO Person (first_name, last_name, mid_name, kor_name, gender, b_date, r_date, email, phone, group, duty, baptism, family, c_study, m_study, b_study) VALUES ('" + first_name + ", " + last_name + ", " + mid_name + ", " + kor_name + ", " + gender + ", " + b_date + ", " + r_date + ", " + email + ", " + phone + ", " + group + ", " + duty + ", " + baptism + ", " + family + ", " + c_study + ", " + m_study + ", " + b_study + ");")
+                "INSERT INTO Person (first_name, last_name, mid_name, kor_name, gender, b_date, r_date, email, phone, group, duty, baptism, family, c_study, m_study) VALUES ('" + first_name + ", " + last_name + ", " + mid_name + ", " + kor_name + ", " + gender + ", " + b_date + ", " + r_date + ", " + email + ", " + phone + ", " + group + ", " + duty + ", " + baptism + ", " + family + ", " + c_study + ", " + m_study + ");")
             if not query.exec():
                 return -1
             query.clear()

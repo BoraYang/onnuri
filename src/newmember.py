@@ -15,7 +15,6 @@ class NewMember(QMainWindow, Ui_NewMember):
         self.btn_cancel.released.connect(self.closeClicked)
         self.btn_save.released.connect(self.saveClicked)
         self.btn_show.released.connect(self.showClicked)
-        self.tb_kor_name.setReadOnly(False)
         self.rb_gender_male.setChecked(True)
         self.de_bap.setDate(QDate.currentDate())
         self.de_dob.setDate(QDate.currentDate())
@@ -40,7 +39,7 @@ class NewMember(QMainWindow, Ui_NewMember):
 
     @pyqtSlot()
     def showClicked(self):
-        self.person()
+        self.saveToDb()
         print("show button clicked.")
 
     def saveToDb(self):
@@ -112,13 +111,13 @@ class NewMember(QMainWindow, Ui_NewMember):
     def getDutyId(self, duty_str):
         id_ = DBConnectSingleton.instance.getDutyID(duty_str)
         if -1 == id_:
-            print("Duty ID could not searched")
+            print("Cannot search Duty ID")
         return id_
 
     def getGroupId(self, group_str):
         id_ = DBConnectSingleton.instance.getGroupID(group_str)
         if -1 == id_:
-            print("Group ID could not searched")
+            print("Cannot search Group ID")
         return id_
 
     def getGender(self):

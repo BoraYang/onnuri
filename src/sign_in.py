@@ -7,7 +7,7 @@ from newmember import *
 import re
 
 
-class Singin(QMainWindow,Ui_SignIn):
+class Signin(QMainWindow,Ui_SignIn):
 
     def __init__(self):
         super().__init__()
