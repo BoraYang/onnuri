@@ -104,7 +104,7 @@ class NewMember(QMainWindow, Ui_NewMember):
 
         self.lbl_photo_loc.setText("" + arr[index])
 
-    # def insrtBiptismInfo(self, dobap , biptism_site , biptism_by):
+    # def insertBiptismInfo(self, dobap , biptism_site , biptism_by):
     #     id_ = DBConnectSingleton.instance.insertBiptismInfo(dobap ,biptism_site,biptism_by)
     #     return id_
 

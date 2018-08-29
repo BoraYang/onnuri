@@ -48,7 +48,6 @@ class DBConnectSingleton:
                 else:
                     return 0
 
-
         # Add data to Person table
         def addPerson(self, first_name="", last_name="", mid_name="", kor_name="", gender="", b_date="", r_date="",
                       email="", phone="", group=-1, duty=-1, baptism=-1, family=-1, c_study="", m_study=""):
@@ -194,15 +193,18 @@ class DBConnectSingleton:
         #         returnVal = query.value(0)
         #     return returnVal
         #
-        # def getBDate(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT b_date FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
-        #
+
+
+        # Return date of birth
+        def getBDate(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT b_date FROM Person WHERE id = '" + input_id + "';")
+            query.exec()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
+
         # def getRDate(self, input_id):
         #     query = QtSql.QSqlQuery(self.db)
         #     query.prepare("SELECT r_date FROM Person WHERE id = '" + input_id + "'")
@@ -230,53 +232,56 @@ class DBConnectSingleton:
                 returnVal = query.value(0)
             return returnVal
 
-        # def getGroup(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT group FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec()
-        #     group_id = None
-        #     while query.next():
-        #         group_id = query.value(0)
-        #
-        #     query.prepare("SELECT name FROM ChurchGroup WHERE group_num = '" + group_id + "';")
-        #     query.exec()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
-        #
-        # def getDuty(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT duty FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec()
-        #     duty_id = None
-        #     while query.next():
-        #         duty_id = query.value(0)
-        #
-        #     query.prepare("SELECT name FROM Duty WHERE num = '" + duty_id + "';")
-        #     query.exec()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
-        #
-        #
-        # def getBaptism(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT baptism FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec()
-        #     baptism_id = None
-        #     while query.next():
-        #         baptism_id = query.value(0)
-        #
-        #     query.prepare("SELECT bap_date, location, admin FROM Baptism WHERE num = '" + baptism_id + "';")
-        #     query.exec()
-        #     returnVal = []
-        #     while query.next():
-        #         returnVal.append(query.value(0))
-        #         returnVal.append(query.value(1))
-        #         returnVal.append(query.value(2))
-        #     return returnVal
+        def getGroup(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT group FROM Person WHERE id = '" + input_id + "';")
+            query.exec()
+            group_id = None
+            while query.next():
+                group_id = query.value(0)
+
+            query.prepare("SELECT name FROM ChurchGroup WHERE group_num = '" + group_id + "';")
+            query.exec()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
+
+
+        # Return duty for individual
+        def getDuty(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT duty FROM Person WHERE id = '" + input_id + "';")
+            query.exec()
+            duty_id = None
+            while query.next():
+                duty_id = query.value(0)
+
+            query.prepare("SELECT name FROM Duty WHERE num = '" + duty_id + "';")
+            query.exec()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
+
+
+        # Return Baptism status for individual
+        def getBaptism(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT baptism FROM Person WHERE id = '" + input_id + "';")
+            query.exec()
+            baptism_id = None
+            while query.next():
+                baptism_id = query.value(0)
+
+            query.prepare("SELECT bap_date, location, admin FROM Baptism WHERE num = '" + baptism_id + "';")
+            query.exec()
+            returnVal = []
+            while query.next():
+                returnVal.append(query.value(0))
+                returnVal.append(query.value(1))
+                returnVal.append(query.value(2))
+            return returnVal
         #
         # def getFamily(self, input_id):
         #     query = QtSql.QSqlQuery(self.db)
