@@ -115,6 +115,13 @@ class DBConnectSingleton:
             if not query.exec_():
                 return -1
 
+        # Update BibleStudy data
+        def addBibleStudy(self, input_name):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("INSERT INTO BibleStudy (name) VALUES ('" + input_name + "');")
+            if not query.exec_():
+                return -1
+
         # Convert Duty ID into duty name
         def getDutyID(self, input_duty):
             query = QtSql.QSqlQuery(self.db)
@@ -364,7 +371,7 @@ class DBConnectSingleton:
             while query.next():
                 b_id_list.append(query.value(0))
 
-            query.clear(self)
+            query.clear()
             query.prepare("SELECT name FROM BibleStudy WHERE num = '" + x + "';")
             b_list = []
             for x in b_id_list:
