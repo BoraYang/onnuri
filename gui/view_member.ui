@@ -33,24 +33,41 @@
           <string>Personal Information</string>
          </property>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="7" column="0">
-           <widget class="QLabel" name="lbl_gender">
+          <item row="3" column="0">
+           <widget class="QLabel" name="lbl_email">
             <property name="text">
-             <string>Gender</string>
+             <string>E-Mail</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="4" column="0">
+           <widget class="QLabel" name="lbl_phone">
+            <property name="text">
+             <string> Phone</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="tb_kor_name">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
            <widget class="QLineEdit" name="tb_email">
             <property name="readOnly">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item row="6" column="1">
+          <item row="5" column="1">
            <widget class="QDateEdit" name="de_dob">
             <property name="readOnly">
              <bool>true</bool>
@@ -60,16 +77,6 @@
             </property>
             <property name="calendarPopup">
              <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="lbl_email">
-            <property name="text">
-             <string>E-Mail</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -83,31 +90,28 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="lbl_eng_name">
             <property name="text">
              <string>English Name</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="lbl_phone">
-            <property name="text">
-             <string> Phone</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
+          <item row="4" column="1">
            <widget class="QLineEdit" name="tb_phone">
             <property name="readOnly">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item row="6" column="0">
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="tb_eng_name">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
            <widget class="QLabel" name="lbl_birthday">
             <property name="text">
              <string>Date of Birth</string>
@@ -117,21 +121,17 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="tb_eng_name">
-            <property name="readOnly">
-             <bool>true</bool>
+          <item row="6" column="0">
+           <widget class="QLabel" name="lbl_gender">
+            <property name="text">
+             <string>Gender</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="tb_kor_name">
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="1">
+          <item row="6" column="1">
            <widget class="QFrame" name="frame_3">
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
@@ -163,8 +163,25 @@
             </layout>
            </widget>
           </item>
-          <item row="2" column="4" rowspan="5">
-           <widget class="QGraphicsView" name="gv_pic"/>
+          <item row="0" column="2" rowspan="6">
+           <widget class="QLabel" name="lbl_pic_view">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="2">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>

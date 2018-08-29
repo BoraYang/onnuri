@@ -73,4 +73,27 @@ class ViewMember(QMainWindow, Ui_ViewMember):
         baptismDate = baptism[2]
         return baptismDate
 
+    @pyqtSlot()
+    def showPicture(self):
+        fileName = DBConnectSingleton.instance.getPicPath(self.p_id)
+        if (len(fileName) is not 0):
+            print(fileName[0])
+        img = QImage(fileName[0])
+        h = self.lbl_photo_view.height()
+        w = self.lbl_photo_view.width()
+
+        img_h = img.height()
+        img_w = img.width()
+        if (img_h > img_w):
+            scale_factor = h / img_h
+            img_h = h
+            img_w *= scale_factor
+        else:
+            scale_factor = w / img_w
+            img_w = w
+            img_h *= scale_factor
+        imag = img.scaledToHeight(img_h)
+        # img.scaledToWidth(img_w)
+        self.lbl_photo_view.setPixmap(QPixmap.fromImage(imag))
+
 
