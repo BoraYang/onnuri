@@ -350,7 +350,15 @@ class DBConnectSingleton:
             return returnVal
 
 
-
+        # Return all bible study names with BibleStudy ID
+        def getBStudyName(self, b_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT name FROM BibleStudy WHERE num ='" + b_id + "';")
+            query.exec()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
 
 
 
