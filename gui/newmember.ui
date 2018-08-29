@@ -356,7 +356,7 @@
            </widget>
           </item>
           <item row="8" column="1">
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="btn_show_bible_study">
             <property name="text">
              <string>Show</string>
             </property>
@@ -489,6 +489,31 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>tb_kor_name</tabstop>
+  <tabstop>tb_first_name</tabstop>
+  <tabstop>tb_mid_name</tabstop>
+  <tabstop>tb_last_name</tabstop>
+  <tabstop>tb_phone</tabstop>
+  <tabstop>tb_email</tabstop>
+  <tabstop>de_dob</tabstop>
+  <tabstop>rb_gender_male</tabstop>
+  <tabstop>rb_gender_female</tabstop>
+  <tabstop>btn_sel_photo</tabstop>
+  <tabstop>de_reg</tabstop>
+  <tabstop>de_bap</tabstop>
+  <tabstop>tb_baptism_place</tabstop>
+  <tabstop>tb_baptism_by</tabstop>
+  <tabstop>cb_duty</tabstop>
+  <tabstop>cb_group</tabstop>
+  <tabstop>chk_new_family_study</tabstop>
+  <tabstop>chk_new_comer_study</tabstop>
+  <tabstop>btn_show_bible_study</tabstop>
+  <tabstop>btn_show_family</tabstop>
+  <tabstop>btn_show_group</tabstop>
+  <tabstop>btn_cancel</tabstop>
+  <tabstop>btn_save</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

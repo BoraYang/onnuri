@@ -14,7 +14,7 @@ class NewMember(QMainWindow, Ui_NewMember):
         self.setupUi(self)
         self.btn_cancel.released.connect(self.closeClicked)
         self.btn_save.released.connect(self.saveClicked)
-        self.btn_show.released.connect(self.showClicked)
+        self.btn_show_bible_study.released.connect(self.showClicked)
         self.rb_gender_male.setChecked(True)
         self.de_bap.setDate(QDate.currentDate())
         self.de_dob.setDate(QDate.currentDate())
@@ -125,10 +125,10 @@ class NewMember(QMainWindow, Ui_NewMember):
 
     def getGender(self):
         if (self.rb_gender_male):
-            return "male"
+            return "Male"
         else:
-            return "female"
+            return "Female"
 
     def getDutyListFromDB(self):
-        duties = ("목사", "전도사", "평신도")
+        duties = DBConnectSingleton.instance.getDutyName()
         return duties
