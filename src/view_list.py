@@ -10,7 +10,7 @@ class ViewList(QMainWindow , Ui_ViewList):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        # self.btn_cancel.released.connect()
+        self.btn_cancel.released.connect(self.btnCancelClicked)
         self.btn_add.released.connect(self.btnAddClicked)
         # self.btn_delete.released.connect()
         # self.btn_edit.released.connect()
