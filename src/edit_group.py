@@ -12,3 +12,10 @@ class EditGroup(QMainWindow, Ui_EditGroup):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.btn_cancel.released.connect(self.closeClicked)
+
+    @pyqtSlot()
+    def closeClicked(self):
+        self.close()
+
+
