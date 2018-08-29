@@ -144,43 +144,47 @@ class DBConnectSingleton:
                 returnVal.append(query.value(0))
             return returnVal
 
+        # Return first name
+        def getFirstName(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT first_name FROM Person WHERE id = '" + input_id + "';")
+            query.exec()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
 
-        # def getFirstName(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT first_name FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
-        #
-        # def getLastName(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT last_name FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
-        #
-        # def getMidName(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT mid_name FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
-        #
-        # def getKorName(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT kor_name FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
-        #
+        # Return last name
+        def getLastName(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT last_name FROM Person WHERE id = '" + input_id + "';")
+            query.exec()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
+
+        # Return middle name
+        def getMidName(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT mid_name FROM Person WHERE id = '" + input_id + "';")
+            query.exec()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
+
+        # Return Korean name
+        def getKorName(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT kor_name FROM Person WHERE id = '" + input_id + "';")
+            query.exec()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
+
+        # Return
         # def getGender(self, input_id):
         #     query = QtSql.QSqlQuery(self.db)
         #     query.prepare("SELECT gender FROM Person WHERE id = '" + input_id + "';")
@@ -208,24 +212,24 @@ class DBConnectSingleton:
         #         returnVal = query.value(0)
         #     return returnVal
         #
-        # def getEmail(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT email FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
-        #
-        # def getPhone(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT phone FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
-        #
+        def getEmail(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT email FROM Person WHERE id = '" + input_id + "';")
+            query.exec()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
+
+        def getPhone(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT phone FROM Person WHERE id = '" + input_id + "';")
+            query.exec()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
+
         # def getGroup(self, input_id):
         #     query = QtSql.QSqlQuery(self.db)
         #     query.prepare("SELECT group FROM Person WHERE id = '" + input_id + "';")
@@ -302,6 +306,54 @@ class DBConnectSingleton:
         #     while query.next():
         #         returnVal = query.value(0)
         #     return returnVal
+        #
+        # # Return status of Newcomer Study
+        # def getMStudy(self, input_id):
+        #     query = QtSql.QSqlQuery(self.db)
+        #     query.prepare("SELECT m_study FROM Person WHERE id = '" + input_id + "';")
+        #     query.exec()
+        #     returnVal = None
+        #     while query.next():
+        #         returnVal = query.value(0)
+        #     return returnVal
+
+        # Return name list of the bible study
+        def getBStudyList(self):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT name FROM BibleStudy;")
+            query.exec()
+            returnVal = []
+            while query.next():
+                returnVal.append(query.value(0))
+            return returnVal
+
+        # Return bible study status for individual with person ID
+        def getBStudy(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT b_id FROM BibleStudyHistory WHERE p_id = '" + input_id + "';")
+            query.exec()
+            b_id_list = []
+            returnVal = {}
+            while query.next():
+                b_id_list.append(query.value(0))
+
+            query.clear(self)
+            query.prepare("SELECT name FROM BibleStudy WHERE num = '" + x + "';")
+            b_list = []
+            for x in b_id_list:
+                query.exec()
+                while query.next():
+                    b_list.append(query.value(0))
+
+            for x in b_list:
+                returnVal[x] = True
+            return returnVal
+
+
+
+
+
+
     instance = None
     def __init__(self, db):
         if not DBConnectSingleton.instance:

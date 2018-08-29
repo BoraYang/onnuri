@@ -69,7 +69,7 @@ class NewMember(QMainWindow, Ui_NewMember):
                                                      mid_name=mid_name,gender=gender, email=email,
                                                      b_date=dob, r_date=doreg, kor_name=kor_name, phone=phone,
                                                      group=group,duty=duty_id, baptism=-1,
-                                                     family=-1, c_study=new_c_s, m_study=new_f_s, b_study=-1)
+                                                     family=-1, c_study=new_c_s, m_study=new_f_s)
         # add baptism id to db anf get baptism id
         b_id = DBConnectSingleton.instance.addBaptism(input_id=p_id, bap_date=dobap, location=biptism_site,
                                                       admin=biptism_by)

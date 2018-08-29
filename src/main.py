@@ -3,6 +3,7 @@ from sign_in import *
 from db_connect_singleton import *
 from PyQt5 import QtSql
 from view_list import *
+from view_member import *
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -19,7 +20,7 @@ if __name__ == "__main__":
 
     DBConnectSingleton(db_driver)
 
-    mywin =Singin()
+    mywin =ViewMember()
     mywin.show()
     app.exec_()
 
