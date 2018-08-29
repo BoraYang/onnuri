@@ -20,6 +20,7 @@ class ViewMember(QMainWindow, Ui_ViewMember):
         self.tb_kor_name.setText(DBConnectSingleton.instance.getKorname(self.p_id))
         self.tb_email.setText(DBConnectSingleton.instance.getEmail(self.p_id))
         self.tb_phone.setText(DBConnectSingleton.instance.getPhone(self.p_id))
+        self.tb_address.setText(DBConnectSingleton.instance.getPhysicalAddress(self.p_id))
         self.tb_baptism_place.setText(self.showBaptismSite())
         self.tb_baptism_by.setText(self.showBaptizer())
         self.de_dob.setDate(DBConnectSingleton.instance.getBDate(self.p_id))
@@ -31,7 +32,6 @@ class ViewMember(QMainWindow, Ui_ViewMember):
         self.lbl_group_info.setText(DBConnectSingleton.instance.getGroup(self.p_id))
         self.rb_gender_male.setChecked(QtCore.Qt.Checked)
         self.rb_gender_female.setChecked(QtCore.Qt.Checked)
-        #self.gv_pic.set
 
     @pyqtSlot()
     def closeClicked(self):
@@ -45,7 +45,6 @@ class ViewMember(QMainWindow, Ui_ViewMember):
     def showClicked(self):
         print("show button clicked.")
 
-    @pyqtSlot()
     def showEngName(self):
         first_name = DBConnectSingleton.instance.getFirstName(self.p_id)
         mid_name = DBConnectSingleton.instance.getMidName(self.p_id)
@@ -55,25 +54,21 @@ class ViewMember(QMainWindow, Ui_ViewMember):
         else:
             return first_name + " " + mid_name + " " + last_name
 
-    @pyqtSlot()
     def showBaptismSite(self):
         baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
         baptismSite = baptism[3]
         return baptismSite
 
-    @pyqtSlot()
     def showBaptizer(self):
         baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
         baptizer = baptism[4]
         return baptizer
 
-    @pyqtSlot()
     def showBaptismDate(self):
         baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
         baptismDate = baptism[2]
         return baptismDate
 
-    @pyqtSlot()
     def showPicture(self):
         fileName = DBConnectSingleton.instance.getPicPath(self.p_id)
         if (len(fileName) is not 0):
@@ -92,8 +87,7 @@ class ViewMember(QMainWindow, Ui_ViewMember):
             scale_factor = w / img_w
             img_w = w
             img_h *= scale_factor
-        imag = img.scaledToHeight(img_h)
-        # img.scaledToWidth(img_w)
-        self.lbl_photo_view.setPixmap(QPixmap.fromImage(imag))
+        image = img.scaledToHeight(img_h)
+        self.lbl_pic_view.setPixmap(QPixmap.fromImage(image))
 
 

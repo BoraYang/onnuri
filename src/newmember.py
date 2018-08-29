@@ -99,9 +99,9 @@ class NewMember(QMainWindow, Ui_NewMember):
             scale_factor = w / img_w
             img_w = w
             img_h *= scale_factor
-        imag = img.scaledToHeight(img_h)
+        image = img.scaledToHeight(img_h)
         # img.scaledToWidth(img_w)
-        self.lbl_photo_view.setPixmap(QPixmap.fromImage(imag))
+        self.lbl_photo_view.setPixmap(QPixmap.fromImage(image))
         arr = fileName[0].split("/")
         index = len(arr) - 1
 

@@ -33,6 +33,16 @@
           <string>Personal Information</string>
          </property>
          <layout class="QGridLayout" name="gridLayout">
+          <item row="9" column="1" rowspan="2">
+           <widget class="QLabel" name="lbl_photo_view">
+            <property name="autoFillBackground">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
           <item row="7" column="3">
            <widget class="QLabel" name="lbl_email">
             <property name="text">
@@ -43,20 +53,13 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="lbl_mid_name">
-            <property name="text">
-             <string>Middle Name</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
+          <item row="7" column="4">
+           <widget class="QLineEdit" name="tb_email"/>
           </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="label_2">
+          <item row="0" column="3">
+           <widget class="QLabel" name="lbl_gender">
             <property name="text">
-             <string>Photo</string>
+             <string>Gender</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -73,18 +76,22 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="lbl_first_name">
+          <item row="9" column="3" colspan="2">
+           <widget class="QLabel" name="lbl_photo_loc">
             <property name="text">
-             <string>First Name</string>
+             <string>Photo Location</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="lbl_mid_name">
+            <property name="text">
+             <string>Middle Name</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="tb_first_name"/>
           </item>
           <item row="4" column="1">
            <widget class="QLineEdit" name="tb_mid_name"/>
@@ -99,74 +106,38 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="tb_kor_name"/>
-          </item>
-          <item row="3" column="3">
-           <widget class="QLabel" name="lbl_birthday">
-            <property name="text">
-             <string>Date of Birth</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="lbl_kor_name">
-            <property name="text">
-             <string>Korean Name</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="4">
-           <widget class="QLineEdit" name="tb_last_name"/>
-          </item>
-          <item row="3" column="4">
-           <widget class="QDateEdit" name="de_dob">
-            <property name="locale">
-             <locale language="English" country="UnitedStates"/>
-            </property>
-            <property name="displayFormat">
-             <string>MM/dd/yyyy</string>
-            </property>
-            <property name="calendarPopup">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="1">
-           <widget class="QLineEdit" name="tb_phone"/>
-          </item>
-          <item row="7" column="4">
-           <widget class="QLineEdit" name="tb_email"/>
-          </item>
-          <item row="9" column="4">
+          <item row="10" column="4">
            <widget class="QPushButton" name="btn_sel_photo">
             <property name="text">
              <string>Select Photo</string>
             </property>
            </widget>
           </item>
-          <item row="8" column="3" colspan="2">
-           <widget class="QLabel" name="lbl_photo_loc">
-            <property name="text">
-             <string>Photo Location</string>
-            </property>
-           </widget>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="tb_first_name"/>
           </item>
-          <item row="0" column="3">
-           <widget class="QLabel" name="lbl_gender">
+          <item row="9" column="0">
+           <widget class="QLabel" name="label_2">
             <property name="text">
-             <string>Gender</string>
+             <string>Photo</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="lbl_first_name">
+            <property name="text">
+             <string>First Name</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLineEdit" name="tb_phone"/>
           </item>
           <item row="0" column="4">
            <widget class="QFrame" name="frame_3">
@@ -194,15 +165,57 @@
             </layout>
            </widget>
           </item>
-          <item row="8" column="1" rowspan="2">
-           <widget class="QLabel" name="lbl_photo_view">
-            <property name="autoFillBackground">
+          <item row="3" column="4">
+           <widget class="QDateEdit" name="de_dob">
+            <property name="locale">
+             <locale language="English" country="UnitedStates"/>
+            </property>
+            <property name="displayFormat">
+             <string>MM/dd/yyyy</string>
+            </property>
+            <property name="calendarPopup">
              <bool>true</bool>
             </property>
+           </widget>
+          </item>
+          <item row="4" column="4">
+           <widget class="QLineEdit" name="tb_last_name"/>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="tb_kor_name"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_kor_name">
             <property name="text">
-             <string/>
+             <string>Korean Name</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLabel" name="lbl_birthday">
+            <property name="text">
+             <string>Date of Birth</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Address</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1" colspan="4">
+           <widget class="QLineEdit" name="tb_address"/>
           </item>
          </layout>
         </widget>
