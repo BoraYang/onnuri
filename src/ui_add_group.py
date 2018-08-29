@@ -1,0 +1,91 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file '../gui/add_group.ui'
+#
+# Created by: PyQt5 UI code generator 5.11.2
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_AddGroup(object):
+    def setupUi(self, AddGroup):
+        AddGroup.setObjectName("AddGroup")
+        AddGroup.resize(395, 187)
+        self.centralWidget = QtWidgets.QWidget(AddGroup)
+        self.centralWidget.setObjectName("centralWidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralWidget)
+        self.verticalLayout.setSizeConstraint(QtWidgets.QLayout.SetMaximumSize)
+        self.verticalLayout.setContentsMargins(11, 11, 11, 11)
+        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.frame = QtWidgets.QFrame(self.centralWidget)
+        self.frame.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.gridLayout = QtWidgets.QGridLayout(self.frame)
+        self.gridLayout.setContentsMargins(11, 11, 11, 11)
+        self.gridLayout.setSpacing(6)
+        self.gridLayout.setObjectName("gridLayout")
+        self.lbl_group_name = QtWidgets.QLabel(self.frame)
+        self.lbl_group_name.setObjectName("lbl_group_name")
+        self.gridLayout.addWidget(self.lbl_group_name, 0, 0, 1, 1)
+        self.lbl_leader_id = QtWidgets.QLabel(self.frame)
+        self.lbl_leader_id.setObjectName("lbl_leader_id")
+        self.gridLayout.addWidget(self.lbl_leader_id, 1, 0, 1, 1)
+        self.tb_leader_id = QtWidgets.QLineEdit(self.frame)
+        self.tb_leader_id.setObjectName("tb_leader_id")
+        self.gridLayout.addWidget(self.tb_leader_id, 1, 1, 1, 1)
+        self.cb_group_name = QtWidgets.QComboBox(self.frame)
+        self.cb_group_name.setObjectName("cb_group_name")
+        self.gridLayout.addWidget(self.cb_group_name, 0, 1, 1, 1)
+        self.verticalLayout.addWidget(self.frame)
+        self.frame_2 = QtWidgets.QFrame(self.centralWidget)
+        self.frame_2.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.frame_2)
+        self.gridLayout_2.setContentsMargins(11, 11, 11, 11)
+        self.gridLayout_2.setSpacing(6)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.btn_save = QtWidgets.QPushButton(self.frame_2)
+        self.btn_save.setObjectName("btn_save")
+        self.gridLayout_2.addWidget(self.btn_save, 0, 0, 1, 1)
+        self.btn_cancel = QtWidgets.QPushButton(self.frame_2)
+        self.btn_cancel.setObjectName("btn_cancel")
+        self.gridLayout_2.addWidget(self.btn_cancel, 0, 1, 1, 1)
+        self.verticalLayout.addWidget(self.frame_2)
+        AddGroup.setCentralWidget(self.centralWidget)
+        self.menuBar = QtWidgets.QMenuBar(AddGroup)
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 395, 22))
+        self.menuBar.setDefaultUp(True)
+        self.menuBar.setObjectName("menuBar")
+        self.menuMenu = QtWidgets.QMenu(self.menuBar)
+        self.menuMenu.setObjectName("menuMenu")
+        AddGroup.setMenuBar(self.menuBar)
+        self.actionfiles = QtWidgets.QAction(AddGroup)
+        self.actionfiles.setObjectName("actionfiles")
+        self.actionnew = QtWidgets.QAction(AddGroup)
+        self.actionnew.setObjectName("actionnew")
+        self.actionedit = QtWidgets.QAction(AddGroup)
+        self.actionedit.setObjectName("actionedit")
+        self.menuMenu.addAction(self.actionfiles)
+        self.menuMenu.addAction(self.actionnew)
+        self.menuMenu.addAction(self.actionedit)
+        self.menuBar.addAction(self.menuMenu.menuAction())
+
+        self.retranslateUi(AddGroup)
+        QtCore.QMetaObject.connectSlotsByName(AddGroup)
+
+    def retranslateUi(self, AddGroup):
+        _translate = QtCore.QCoreApplication.translate
+        AddGroup.setWindowTitle(_translate("AddGroup", "Add New Member"))
+        self.lbl_group_name.setText(_translate("AddGroup", "Group Name"))
+        self.lbl_leader_id.setText(_translate("AddGroup", "Leader ID Number"))
+        self.btn_save.setText(_translate("AddGroup", "Save"))
+        self.btn_cancel.setText(_translate("AddGroup", "Cancel"))
+        self.menuMenu.setTitle(_translate("AddGroup", "Menu"))
+        self.actionfiles.setText(_translate("AddGroup", "files"))
+        self.actionnew.setText(_translate("AddGroup", "new"))
+        self.actionedit.setText(_translate("AddGroup", "edit"))
+
