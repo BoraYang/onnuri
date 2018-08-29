@@ -365,6 +365,16 @@ class DBConnectSingleton:
                 returnVal = query.value(0)
             return returnVal
 
+        # Return picture file path
+        def getPicPath(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT picture_path FROM Person WHERE id ='" + input_id + "';")
+            query.exec()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
+
 
 
     instance = None
