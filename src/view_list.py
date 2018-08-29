@@ -20,11 +20,12 @@ class ViewList(QMainWindow , Ui_ViewList):
         self.model.select()
 
         # self.model.EditStrategy(QSqlTableModel.OnManualSubmit)
-        h_list = ["First Name","Middle Name","Last Name","Korean Name","Gender","BirthDay","Day of Register","E-Mail","Phone","Group","Duty","Baptism","Family","NewComer Study","New Member Study","BibleStudy"]
-        h_visible = [1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0]
+        h_list = ["First Name","Middle Name","Last Name","Korean Name","Gender","Address" ,"BirthDay","Day of Register","E-Mail","Phone","Group","Duty","Baptism","Family","NewComer Study","New Member Study","BibleStudy"]
+        # h_visible = [1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0]
+        h_visible = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         index = 1;
         for s in h_list:
-            self.model.setHeaderData(index, QtCore.Qt.Horizontal,s)
+            self.model.setHeaderData(index, QtCore.Qt.Horizontal, s)
             index+=1
         index =0
         self.tv_list.setModel(self.model)

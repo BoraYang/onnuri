@@ -35,11 +35,11 @@ class NewMember(QMainWindow, Ui_NewMember):
 
     @pyqtSlot()
     def saveClicked(self):
+        self.saveToDb()
         print("save button clicked.")
 
     @pyqtSlot()
     def showClicked(self):
-        self.saveToDb()
         print("show button clicked.")
 
     def saveToDb(self):
@@ -47,7 +47,10 @@ class NewMember(QMainWindow, Ui_NewMember):
         mid_name = self.tb_mid_name.text()
         last_name = self.tb_last_name.text()
         kor_name = self.tb_kor_name.text()
-        phone = int(self.tb_phone.text())
+        if(len(self.tb_phone.text()) is 0):
+            phone = ""
+        else:
+            phone = int(self.tb_phone.text())
         gender = self.getGender()
         email = self.tb_email.text()
         dob = self.de_dob.date().toString()  # birth
