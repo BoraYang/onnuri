@@ -14,7 +14,7 @@ class DBConnectSingleton:
         # Get data from Person table
         def getInfo(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT * FROM Person WHERE id = '" + input_id + "';")
+            query.prepare("SELECT * FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec()
             returnVal = []
             while query.next():
@@ -38,7 +38,7 @@ class DBConnectSingleton:
 
         def verifyIdAndPasswd(self,id_ , passwd):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("select password from User where id == '"+id_+"'")
+            query.prepare("select password from User where id == '"+str(id_)+"'")
             if not query.exec():
                 return -1
             while query.next():
@@ -53,7 +53,7 @@ class DBConnectSingleton:
                       email="", phone="", group=-1, duty=-1, baptism=-1, family=-1, c_study="", m_study=""):
             query = QtSql.QSqlQuery(self.db)
             query.prepare(
-                "INSERT INTO Person (first_name, last_name, mid_name, kor_name, gender, b_date, r_date, email, phone, group, duty, baptism, family, c_study, m_study) VALUES ('" + first_name + ", " + last_name + ", " + mid_name + ", " + kor_name + ", " + gender + ", " + b_date + ", " + r_date + ", " + email + ", " + phone + ", " + group + ", " + duty + ", " + baptism + ", " + family + ", " + c_study + ", " + m_study + ");")
+                "INSERT INTO Person (first_name, last_name, mid_name, kor_name, gender, b_date, r_date, email, phone, group, duty, baptism, family, c_study, m_study) VALUES ('" + first_name + ", " + last_name + ", " + mid_name + ", " + kor_name + ", " + gender + ", " + b_date + ", " + r_date + ", " + email + ", " + phone + ", " + str(group) + ", " + str(duty) + ", " + str(baptism) + ", " + str(family) + ", " + c_study + ", " + m_study + ");")
             if not query.exec():
                 return -1
             query.clear()
@@ -69,11 +69,11 @@ class DBConnectSingleton:
         def addBaptism(self, input_id, bap_date, location, admin):
             query = QtSql.QSqlQuery(self.db)
             query.prepare(
-                "INSERT INTO Baptism (id, bap_date, location, admin) VALUES (" + input_id + ", " + bap_date + ", " + location + ", " + admin + ");")
+                "INSERT INTO Baptism (id, bap_date, location, admin) VALUES (" + str(input_id) + ", " + str(bap_date) + ", " + location + ", " + admin + ");")
             if not query.exec():
                 return -1
             query.clear()
-            query.prepare("select num from Baptism where id = '" + input_id + "'")
+            query.prepare("select num from Baptism where id = '" + str(input_id)  + "'")
             if not query.exec():
                 return -1
             b_id = -1
@@ -92,21 +92,21 @@ class DBConnectSingleton:
         # Update Baptism data of Person
         def updateBaptism(self, input_id, baptism_num):
             query = QtSql.QsqlQuery(self.db)
-            query.prepare("UPDATE Person SET Baptism ='" + baptism_num + "' WHERE id ='" + input_id + "';")
+            query.prepare("UPDATE Person SET Baptism ='" + str(baptism_num) + "' WHERE id ='" + str(input_id) + "';")
             if not query.exec():
                 return -1
 
         # Update Family data of Person
         def updateFamily(self, input_id, family_num):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Person SET family = '" + family_num + "' WHERE id = '" + input_id + "';")
+            query.prepare("UPDATE Person SET family = '" + str(family_num) + "' WHERE id = '" + str(input_id) + "';")
             if not query.exec():
                 return -1
 
         # Convert Duty ID into duty name
         def getDutyID(self, input_duty):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT num FROM Duty WHERE name = '" + input_duty + "';")
+            query.prepare("SELECT num FROM Duty WHERE name = '" + str(input_duty) + "';")
             query.exec()
             returnVal = None
             while query.next():
@@ -116,7 +116,7 @@ class DBConnectSingleton:
         # Convert Group ID into group name
         def getGroupID(self, input_group):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT num FROM ChurchGroup WHERE name = '" + input_group + "';")
+            query.prepare("SELECT num FROM ChurchGroup WHERE name = '" + str(input_group) + "';")
             query.exec()
             returnVal = None
             while query.next():
@@ -146,7 +146,7 @@ class DBConnectSingleton:
         # Return first name
         def getFirstName(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT first_name FROM Person WHERE id = '" + input_id + "';")
+            query.prepare("SELECT first_name FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec()
             returnVal = None
             while query.next():
@@ -156,7 +156,7 @@ class DBConnectSingleton:
         # Return last name
         def getLastName(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT last_name FROM Person WHERE id = '" + input_id + "';")
+            query.prepare("SELECT last_name FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec()
             returnVal = None
             while query.next():
@@ -166,7 +166,7 @@ class DBConnectSingleton:
         # Return middle name
         def getMidName(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT mid_name FROM Person WHERE id = '" + input_id + "';")
+            query.prepare("SELECT mid_name FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec()
             returnVal = None
             while query.next():
@@ -176,7 +176,7 @@ class DBConnectSingleton:
         # Return Korean name
         def getKorName(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT kor_name FROM Person WHERE id = '" + input_id + "';")
+            query.prepare("SELECT kor_name FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec()
             returnVal = None
             while query.next():
@@ -198,7 +198,7 @@ class DBConnectSingleton:
         # Return date of birth
         def getBDate(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT b_date FROM Person WHERE id = '" + input_id + "';")
+            query.prepare("SELECT b_date FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec()
             returnVal = None
             while query.next():
@@ -216,7 +216,7 @@ class DBConnectSingleton:
         #
         def getEmail(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT email FROM Person WHERE id = '" + input_id + "';")
+            query.prepare("SELECT email FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec()
             returnVal = None
             while query.next():
@@ -225,7 +225,7 @@ class DBConnectSingleton:
 
         def getPhone(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT phone FROM Person WHERE id = '" + input_id + "';")
+            query.prepare("SELECT phone FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec()
             returnVal = None
             while query.next():
@@ -234,13 +234,13 @@ class DBConnectSingleton:
 
         def getGroup(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT group FROM Person WHERE id = '" + input_id + "';")
+            query.prepare("SELECT group FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec()
             group_id = None
             while query.next():
                 group_id = query.value(0)
 
-            query.prepare("SELECT name FROM ChurchGroup WHERE group_num = '" + group_id + "';")
+            query.prepare("SELECT name FROM ChurchGroup WHERE group_num = '" + str(group_id) + "';")
             query.exec()
             returnVal = None
             while query.next():
@@ -251,13 +251,13 @@ class DBConnectSingleton:
         # Return duty for individual
         def getDuty(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT duty FROM Person WHERE id = '" + input_id + "';")
+            query.prepare("SELECT duty FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec()
             duty_id = None
             while query.next():
                 duty_id = query.value(0)
 
-            query.prepare("SELECT name FROM Duty WHERE num = '" + duty_id + "';")
+            query.prepare("SELECT name FROM Duty WHERE num = '" + str(duty_id) + "';")
             query.exec()
             returnVal = None
             while query.next():
@@ -268,13 +268,13 @@ class DBConnectSingleton:
         # Return Baptism status for individual
         def getBaptism(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT baptism FROM Person WHERE id = '" + input_id + "';")
+            query.prepare("SELECT baptism FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec()
             baptism_id = None
             while query.next():
                 baptism_id = query.value(0)
 
-            query.prepare("SELECT bap_date, location, admin FROM Baptism WHERE num = '" + baptism_id + "';")
+            query.prepare("SELECT bap_date, location, admin FROM Baptism WHERE num = '" + str(baptism_id) + "';")
             query.exec()
             returnVal = []
             while query.next():
@@ -335,17 +335,17 @@ class DBConnectSingleton:
         # Return bible study status for individual with person ID
         def getBStudy(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT b_id FROM BibleStudyHistory WHERE p_id = '" + input_id + "';")
+            query.prepare("SELECT b_id FROM BibleStudyHistory WHERE p_id = '" + str(input_id) + "';")
             query.exec()
             b_id_list = []
             returnVal = {}
             while query.next():
                 b_id_list.append(query.value(0))
 
-            query.clear(self)
-            query.prepare("SELECT name FROM BibleStudy WHERE num = '" + x + "';")
             b_list = []
             for x in b_id_list:
+                query.clear()
+                query.prepare("SELECT name FROM BibleStudy WHERE num = '" + x + "';")
                 query.exec()
                 while query.next():
                     b_list.append(query.value(0))
@@ -358,7 +358,7 @@ class DBConnectSingleton:
         # Return all bible study names with BibleStudy ID
         def getBStudyName(self, b_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT name FROM BibleStudy WHERE num ='" + b_id + "';")
+            query.prepare("SELECT name FROM BibleStudy WHERE num ='" + str(b_id) + "';")
             query.exec()
             returnVal = None
             while query.next():

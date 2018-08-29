@@ -3,7 +3,7 @@ from sign_in import *
 from db_connect_singleton import *
 from PyQt5 import QtSql
 from view_list import *
-from view_member import *
+from BibleStudyWindow import *
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -12,15 +12,13 @@ if __name__ == "__main__":
 
     if not db_driver.isValid():
         print("ERROR: Invalid database")
-
     db_driver.setDatabaseName("../../db/onnuri.db")
-
     if not db_driver.open():
         print("ERROR: ", db_driver.lastError().text())
 
     DBConnectSingleton(db_driver)
 
-    mywin =ViewMember()
+    mywin =BibleStudyWindow("youngtak cho",editable=True)
     mywin.show()
     app.exec_()
 
