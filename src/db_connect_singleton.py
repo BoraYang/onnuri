@@ -1,6 +1,14 @@
 from PyQt5 import QtSql
 from PyQt5.Qt import QSqlDatabase
 
+
+# to do list
+# 각 창을 연결할 것
+# 부서 관리 창 만들기 및 소스 코드
+# 부서 추가 업데이트 쿼리 코드
+# 성경공부반 관련 쿼리 코드  추가
+# 등등등....
+
 class DBConnectSingleton:
     class __DBConnectSingleton:
         def __init__(self, db):
@@ -123,6 +131,7 @@ class DBConnectSingleton:
                 return -1
 
         def addBStudyHistory(self, p_id):
+            pass
 
         # Convert Duty ID into duty name
         def getDutyID(self, input_duty):

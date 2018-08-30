@@ -23,7 +23,7 @@ class ViewList(QMainWindow , Ui_ViewList):
         # ui.frame->setStyleSheet("background-image: url(:/images/menu_background.png);" "background-repeat: repeat;");
 
         # self.model.EditStrategy(QSqlTableModel.OnManualSubmit)
-        h_list = ["First Name","Middle Name","Last Name","Korean Name","Gender","Address" ,"BirthDay","Day of Register","E-Mail","Phone","Group","Duty","Baptism","Family","NewComer Study","New Member Study","BibleStudy"]
+        h_list = ["First Name","Middle Name","Last Name","Korean Name","Gender","Address" ,"BirthDay","Day of Register","E-Mail","Phone","Group","Duty","Baptism","Family","NewComer Study","New Member Study","Picture"]
         # h_visible = [1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0]
         h_visible = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         index = 1;
