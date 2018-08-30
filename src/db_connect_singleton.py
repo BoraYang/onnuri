@@ -259,6 +259,16 @@ class DBConnectSingleton:
                 returnVal = query.value(0)
             return returnVal
 
+        # Return list of all group names
+        def getGroupList(self):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT name FROM ChurchGroup;")
+            query.exec_()
+            returnVal = []
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
+
         # Return
         # def getGender(self, input_id):
         #     query = QtSql.QSqlQuery(self.db)

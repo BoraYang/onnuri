@@ -7,6 +7,7 @@ from PyQt5.Qt import QImage, QFile, QFileDialog, QPixmap
 from view_list import *
 from edit_group import *
 from BibleStudyWindow import *
+from view_dept import *
 
 class Home(QMainWindow, Ui_Home):
     myWindowCloseSignal = pyqtSignal()
@@ -36,4 +37,9 @@ class Home(QMainWindow, Ui_Home):
     @pyqtSlot()
     def bibleStudyClicked(self):
         self.childWindow = BibleStudyWindow('manage', p_id = -1 , editable=True)
+        self.childWindow.show()
+
+    @pyqtSlot()
+    def deptClicked(self):
+        self.childWindow = ViewDept()
         self.childWindow.show()
