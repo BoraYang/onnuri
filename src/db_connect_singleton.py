@@ -51,19 +51,19 @@ class DBConnectSingleton:
 
         # Add data to Person table
         def addPerson(self, first_name="", last_name="", mid_name="", kor_name="", gender="", address="", b_date="",
-                      r_date="",email="", phone="", group=-1,department=-1,duty = -1, baptism = -1, family = -1,
+                      r_date="",email="", phone="", church_group=-1,department=-1,duty = -1, baptism = -1, family = -1,
                       c_study = "", m_study = "", pic_path = ""):
             print(
-                "INSERT INTO Person (first_name, last_name, mid_name, kor_name, gender , physical_address, b_date, r_date, email, phone, group, duty, baptism, family, c_study, m_study) VALUES ('" + first_name + ", " + last_name + ", " + mid_name + ", " + kor_name + ", " + str(
+                "INSERT INTO Person (first_name, last_name, mid_name, kor_name, gender , physical_address, b_date, r_date, email, phone, church_group, duty, baptism, family, c_study, m_study) VALUES ('" + first_name + ", " + last_name + ", " + mid_name + ", " + kor_name + ", " + str(
                     gender) + ", " + address + "," + b_date + ", " + r_date + ", " + email + ", " + str(phone) + ", " + str(
-                    group) + ", " + str(department) + ", " + str(duty) + ", " + str(baptism) + ", " + str(
+                    church_group) + ", " + str(department) + ", " + str(duty) + ", " + str(baptism) + ", " + str(
                     family) + ", " + str(c_study) + ", " + str(
                     m_study) + ");")
             query = QtSql.QSqlQuery(self.db)
             query.prepare(
-                "INSERT INTO Person (first_name, last_name, mid_name, kor_name, gender, physical_address, b_date, r_date, email, phone, group, department, duty, baptism, family, c_study, m_study, picture_path) VALUES ('" + first_name + ", " + last_name + ", " + mid_name + ", " + kor_name + ", " + str(
+                "INSERT INTO Person (first_name, last_name, mid_name, kor_name, gender, physical_address, b_date, r_date, email, phone, church_group, department, duty, baptism, family, c_study, m_study, picture_path) VALUES ('" + first_name + ", " + last_name + ", " + mid_name + ", " + kor_name + ", " + str(
                     gender) + ", " + address + "," + b_date + ", " + r_date + ", " + email + ", " + str(phone) + ", " + str(
-                    group) + ", " + str(department) + ", " + str(duty) + ", " + str(baptism) + ", " + str(
+                    church_group) + ", " + str(department) + ", " + str(duty) + ", " + str(baptism) + ", " + str(
                     family) + ", " + str(c_study) + ", " + str(m_study) + str(pic_path) + ");")
             if not query.exec_():
                 return -1
@@ -329,7 +329,7 @@ class DBConnectSingleton:
 
         def getGroup(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT group FROM Person WHERE id = '" + str(input_id) + "';")
+            query.prepare("SELECT church_group FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec_()
             group_id = None
             while query.next():
