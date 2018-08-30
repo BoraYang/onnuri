@@ -80,8 +80,8 @@ class DBConnectSingleton:
         def addBaptism(self, input_id, bap_date, location, admin):
             query = QtSql.QSqlQuery(self.db)
             query.prepare(
-                "INSERT INTO Baptism (id, bap_date, location, admin) VALUES (" + str(input_id) + "', '" + str(
-                    bap_date) + "', '" + location + "', '" + admin + ");")
+                "INSERT INTO Baptism (id, bap_date, location, admin) VALUES (" + str(input_id) + ", " + str(
+                    bap_date) + ", " + location + ", " + admin + ");")
             if not query.exec_():
                 return -1
             query.clear()
@@ -111,7 +111,7 @@ class DBConnectSingleton:
 
         # Update Baptism data of Person
         def updateBaptism(self, input_id, baptism_num):
-            query = QtSql.QSqlQuery(self.db)
+            query = QtSql.QsqlQuery(self.db)
             query.prepare("UPDATE Person SET baptism ='" + str(baptism_num) + "' WHERE id ='" + str(input_id) + "';")
             if not query.exec_():
                 return -1
@@ -157,16 +157,16 @@ class DBConnectSingleton:
             while query.next():
                 returnVal.append(query.value(0))
             return returnVal
-
-        # Return list of people who are in the given department number
-        def getDeptNameList(self, d_id):
-            query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT name FROM Person WHERE department = '" + str(d_id) + "';")
-            query.exec_()
-            returnVal = []
-            while query.next():
-                returnVal.append(query.value(0))
-            return returnVal
+        #
+        # # Return list of people who are in the given department number
+        # def getDeptNameList(self, d_id):
+        #     query = QtSql.QSqlQuery(self.db)
+        #     query.prepare("SELECT name FROM Person WHERE department = '" + str(d_id) + "';")
+        #     query.exec_()
+        #     returnVal = []
+        #     while query.next():
+        #         returnVal.append(query.value(0))
+        #     return returnVal
 
         # Return list of birthday regarding to people who are in the given department number
         def getDeptDOBList(self, d_id):
@@ -328,7 +328,7 @@ class DBConnectSingleton:
 
         def getGroup(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT group FROM Person WHERE id = '" + str(input_id) + "';")
+            query.prepare("SELECT church_group FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec_()
             group_id = None
             while query.next():

@@ -19,6 +19,7 @@ class Home(QMainWindow, Ui_Home):
         self.btn_member.released.connect(self.memberClicked)
         self.btn_group.released.connect(self.groupClicked)
         self.btn_bible_study.released.connect(self.bibleStudyClicked)
+        self.btn_department.released.connect(self.deptClicked)
 
     @pyqtSlot()
     def closeClicked(self):
