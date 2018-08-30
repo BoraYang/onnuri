@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_ViewDept(object):
     def setupUi(self, ViewDept):
         ViewDept.setObjectName("ViewDept")
-        ViewDept.resize(397, 574)
+        ViewDept.resize(402, 521)
         self.centralWidget = QtWidgets.QWidget(ViewDept)
         self.centralWidget.setObjectName("centralWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralWidget)
@@ -54,7 +54,7 @@ class Ui_ViewDept(object):
         self.verticalLayout.addWidget(self.frame_2)
         ViewDept.setCentralWidget(self.centralWidget)
         self.menuBar = QtWidgets.QMenuBar(ViewDept)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 397, 22))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 402, 22))
         self.menuBar.setDefaultUp(True)
         self.menuBar.setObjectName("menuBar")
         self.menuMenu = QtWidgets.QMenu(self.menuBar)

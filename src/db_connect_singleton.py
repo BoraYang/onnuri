@@ -158,16 +158,16 @@ class DBConnectSingleton:
             while query.next():
                 returnVal.append(query.value(0))
             return returnVal
-
-        # Return list of people who are in the given department number
-        def getDeptNameList(self, d_id):
-            query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT name FROM Person WHERE department = '" + str(d_id) + "';")
-            query.exec_()
-            returnVal = []
-            while query.next():
-                returnVal.append(query.value(0))
-            return returnVal
+        #
+        # # Return list of people who are in the given department number
+        # def getDeptNameList(self, d_id):
+        #     query = QtSql.QSqlQuery(self.db)
+        #     query.prepare("SELECT name FROM Person WHERE department = '" + str(d_id) + "';")
+        #     query.exec_()
+        #     returnVal = []
+        #     while query.next():
+        #         returnVal.append(query.value(0))
+        #     return returnVal
 
         # Return list of birthday regarding to people who are in the given department number
         def getDeptDOBList(self, d_id):
