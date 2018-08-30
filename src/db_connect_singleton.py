@@ -104,7 +104,7 @@ class DBConnectSingleton:
         # Update Baptism data of Person
         def updateBaptism(self, input_id, baptism_num):
             query = QtSql.QsqlQuery(self.db)
-            query.prepare("UPDATE Person SET Baptism ='" + baptism_num + "' WHERE id ='" + input_id + "';")
+            query.prepare("UPDATE Person SET baptism ='" + baptism_num + "' WHERE id ='" + input_id + "';")
             if not query.exec_():
                 return -1
 
@@ -116,11 +116,13 @@ class DBConnectSingleton:
                 return -1
 
         # Update BibleStudy data
-        def addBibleStudy(self, input_name):
+        def addBStudy(self, input_name):
             query = QtSql.QSqlQuery(self.db)
             query.prepare("INSERT INTO BibleStudy (name) VALUES ('" + input_name + "');")
             if not query.exec_():
                 return -1
+
+        def addBStudyHistory(self, p_id):
 
         # Convert Duty ID into duty name
         def getDutyID(self, input_duty):
@@ -405,8 +407,6 @@ class DBConnectSingleton:
             while query.next():
                 returnVal = query.value(0)
             return returnVal
-
-
 
     instance = None
     def __init__(self, db):
