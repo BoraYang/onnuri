@@ -59,7 +59,6 @@ class DBConnectSingleton:
                     group) + ", " + str(department) + ", " + str(duty) + ", " + str(baptism) + ", " + str(
                     family) + ", " + str(c_study) + ", " + str(
                     m_study) + ");")
-            pass
             query = QtSql.QSqlQuery(self.db)
             query.prepare(
                 "INSERT INTO Person (first_name, last_name, mid_name, kor_name, gender, physical_address, b_date, r_date, email, phone, group, department, duty, baptism, family, c_study, m_study, picture_path) VALUES ('" + first_name + ", " + last_name + ", " + mid_name + ", " + kor_name + ", " + str(
