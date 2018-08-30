@@ -32,8 +32,7 @@ class NewMember(QMainWindow, Ui_NewMember):
         list = DBConnectSingleton.instance.getDeptName()
         for i in DBConnectSingleton.instance.getDeptName():
             self.cb_dept.addItem(i)
-
-
+        self.btn_show_bible_study.setEnabled(False)
 
     def closeEvent(self, event):
         self.myWindowCloseSignal.emit()
@@ -62,6 +61,7 @@ class NewMember(QMainWindow, Ui_NewMember):
         else:
             phone = int(self.tb_phone.text())
         gender = self.getGender()
+        address =self.tb_address.text()
         email = self.tb_email.text()
         dob = self.de_dob.date().toString()  # birth
         doreg = self.de_reg.date().toString()  # register
@@ -72,14 +72,14 @@ class NewMember(QMainWindow, Ui_NewMember):
         group = self.cb_group.currentText()
         new_c_s = self.chk_new_comer_study.isChecked()
         new_f_s = self.chk_new_comer_study.isChecked()
-        s_john = self.chk_john.isChecked()  # boolean
-        s_romans = self.chk_romans.isChecked()  # boolean
-        s_timothy = self.chk_timothy.isChecked()  # boolean
+
+        dept = self.cb_dept.currentText()
+        dept_id = DBConnectSingleton.instance.getDeptName()
 
         duty_id = self.getDutyId(duty)
         # add to db with no baptism id and get personal id
         p_id = DBConnectSingleton.instance.addPerson(first_name=first_name, last_name=last_name,
-                                                     mid_name=mid_name,gender=gender, email=email,
+                                                     mid_name=mid_name,gender=gender,address=address,email=email,
                                                      b_date=dob, r_date=doreg, kor_name=kor_name, phone=phone,
                                                      group=group,duty=duty_id, baptism=-1,
                                                      family=-1, c_study=new_c_s, m_study=new_f_s)
