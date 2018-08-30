@@ -461,15 +461,15 @@ class DBConnectSingleton:
             return returnVal
 
 
-instance = None
+    instance = None
 
 
-def __init__(self, db):
-    if not DBConnectSingleton.instance:
-        DBConnectSingleton.instance = DBConnectSingleton.__DBConnectSingleton(db)
-    else:
-        DBConnectSingleton.instance.val = db
+    def __init__(self, db):
+        if not DBConnectSingleton.instance:
+            DBConnectSingleton.instance = DBConnectSingleton.__DBConnectSingleton(db)
+        else:
+            DBConnectSingleton.instance.val = db
 
 
-def __getattr__(self, name):
-    return getattr(self.instance, name)
+    def __getattr__(self, name):
+        return getattr(self.instance, name)
