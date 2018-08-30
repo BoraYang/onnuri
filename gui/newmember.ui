@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>599</width>
-    <height>888</height>
+    <height>924</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -412,22 +412,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_4">
-         <property name="title">
-          <string>Group Information</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QPushButton" name="btn_show_group">
-            <property name="text">
-             <string>Show</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
         <widget class="QFrame" name="frame_2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -540,7 +524,6 @@
   <tabstop>chk_new_comer_study</tabstop>
   <tabstop>btn_show_bible_study</tabstop>
   <tabstop>btn_show_family</tabstop>
-  <tabstop>btn_show_group</tabstop>
   <tabstop>btn_cancel</tabstop>
   <tabstop>btn_save</tabstop>
  </tabstops>
