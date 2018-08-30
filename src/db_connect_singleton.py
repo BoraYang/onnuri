@@ -1,7 +1,6 @@
 from PyQt5 import QtSql
 from PyQt5.Qt import QSqlDatabase
 
-
 class DBConnectSingleton:
     class __DBConnectSingleton:
         def __init__(self, db):
