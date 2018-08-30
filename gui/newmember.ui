@@ -376,7 +376,11 @@
            </widget>
           </item>
           <item row="6" column="1">
-           <widget class="QComboBox" name="cb_dept"/>
+           <widget class="QComboBox" name="cb_dept">
+            <property name="editable">
+             <bool>false</bool>
+            </property>
+           </widget>
           </item>
           <item row="6" column="0">
            <widget class="QLabel" name="label_4">
