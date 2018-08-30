@@ -25,6 +25,16 @@ class NewMember(QMainWindow, Ui_NewMember):
         for i in self.getDutyListFromDB():
             self.cb_duty.addItem(i)
 
+        list = DBConnectSingleton.instance.getGroupList()
+        for i in DBConnectSingleton.instance.getGroupList():
+            self.cb_group.addItem(i)
+
+        list = DBConnectSingleton.instance.getDeptName()
+        for i in DBConnectSingleton.instance.getDeptName():
+            self.cb_dept.addItem(i)
+
+
+
     def closeEvent(self, event):
         self.myWindowCloseSignal.emit()
         event.accept()
