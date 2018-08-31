@@ -53,17 +53,22 @@ class DBConnectSingleton:
         def addPerson(self, first_name="", last_name="", mid_name="", kor_name="", gender="", address="", b_date="",
                       r_date="",email="", phone="", group=-1,department=-1,duty = -1, baptism = -1, family = -1,
                       c_study = "", m_study = "", pic_path = ""):
-            print(
-                "INSERT INTO Person (first_name, last_name, mid_name, kor_name, gender , physical_address, b_date, r_date, email, phone, group, duty, baptism, family, c_study, m_study) VALUES ('" + first_name + "', '" + last_name + "', '" + mid_name + "', '" + kor_name + "', '" +
-                    str(gender) + "', '" + address + "', '" + b_date + "', '" + r_date + "', '" + email + "', '" + str(phone) + "', '" + str(
-                    group) + "', '" + str(department) + "', '" + str(duty) + "', '" + str(baptism) + "', '" + str(
-                    family) + "', '" + str(c_study) + "', '" + str(m_study) + ");")
             query = QtSql.QSqlQuery(self.db)
             query.prepare(
-                "INSERT INTO Person (first_name, last_name, mid_name, kor_name, gender, physical_address, b_date, r_date, email, phone, group, department, duty, baptism, family, c_study, m_study, picture_path) VALUES ('" + first_name + "', '" + last_name + "', '" + mid_name + "', '" + kor_name + "', '" + str(
-                    gender) + "', '" + address + "', '" + b_date + "', '" + r_date + "', '" + email + "', '" + str(phone) + "', '" + str(
+                "INSERT INTO Person " +
+                "(first_name, last_name, mid_name, kor_name, gender, physical_address, b_date, r_date, email, phone, church_group, department, duty, baptism, family, c_study, m_study, picture_path) VALUES ('" + first_name + "', '" + last_name + "', '" + mid_name + "', '" + kor_name + "', '" + str(
+                    gender) + "', '" + address + "', '" + b_date + "', '" + r_date + "', '" + email + "', '" + str(
+                    phone) + "', '" + str(
                     group) + "', '" + str(department) + "', '" + str(duty) + "', '" + str(baptism) + "', '" + str(
-                    family) + "', '" + str(c_study) + "', '" + str(m_study) + str(pic_path) + ");")
+                    family) + "', '" + str(c_study) + "', '" + str(m_study) + "', '" + str(pic_path) + "');")
+            print(
+                "INSERT INTO Person " +
+                "(first_name, last_name, mid_name, kor_name, gender, physical_address, b_date, r_date, email, phone, church_group, department, duty, baptism, family, c_study, m_study, picture_path) VALUES ('" + first_name + "', '" + last_name + "', '" + mid_name + "', '" + kor_name + "', '" + str(
+                    gender) + "', '" + address + "', '" + b_date + "', '" + r_date + "', '" + email + "', '" + str(
+                    phone) + "', '" + str(
+                    group) + "', '" + str(department) + "', '" + str(duty) + "', '" + str(baptism) + "', '" + str(
+                    family) + "', '" + str(c_study) + "', '" + str(m_study) +"', '"+ str(pic_path) + "');")
+
             if not query.exec_():
                 return -1
             query.clear()
@@ -80,8 +85,8 @@ class DBConnectSingleton:
         def addBaptism(self, input_id, bap_date, location, admin):
             query = QtSql.QSqlQuery(self.db)
             query.prepare(
-                "INSERT INTO Baptism (id, bap_date, location, admin) VALUES (" + str(input_id) + ", " + str(
-                    bap_date) + ", " + location + ", " + admin + ");")
+                "INSERT INTO Baptism (id, bap_date, location, admin) VALUES ("+"'" +str(input_id)+"'"+ ", '"+str(
+                    bap_date) + "', '"+location +"', '" + admin + "');")
             if not query.exec_():
                 return -1
             query.clear()
@@ -111,7 +116,7 @@ class DBConnectSingleton:
 
         # Update Baptism data of Person
         def updateBaptism(self, input_id, baptism_num):
-            query = QtSql.QsqlQuery(self.db)
+            query = QtSql.QSqlQuery(self.db)
             query.prepare("UPDATE Person SET baptism ='" + str(baptism_num) + "' WHERE id ='" + str(input_id) + "';")
             if not query.exec_():
                 return -1

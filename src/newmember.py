@@ -38,6 +38,7 @@ class NewMember(QMainWindow, Ui_NewMember):
         self.myWindowCloseSignal.emit()
         event.accept()
 
+
     @pyqtSlot()
     def closeClicked(self):
         self.close()
@@ -74,15 +75,16 @@ class NewMember(QMainWindow, Ui_NewMember):
         new_f_s = self.chk_new_comer_study.isChecked()
 
         dept = self.cb_dept.currentText()
-        dept_id = DBConnectSingleton.instance.getDeptName()
+        dept_id = DBConnectSingleton.instance.getDeptID(dept)
 
         duty_id = self.getDutyId(duty)
         # add to db with no baptism id and get personal id
         p_id = DBConnectSingleton.instance.addPerson(first_name=first_name, last_name=last_name,
-                                                     mid_name=mid_name,gender=gender,address=address,email=email,
-                                                     b_date=dob, r_date=doreg, kor_name=kor_name, phone=phone,
-                                                     group=group,duty=duty_id, baptism=-1,
-                                                     family=-1, c_study=new_c_s, m_study=new_f_s)
+                                                     mid_name=mid_name,kor_name=kor_name,
+                                                     gender=gender,address=address,
+                                                     b_date=dob, r_date=doreg, email = email,phone=phone,
+                                                     group=group,department=dept_id,duty=duty_id, baptism=-1,
+                                                     family=-1, c_study=new_c_s, m_study=new_f_s , pic_path=self.file_path)
         # add baptism id to db anf get baptism id
         b_id = DBConnectSingleton.instance.addBaptism(input_id=p_id, bap_date=dobap, location=biptism_site,
                                                       admin=biptism_by)
@@ -95,6 +97,7 @@ class NewMember(QMainWindow, Ui_NewMember):
         fileName = QFileDialog.getOpenFileName(self, caption="Select Photo", filter="Image Files (*.png *.jpg *.bmp)")
         if (len(fileName) is not 0):
             print(fileName[0])
+        self.file_path = fileName[0]
         img = QImage(fileName[0])
         h = self.lbl_photo_view.height()
         w = self.lbl_photo_view.width()
