@@ -4,7 +4,6 @@ from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.QtCore import QDate , Qt
 from db_connect_singleton import *
 from PyQt5.Qt import QImage, QFile, QFileDialog, QPixmap
-from shutil import copyfile
 file_dir = "../../onnuri_photo"
 class NewMember(QMainWindow, Ui_NewMember):
     myWindowCloseSignal = pyqtSignal()
