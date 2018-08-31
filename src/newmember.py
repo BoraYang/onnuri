@@ -1,17 +1,18 @@
 from PyQt5.QtWidgets import *
 from ui_newmember import *
 from PyQt5.QtCore import pyqtSlot, pyqtSignal
-from PyQt5.QtCore import QDate
+from PyQt5.QtCore import QDate , Qt
 from db_connect_singleton import *
 from PyQt5.Qt import QImage, QFile, QFileDialog, QPixmap
-
-
+from shutil import copyfile
+file_dir = "../../onnuri_photo"
 class NewMember(QMainWindow, Ui_NewMember):
     myWindowCloseSignal = pyqtSignal()
 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.img = None
         self.btn_cancel.released.connect(self.closeClicked)
         self.btn_save.released.connect(self.saveClicked)
         self.btn_show_bible_study.released.connect(self.showClicked)
@@ -78,19 +79,31 @@ class NewMember(QMainWindow, Ui_NewMember):
         dept_id = DBConnectSingleton.instance.getDeptID(dept)
 
         duty_id = self.getDutyId(duty)
+        f_name = first_name+mid_name+last_name+str(phone)
+        file_path = self.savePhoto(f_name)
         # add to db with no baptism id and get personal id
         p_id = DBConnectSingleton.instance.addPerson(first_name=first_name, last_name=last_name,
                                                      mid_name=mid_name,kor_name=kor_name,
                                                      gender=gender,address=address,
                                                      b_date=dob, r_date=doreg, email = email,phone=phone,
                                                      group=group,department=dept_id,duty=duty_id, baptism=-1,
-                                                     family=-1, c_study=new_c_s, m_study=new_f_s , pic_path=self.file_path)
+                                                     family=-1, c_study=new_c_s, m_study=new_f_s , pic_path=file_path)
         # add baptism id to db anf get baptism id
         b_id = DBConnectSingleton.instance.addBaptism(input_id=p_id, bap_date=dobap, location=biptism_site,
                                                       admin=biptism_by)
         # update personal information with baptism id
         DBConnectSingleton.instance.updateBaptism(input_id=p_id, baptism_num=b_id)
 
+
+
+
+    def savePhoto(self,name):
+        if(self.img is not None):
+            self.img = self.img.scaled(600,600 , Qt.KeepAspectRatio)
+            self.img.save(file_dir+"/"+name+".png")
+            return ""+file_dir+"/"+name+".png"
+        else:
+            return "None"
 
     @pyqtSlot()
     def btn_sel_photo_clicked(self):
@@ -99,6 +112,7 @@ class NewMember(QMainWindow, Ui_NewMember):
             print(fileName[0])
         self.file_path = fileName[0]
         img = QImage(fileName[0])
+        self.img = img.copy()
         h = self.lbl_photo_view.height()
         w = self.lbl_photo_view.width()
 

@@ -14,7 +14,7 @@ class ViewDept(QMainWindow, Ui_ViewDept):
         self.btn_go_back.released.connect(self.closeClicked)
         for e in DBConnectSingleton.instance.getDeptName():
             self.cb_dept_name.addItem(e)
-        self.cb_dept.currentTextChanged.connect(self.cb_changed)
+        self.cb_dept_name.currentTextChanged.connect(self.cb_changed)
 
     @pyqtSlot()
     def closeClicked(self):
