@@ -14,8 +14,16 @@ class ViewDept(QMainWindow, Ui_ViewDept):
         self.btn_go_back.released.connect(self.closeClicked)
         for e in DBConnectSingleton.instance.getDeptName():
             self.cb_dept_name.addItem(e)
-        self.tv_list.
+        self.cb_dept.currentTextChanged.connect(self.cb_changed)
 
     @pyqtSlot()
     def closeClicked(self):
         self.close()
+
+    @pyqtSlot(str)
+    def cb_changed(self, name):
+        id_ = DBConnectSingleton.instance.getDeptID(name)
+        self.tv_list.model.filter("department = '" + id_ + "';")
+        self.tv_list.model.select()
+        self.tv_list.show()
+        
