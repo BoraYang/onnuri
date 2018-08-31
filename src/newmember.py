@@ -4,7 +4,10 @@ from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.QtCore import QDate , Qt
 from db_connect_singleton import *
 from PyQt5.Qt import QImage, QFile, QFileDialog, QPixmap
+from person import *
 file_dir = "../../onnuri_photo"
+
+
 class NewMember(QMainWindow, Ui_NewMember):
     myWindowCloseSignal = pyqtSignal()
 
@@ -21,6 +24,43 @@ class NewMember(QMainWindow, Ui_NewMember):
         self.de_reg.setDate(QDate.currentDate())
         self.btn_sel_photo.released.connect(self.btn_sel_photo_clicked)
         self.photo = None
+
+        for i in self.getDutyListFromDB():
+            self.cb_duty.addItem(i)
+
+        list = DBConnectSingleton.instance.getGroupList()
+        for i in DBConnectSingleton.instance.getGroupList():
+            self.cb_group.addItem(i)
+
+        list = DBConnectSingleton.instance.getDeptName()
+        for i in DBConnectSingleton.instance.getDeptName():
+            self.cb_dept.addItem(i)
+        self.btn_show_bible_study.setEnabled(False)
+
+    def __init__(self , id_ , person:Person):
+        super().__init__()
+        self.setupUi(self)
+        self.btn_cancel.released.connect(self.closeClicked)
+        self.btn_save.released.connect(self.saveClicked)
+        self.btn_show_bible_study.released.connect(self.showClicked)
+        self.de_bap.setDate(QDate.currentDate())
+        self.de_dob.setDate(QDate.currentDate())
+        self.de_reg.setDate(QDate.currentDate())
+        self.btn_sel_photo.released.connect(self.btn_sel_photo_clicked)
+
+        img_file_path = DBConnectSingleton.instance.getPicPath(id_)
+
+        self.img = QImage(img_file_path)
+
+        gender = person.gender
+        if(gender == "Male"):
+            self.rb_gender_male.setChecked(True)
+            self.rb_gender_female.setChecked(False)
+        else:
+            self.rb_gender_male.setChecked(False)
+            self.rb_gender_female.setChecked(True)
+
+        self.tb_address.setText(person.address)
 
         for i in self.getDutyListFromDB():
             self.cb_duty.addItem(i)
@@ -104,14 +144,7 @@ class NewMember(QMainWindow, Ui_NewMember):
         else:
             return "None"
 
-    @pyqtSlot()
-    def btn_sel_photo_clicked(self):
-        fileName = QFileDialog.getOpenFileName(self, caption="Select Photo", filter="Image Files (*.png *.jpg *.bmp)")
-        if (len(fileName) is not 0):
-            print(fileName[0])
-        self.file_path = fileName[0]
-        img = QImage(fileName[0])
-        self.img = img.copy()
+    def setPhototoView(self,img):
         h = self.lbl_photo_view.height()
         w = self.lbl_photo_view.width()
 
@@ -128,6 +161,18 @@ class NewMember(QMainWindow, Ui_NewMember):
         image = img.scaledToHeight(img_h)
         # img.scaledToWidth(img_w)
         self.lbl_photo_view.setPixmap(QPixmap.fromImage(image))
+
+
+    @pyqtSlot()
+    def btn_sel_photo_clicked(self):
+        fileName = QFileDialog.getOpenFileName(self, caption="Select Photo", filter="Image Files (*.png *.jpg *.bmp)")
+        if (len(fileName) is not 0):
+            print(fileName[0])
+        self.file_path = fileName[0]
+        img = QImage(fileName[0])
+        self.img = img.copy()
+
+        self.setPhototoView(img)
         arr = fileName[0].split("/")
         index = len(arr) - 1
 
