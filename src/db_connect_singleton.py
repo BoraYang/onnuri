@@ -135,7 +135,7 @@ class DBConnectSingleton:
             if not query.exec_():
                 return -1
 
-        # Update BibleStudy data
+        # Add data to BibleStudy Table
         def addBStudy(self, input_name):
             query = QtSql.QSqlQuery(self.db)
             query.prepare("INSERT INTO BibleStudy (name) VALUES ('" + str(input_name) + "');")
