@@ -98,6 +98,11 @@ class DBConnectSingleton:
                 b_id = query.value(0)
             return b_id
 
+        # Add data to Group Table
+        def addGroup(self):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("INSERT INTO ChurchGroup (name) VALUES ")
+
         # Add data to Family Table
         def addFamily(self):
             query = QtSql.QSqlQuery(self.db)
