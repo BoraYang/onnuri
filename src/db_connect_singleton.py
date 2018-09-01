@@ -107,7 +107,6 @@ class DBConnectSingleton:
             if not query.exec_():
                 return -1
 
-
         # Add data to Family Table
         def addFamily(self):
             query = QtSql.QSqlQuery(self.db)
@@ -127,21 +126,98 @@ class DBConnectSingleton:
         # Update first name for the given Person ID
         def updateFirstName(self, input_id, f_name):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Person SET first_name = '" + f_name + "' WHERE id = " + str(input_id) + "';")
+            query.prepare("UPDATE Person SET first_name = '" + f_name + "' WHERE id = " + str(input_id) + ";")
             if not query.exec_():
                 return -1
 
         # Update mid name for the given Person ID
         def updateMidName(self, input_id, m_name):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Person SET mid_name = '" + m_name + "' WHERE id = " + str(input_id) + "';")
+            query.prepare("UPDATE Person SET mid_name = '" + m_name + "' WHERE id = " + str(input_id) + ";")
             if not query.exec_():
                 return -1
 
         # Update last name for the given Person ID
         def updateLastName(self, input_id, l_name):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Person SET last_name = '" + l_name + "' WHERE id = " + str(input_id) + "';")
+            query.prepare("UPDATE Person SET last_name = '" + l_name + "' WHERE id = " + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Update gender for the given Person ID
+        def updateGender(self, input_id, gender):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET gender = '" + gender + "' WHERE id = " + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Update address for the given Person ID
+        def updatePhysicalAddress(self, input_id, address):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET physical_address = '" + address + "' WHERE id = " + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Update birthday for the given Person ID
+        def updateBDate(self, input_id, birthday):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET b_date = '" + birthday + "' WHERE id = " + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Update registration date for the given Person ID
+        def updateRDate(self, input_id, r_date):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET r_date = '" + r_date + "' WHERE id =" + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Update email address for the given Person ID
+        def updateEmail(self, input_id, e_mail):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET email = '" + e_mail + "' WHERE id =" + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Update phone number for the given Person ID
+        def updatePhone(self, input_id, num):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET phone = '" + num + "' WHERE id =" + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Update church group for the given Person ID
+        def updateGroup(self, input_id, g_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET church_group = '" + g_id + "' WHERE id =" + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Update department for the given Person ID
+        def updateDept(self, input_id, d_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET department = '" + d_id + "' WHERE id =" + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Update Duty for the given Person ID
+        def updateDuty(self, input_id, d_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET duty = '" + d_id + "' WHERE id =" + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Update Newcomer study status for the given Person ID
+        def updateCStudy(self, input_id, status):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET c_study = '" + status + "' WHERE id =" + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Update New Family study status for the given Person ID
+        def updateMStudy(self, input_id, status):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET m_study = '" + status + "' WHERE id =" + str(input_id) + ";")
             if not query.exec_():
                 return -1
 
@@ -252,7 +328,6 @@ class DBConnectSingleton:
             while query.next():
                 returnVal.append(query.value(0))
             return returnVal
-
 
         # Convert Duty ID into duty name
         def getDutyID(self, input_duty):

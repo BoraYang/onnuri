@@ -41,6 +41,7 @@ class EditGroup(QMainWindow, Ui_EditGroup):
 
 
 
+
     def viewTable(self):
         # group_list = DBConnectSingleton.instance.getGroupList()
         self.model = QSqlTableModel(self, DBConnectSingleton.instance.getDB())
