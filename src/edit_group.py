@@ -34,8 +34,9 @@ class EditGroup(QMainWindow, Ui_EditGroup):
 
     @pyqtSlot()
     def removeClicked(self):
-        if self.idx == -1:
+        if self.self.selected_group_id == -1:
             return
+
         DBConnectSingleton.instance.updateGroupToBeRemoved(self.selected_group_id)
 
 

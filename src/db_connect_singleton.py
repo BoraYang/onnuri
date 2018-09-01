@@ -231,7 +231,28 @@ class DBConnectSingleton:
         # Update Baptism data of Person
         def updateBaptism(self, input_id, baptism_num):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Person SET baptism ='" + str(baptism_num) + "' WHERE id ='" + str(input_id) + "';")
+            query.prepare("UPDATE Person SET baptism = '" + str(baptism_num) + "' WHERE id ='" + str(input_id) + "';")
+            if not query.exec_():
+                return -1
+
+        # Update Baptism location for the given Person ID
+        def updateBapLocation(self, b_id, b_location):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Baptism SET location = '" + b_location + "' WHERE num ='" + str(b_id) + "';")
+            if not query.exec_():
+                return -1
+
+        # Update Baptism date for the given Person ID
+        def updateBapDate(self, b_id, b_date):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Baptism SET bap_date = '" + b_date + "' WHERE num ='" + str(b_id) + "';")
+            if not query.exec_():
+                return -1
+
+        # Update Baptism administrator for the given Person ID
+        def updateBapAdmin(self, b_id, b_admin):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Baptism SET admin = '" + b_admin + "' WHERE num ='" + str(b_id) + "';")
             if not query.exec_():
                 return -1
 
@@ -255,12 +276,15 @@ class DBConnectSingleton:
             query.prepare("UPDATE Person SET church_group = -1 WHERE church_group = " + str(g_id) + ";")
             if not query.exec_():
                 return -1
-        #
-        # # Remove Group for the given group ID
-        # def removeGroup(self, g_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("DELETE FROM ")
-        #     dfdfdf
+
+        # Remove Group for the given group ID
+        def removeGroup(self, g_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("DELETE FROM ChurchGroup WHERE num LIKE " + str(g_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Return boolean value to check whether
 
         # Add data to BibleStudy Table
         def addBStudy(self, input_name):
