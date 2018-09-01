@@ -182,28 +182,28 @@ class DBConnectSingleton:
         # Update phone number for the given Person ID
         def updatePhone(self, input_id, num):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Person SET phone = '" + num + "' WHERE id =" + str(input_id) + ";")
+            query.prepare("UPDATE Person SET phone = '" + str(num) + "' WHERE id =" + str(input_id) + ";")
             if not query.exec_():
                 return -1
 
         # Update church group for the given Person ID
         def updateGroup(self, input_id, g_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Person SET church_group = '" + g_id + "' WHERE id =" + str(input_id) + ";")
+            query.prepare("UPDATE Person SET church_group = '" + str(g_id) + "' WHERE id =" + str(input_id) + ";")
             if not query.exec_():
                 return -1
 
         # Update department for the given Person ID
         def updateDept(self, input_id, d_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Person SET department = '" + d_id + "' WHERE id =" + str(input_id) + ";")
+            query.prepare("UPDATE Person SET department = '" + str(d_id) + "' WHERE id =" + str(input_id) + ";")
             if not query.exec_():
                 return -1
 
         # Update Duty for the given Person ID
         def updateDuty(self, input_id, d_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Person SET duty = '" + d_id + "' WHERE id =" + str(input_id) + ";")
+            query.prepare("UPDATE Person SET duty = '" + str(d_id) + "' WHERE id =" + str(input_id) + ";")
             if not query.exec_():
                 return -1
 
@@ -232,6 +232,13 @@ class DBConnectSingleton:
         def updateFamily(self, input_id, family_num):
             query = QtSql.QSqlQuery(self.db)
             query.prepare("UPDATE Person SET family = '" + str(family_num) + "' WHERE id = '" + str(input_id) + "';")
+            if not query.exec_():
+                return -1
+
+        # Update picture file path for the given Person ID
+        def updatePath(self, input_id, path):
+            query = QtSql.QSqlQuery(self.db)
+            query.preparE("UPDATE Person SET picture_path = '" + path + "' WHERE id = " + str(input_id) + ";")
             if not query.exec_():
                 return -1
 
