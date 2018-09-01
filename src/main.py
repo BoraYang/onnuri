@@ -20,6 +20,6 @@ if __name__ == "__main__":
 
     # mywin = BibleStudyWindow("youngtak cho",editable=True)
     # mywin = ViewMember(1)
-    mywin = AddGroup()
+    mywin = EditGroup()
     mywin.show()
     app.exec_()
