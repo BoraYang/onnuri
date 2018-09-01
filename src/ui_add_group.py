@@ -36,9 +36,9 @@ class Ui_AddGroup(object):
         self.tb_leader_id = QtWidgets.QLineEdit(self.frame)
         self.tb_leader_id.setObjectName("tb_leader_id")
         self.gridLayout.addWidget(self.tb_leader_id, 1, 1, 1, 1)
-        self.cb_group_name = QtWidgets.QComboBox(self.frame)
-        self.cb_group_name.setObjectName("cb_group_name")
-        self.gridLayout.addWidget(self.cb_group_name, 0, 1, 1, 1)
+        self.tb_group_name = QtWidgets.QLineEdit(self.frame)
+        self.tb_group_name.setObjectName("tb_group_name")
+        self.gridLayout.addWidget(self.tb_group_name, 0, 1, 1, 1)
         self.verticalLayout.addWidget(self.frame)
         self.frame_2 = QtWidgets.QFrame(self.centralWidget)
         self.frame_2.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -79,7 +79,7 @@ class Ui_AddGroup(object):
 
     def retranslateUi(self, AddGroup):
         _translate = QtCore.QCoreApplication.translate
-        AddGroup.setWindowTitle(_translate("AddGroup", "Add New Member"))
+        AddGroup.setWindowTitle(_translate("AddGroup", "Add Group"))
         self.lbl_group_name.setText(_translate("AddGroup", "Group Name"))
         self.lbl_leader_id.setText(_translate("AddGroup", "Leader ID Number"))
         self.btn_save.setText(_translate("AddGroup", "Save"))

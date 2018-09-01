@@ -129,7 +129,7 @@ class DBConnectSingleton:
             if not query.exec_():
                 return -1
 
-        # Update Family data of Person
+        # Update Family data with the given family_num for the given Person ID
         def updateFamily(self, input_id, family_num):
             query = QtSql.QSqlQuery(self.db)
             query.prepare("UPDATE Person SET family = '" + str(family_num) + "' WHERE id = '" + str(input_id) + "';")
@@ -169,6 +169,22 @@ class DBConnectSingleton:
             returnVal = []
             while query.next():
                 returnVal.append(query.value(0))
+            return returnVal
+
+        # Return department name for the given department ID
+        def getDept(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT department FROM Person WHERE id = '" + str(input_id) + "';")
+            query.exec_()
+            d_id = None
+            while query.next():
+                d_id = query.value(0)
+
+            query.prepare("SELECT name FROM Department WHERE num = '" + str(d_id) + "';")
+            query.exec_()
+            returnVal = None
+            while query.next():
+                returnVal  = query.value(0)
             return returnVal
 
         # Return Department ID for the given department name
@@ -302,16 +318,15 @@ class DBConnectSingleton:
                 returnVal.append(query.value(0))
             return returnVal
 
-        # Return
-        # def getGender(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT gender FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec_()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
-        #
+        # Return gender of the given person id
+        def getGender(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT gender FROM Person WHERE id = '" + str(input_id) + "';")
+            query.exec_()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
 
         # Return date of birth
         def getBDate(self, input_id):
@@ -323,15 +338,16 @@ class DBConnectSingleton:
                 returnVal = query.value(0)
             return returnVal
 
-        # def getRDate(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT r_date FROM Person WHERE id = '" + input_id + "'")
-        #     query.exec_()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
-        #
+        # Return registration date
+        def getRDate(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT r_date FROM Person WHERE id = '" + str(input_id) + "'")
+            query.exec_()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
+
         def getEmail(self, input_id):
             query = QtSql.QSqlQuery(self.db)
             query.prepare("SELECT email FROM Person WHERE id = '" + str(input_id) + "';")
@@ -357,7 +373,8 @@ class DBConnectSingleton:
             group_id = None
             while query.next():
                 group_id = query.value(0)
-            query.prepare("SELECT name FROM ChurchGroup WHERE group_num = '" + str(group_id) + "';")
+
+            query.prepare("SELECT name FROM ChurchGroup WHERE num = '" + str(group_id) + "';")
             query.exec_()
             returnVal = None
             while query.next():
@@ -397,45 +414,47 @@ class DBConnectSingleton:
                 returnVal.append(query.value(2))
             return returnVal
 
-        #
-        # def getFamily(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT family FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec_()
-        #     family_id = None
-        #     while query.next():
-        #         family_id = query.value(0)
-        #
-        #     query.prepare("SELECT first_name, last_name, kor_name, b_date FROM Person WHERE id = '" + family_id + "';")
-        #     query.exec_()
-        #     sublist = []
-        #     returnVal = []
-        #     while query.next():
-        #         sublist.append(query.value(0))
-        #         sublist.append(query.value(1))
-        #         sublist.append(query.value(2))
-        #         sublist.append(query.value(3))
-        #         returnVal.append(sublist)
-        #     return returnVal
-        #
-        # def getCStudy(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT c_study FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec_()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
-        #
-        # # Return status of Newcomer Study
-        # def getMStudy(self, input_id):
-        #     query = QtSql.QSqlQuery(self.db)
-        #     query.prepare("SELECT m_study FROM Person WHERE id = '" + input_id + "';")
-        #     query.exec_()
-        #     returnVal = None
-        #     while query.next():
-        #         returnVal = query.value(0)
-        #     return returnVal
+        # Return family ID for the given Person ID
+        def getFamily(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT family FROM Person WHERE id = '" + input_id + "';")
+            query.exec_()
+            family_id = None
+            while query.next():
+                family_id = query.value(0)
+            return family_id
+
+            # query.prepare("SELECT first_name, last_name, kor_name, b_date FROM Person WHERE id = '" + family_id + "';")
+            # query.exec_()
+            # sublist = []
+            # returnVal = []
+            # while query.next():
+            #     sublist.append(query.value(0))
+            #     sublist.append(query.value(1))
+            #     sublist.append(query.value(2))
+            #     sublist.append(query.value(3))
+            #     returnVal.append(sublist)
+            # return returnVal
+
+        # Return status of Newcomer study
+        def getCStudy(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT c_study FROM Person WHERE id = '" + str(input_id) + "';")
+            query.exec_()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
+
+        # Return status of New Family study (a.k.a. New member study)
+        def getMStudy(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT m_study FROM Person WHERE id = '" + str(input_id) + "';")
+            query.exec_()
+            returnVal = None
+            while query.next():
+                returnVal = query.value(0)
+            return returnVal
 
         # Return name list of the bible study
         def getBStudyList(self):

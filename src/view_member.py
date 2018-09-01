@@ -3,6 +3,7 @@ from ui_view_member import *
 from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.QtCore import QDate
 from db_connect_singleton import *
+from BibleStudyWindow import *
 from PyQt5.Qt import QImage, QFile, QFileDialog, QPixmap
 
 
@@ -21,18 +22,43 @@ class ViewMember(QMainWindow, Ui_ViewMember):
         self.tb_email.setText(DBConnectSingleton.instance.getEmail(self.p_id))
         self.tb_phone.setText(str(DBConnectSingleton.instance.getPhone(self.p_id)))
         self.tb_address.setText(DBConnectSingleton.instance.getPhysicalAddress(self.p_id))
-        self.tb_baptism_place.setText(self.showBaptismSite())
+        self.tb_baptism_place.setText(self.showBaptismSite)
         self.tb_baptism_by.setText(self.showBaptizer())
-        self.de_dob.setDate(QDate(DBConnectSingleton.instance.getBDate(self.p_id),"MM/dd/yyyy"))
-        self.de_bap.setDate(self.showBaptismDate())
-        self.de_reg.setDate(DBConnectSingleton.instance.getRDate(self.p_id))
-        self.cb_duty.setCurrentText(DBConnectSingleton.instance.getDuty(self.p_id))
-        self.chk_new_comer_study.setCheckState(QtCore.Qt.Checked)
-        self.chk_new_family_study.setCheckState(QtCore.Qt.Checked)
-        self.lbl_group_info.setText(DBConnectSingleton.instance.getGroup(self.p_id))
-        self.rb_gender_male.setChecked(QtCore.Qt.Checked)
-        self.rb_gender_female.setChecked(QtCore.Qt.Checked)
+        self.de_dob.setDate(QDate.fromString(DBConnectSingleton.instance.getBDate(self.p_id), "MM/dd/yyyy"))
+        self.de_bap.setDate(QDate.fromString(self.showBaptismDate(), "MM/dd/yyyy"))
+        self.de_reg.setDate(QDate.fromString(DBConnectSingleton.instance.getRDate(self.p_id), "MM/dd/yyyy"))
+        self.cb_duty.addItem(DBConnectSingleton.instance.getDuty(self.p_id))
+        new_comer_study = DBConnectSingleton.instance.getCStudy(self.p_id)
+        if new_comer_study == 'True':
+            self.chk_new_comer_study.setCheckState(QtCore.Qt.Checked)
+        else:
+            self.chk_new_comer_study.setCheckState(QtCore.Qt.Unchecked)
+        new_family_study = DBConnectSingleton.instance.getMStudy(self.p_id)
+        if new_family_study == 'True':
+            self.chk_new_family_study.setCheckState(QtCore.Qt.Checked)
+        else:
+            self.chk_new_family_study.setCheckState(QtCore.Qt.Unchecked)
+        self.chk_new_comer_study.setEnabled(False)
+        self.chk_new_family_study.setEnabled(False)
+        self.cb_group.addItem(DBConnectSingleton.instance.getGroup(self.p_id))
+        self.cb_dept.addItem(DBConnectSingleton.instance.getDept(self.p_id))
+        gender = DBConnectSingleton.instance.getGender(self.p_id)
+        if gender == 'Male':
+            self.rb_gender_male.setChecked(True)
+            self.rb_gender_female.setChecked(False)
+        else:
+            self.rb_gender_male.setChecked(False)
+            self.rb_gender_female.setChecked(True)
+        self.btn_show_bible_study.released.connect(self.bStudyClicked)
 
+    @pyqtSlot()
+    def bStudyClicked(self):
+        first_name = DBConnectSingleton.instance.getFirstName(self.p_id)
+        mid_name = DBConnectSingleton.instance.getMidName(self.p_id)
+        last_name = DBConnectSingleton.instance.getLastName(self.p_id)
+        name = first_name + " " + mid_name + " " + last_name
+        self.ch_window = BibleStudyWindow(name, self.p_id, False)
+        self.ch_window.show()
     @pyqtSlot()
     def closeClicked(self):
         self.close()
@@ -54,6 +80,7 @@ class ViewMember(QMainWindow, Ui_ViewMember):
         else:
             return first_name + " " + mid_name + " " + last_name
 
+    @property
     def showBaptismSite(self):
         baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
         baptismSite = baptism[1]
@@ -89,5 +116,3 @@ class ViewMember(QMainWindow, Ui_ViewMember):
             img_h *= scale_factor
         image = img.scaledToHeight(img_h)
         self.lbl_pic_view.setPixmap(QPixmap.fromImage(image))
-
-

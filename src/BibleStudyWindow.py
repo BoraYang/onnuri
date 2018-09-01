@@ -12,11 +12,11 @@ class BibleStudyWindow(QMainWindow, Ui_BibleStudyWindow):
         self.setupUi(self)
         self.setWindowTitle("Bible Study")
         self.p_name = p_name
-        self.gb_bible.setTitle("Name : "+p_name)
+        self.gb_bible.setTitle("Name: "+p_name)
         self.p_id = p_id
         for i in self.getBibleStudyListFromDB():
             self.lv_bs_list.addItem(i)
-        if p_name.lower() != "manage":
+        if p_name.lower() != "Manage":
             self.list_bible = self.getAttendedBibleStudy(self.p_id)
             for i in range(0, self.lv_bs_list.count()):
                 item = self.lv_bs_list.item(i)
@@ -30,9 +30,9 @@ class BibleStudyWindow(QMainWindow, Ui_BibleStudyWindow):
                 else:
                     item.setFlags(item.flags())
                     if class_name in self.list_bible:
-                        item.setText(class_name + " : complete")
+                        item.setText(class_name + ": Complete")
                     else:
-                        item.setText(class_name + " : incomplete")
+                        item.setText(class_name + ": Incomplete")
                     self.btn_add.setDisabled(True)
                     self.btn_save.setDisabled(True)
 
