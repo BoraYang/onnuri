@@ -29,4 +29,5 @@ class AddGroup(QMainWindow, Ui_AddGroup):
         leader_id = self.tb_leader_id.text()
 
         DBConnectSingleton.instance.addGroup(group_name, leader_id)
+        self.close()
 

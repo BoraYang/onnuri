@@ -501,7 +501,7 @@ class DBConnectSingleton:
             return returnVal
 
 
-    instance :__DBConnectSingleton = None
+    instance = None
 
 
     def __init__(self, db):

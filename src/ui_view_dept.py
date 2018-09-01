@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_ViewDept(object):
     def setupUi(self, ViewDept):
         ViewDept.setObjectName("ViewDept")
-        ViewDept.resize(402, 521)
+        ViewDept.resize(566, 521)
         self.centralWidget = QtWidgets.QWidget(ViewDept)
         self.centralWidget.setObjectName("centralWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralWidget)
@@ -39,7 +39,7 @@ class Ui_ViewDept(object):
         self.tv_list.setObjectName("tv_list")
         self.verticalLayout.addWidget(self.tv_list)
         self.frame_2 = QtWidgets.QFrame(self.centralWidget)
-        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_2.setObjectName("frame_2")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.frame_2)
@@ -54,7 +54,7 @@ class Ui_ViewDept(object):
         self.verticalLayout.addWidget(self.frame_2)
         ViewDept.setCentralWidget(self.centralWidget)
         self.menuBar = QtWidgets.QMenuBar(ViewDept)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 402, 22))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 566, 22))
         self.menuBar.setDefaultUp(True)
         self.menuBar.setObjectName("menuBar")
         self.menuMenu = QtWidgets.QMenu(self.menuBar)
