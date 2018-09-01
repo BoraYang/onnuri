@@ -26,9 +26,7 @@ class AddGroup(QMainWindow, Ui_AddGroup):
 
     def saveToDb(self):
         group_name = self.tb_group_name.text()
-        print(group_name)
         leader_id = self.tb_leader_id.text()
-        print(leader_id)
 
         DBConnectSingleton.instance.addGroup(group_name, leader_id)
         self.close()

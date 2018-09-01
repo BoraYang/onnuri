@@ -63,6 +63,12 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>lv_bs_list</tabstop>
+  <tabstop>btn_add</tabstop>
+  <tabstop>btn_save</tabstop>
+  <tabstop>btn_close</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

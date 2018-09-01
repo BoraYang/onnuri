@@ -76,10 +76,13 @@ class Ui_AddGroup(object):
 
         self.retranslateUi(AddGroup)
         QtCore.QMetaObject.connectSlotsByName(AddGroup)
+        AddGroup.setTabOrder(self.tb_group_name, self.tb_leader_id)
+        AddGroup.setTabOrder(self.tb_leader_id, self.btn_save)
+        AddGroup.setTabOrder(self.btn_save, self.btn_cancel)
 
     def retranslateUi(self, AddGroup):
         _translate = QtCore.QCoreApplication.translate
-        AddGroup.setWindowTitle(_translate("AddGroup", "Add Group"))
+        AddGroup.setWindowTitle(_translate("AddGroup", "Add New Member"))
         self.lbl_group_name.setText(_translate("AddGroup", "Group Name"))
         self.lbl_leader_id.setText(_translate("AddGroup", "Leader ID Number"))
         self.btn_save.setText(_translate("AddGroup", "Save"))

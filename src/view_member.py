@@ -59,6 +59,7 @@ class ViewMember(QMainWindow, Ui_ViewMember):
         name = first_name + " " + mid_name + " " + last_name
         self.ch_window = BibleStudyWindow(name, self.p_id, False)
         self.ch_window.show()
+
     @pyqtSlot()
     def closeClicked(self):
         self.close()

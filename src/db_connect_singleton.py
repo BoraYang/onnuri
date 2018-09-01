@@ -90,7 +90,7 @@ class DBConnectSingleton:
             if not query.exec_():
                 return -1
             query.clear()
-            query.prepare("select num from Baptism where id = '" + str(input_id) + "'")
+            query.prepare("SELECT num FROM Baptism WHERE id = '" + str(input_id) + "'")
             if not query.exec_():
                 return -1
             b_id = -1
@@ -101,7 +101,7 @@ class DBConnectSingleton:
         # Add data to Group Table
         def addGroup(self, g_name, g_leader):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("INSERT INTO ChurchGroup (name, leader) VALUES ('" + g_name + "', " + g_leader + ");")
+            query.prepare("INSERT INTO ChurchGroup (name, leader) VALUES ('" + g_name + "', " + g_leader + ")")
             if not query.exec_():
                 return -1
 
