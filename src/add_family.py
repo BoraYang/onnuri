@@ -32,7 +32,7 @@ class AddFamily(QMainWindow,Ui_AddFamily):
                 exist_f_id = f_id
         if exist_f_id is -1:
             DBConnectSingleton.instance.addFamily()
-        afdsfjaldsj
+
     @pyqtSlot()
     def btnSearchClicked(self):
         f_name = self.tb_fam_name.text()
@@ -48,5 +48,5 @@ class AddFamily(QMainWindow,Ui_AddFamily):
 
     @pyqtSlot(QListWidgetItem)
     def beAddedItemDoubleClicked(self, item: QListWidgetItem):
-        index:QModelIndex = self.lv_be_added_family.indexFromItem(item)
+        index = self.lv_be_added_family.indexFromItem(item)
         self.lv_be_added_family.takeItem(index.row())

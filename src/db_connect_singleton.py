@@ -4,7 +4,7 @@ from PyQt5.Qt import QSqlDatabase
 class DBConnectSingleton:
     class __DBConnectSingleton:
         def __init__(self, db):
-            self.db:QSqlDatabase = db
+            self.db = db
         def __str__(self):
             return repr(self) + self.val
 
@@ -124,6 +124,27 @@ class DBConnectSingleton:
             if not query.exec_():
                 return -1
 
+        # Update first name for the given Person ID
+        def updateFirstName(self, input_id, f_name):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET first_name = '" + f_name + "' WHERE id = " + str(input_id) + "';")
+            if not query.exec_():
+                return -1
+
+        # Update mid name for the given Person ID
+        def updateMidName(self, input_id, m_name):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET mid_name = '" + m_name + "' WHERE id = " + str(input_id) + "';")
+            if not query.exec_():
+                return -1
+
+        # Update last name for the given Person ID
+        def updateFirstName(self, input_id, l_name):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET last_name = '" + l_name + "' WHERE id = " + str(input_id) + "';")
+            if not query.exec_():
+                return -1
+
         # Update Baptism data of Person
         def updateBaptism(self, input_id, baptism_num):
             query = QtSql.QSqlQuery(self.db)
@@ -137,6 +158,19 @@ class DBConnectSingleton:
             query.prepare("UPDATE Person SET family = '" + str(family_num) + "' WHERE id = '" + str(input_id) + "';")
             if not query.exec_():
                 return -1
+
+        # Update Group data into -1 before removing the given group
+        def updateGroupToBeRemoved(self, g_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET church_group = -1 WHERE church_group = " + str(g_id) + ";")
+            if not query.exec_():
+                return -1
+        #
+        # # Remove Group for the given group ID
+        # def removeGroup(self, g_id):
+        #     query = QtSql.QSqlQuery(self.db)
+        #     query.prepare("DELETE FROM ")
+        #     dfdfdf
 
         # Add data to BibleStudy Table
         def addBStudy(self, input_name):
@@ -532,7 +566,7 @@ class DBConnectSingleton:
             return returnVal
 
 
-    instance :__DBConnectSingleton= None
+    instance = None
 
 
     def __init__(self, db):

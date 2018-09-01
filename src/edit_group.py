@@ -15,10 +15,12 @@ class EditGroup(QMainWindow, Ui_EditGroup):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.idx = -1
+        self.selected_group_id = -1
         self.btn_cancel.released.connect(self.closeClicked)
         self.btn_add_group.released.connect(self.addClicked)
         self.btn_remove_group.released.connect(self.removeClicked)
-        self.tv_group.clicked.connect(self.tableViewClicked)
+        self.tv_group.doubleClicked.connect(self.tableViewClicked)
         self.viewTable()
 
     @pyqtSlot()
@@ -32,7 +34,12 @@ class EditGroup(QMainWindow, Ui_EditGroup):
 
     @pyqtSlot()
     def removeClicked(self):
-        return
+        if self.idx == -1:
+            return
+        DBConnectSingleton.instance.updateGroupToBeRemoved(self.selected_group_id)
+
+
+
 
     def viewTable(self):
         # group_list = DBConnectSingleton.instance.getGroupList()
@@ -41,7 +48,7 @@ class EditGroup(QMainWindow, Ui_EditGroup):
         # self.model.setFilter("department = '" + str(id_) + "';")
         self.model.select()
         self.tv_group.setModel(self.model)
-
+        self.tv_group.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
         h_list = ["Name", "Leader"]
 
@@ -63,18 +70,11 @@ class EditGroup(QMainWindow, Ui_EditGroup):
             index += 1
 
         self.tv_group.setSortingEnabled(True)
-        for i in range(0,len(h_visible)):
-            self.tv_group.setColumnWidth(i,326)
+        for i in range(0, len(h_visible)):
+            self.tv_group.setColumnWidth(i, 326)
         self.tv_group.show()
-asdasd
+
     @pyqtSlot(QModelIndex)
     def tableViewClicked(self, index):
-        print('hi')
-    #
-    # def setTableWidth(self):
-    #     width = self.tv_group.verticalHeader().width()
-    #     width += self.tv_group.horizontalHeader().length()
-    #     if self.tv_group.verticalScrollBar().isVisible():
-    #         width += self.tv_group.verticalScrollBar().width()
-    #     self.tv_group.setFixedWidth(width)
-    #     width += self.tv_group.frameWidth() * 2
+        self.idx = index.row()
+        self.selected_group_id = self.tv_group.model().index(self.idx, 0).data()
