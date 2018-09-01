@@ -11,12 +11,13 @@ class AddFamily(QMainWindow,Ui_AddFamily):
         self.btn_search.released.connect(self.btnSearchClicked)
         self.lv_search_result.itemDoubleClicked.connect(self.searchItemDoubleClicked)
         self.lv_be_added_family.itemDoubleClicked.connect(self.beAddedItemDoubleClicked)
-        self.btn_add
-        self.btn_cancel.released.connect()
+        self.btn_add.released.connect(self.btnSaveClicked)
+        self.btn_cancel.released.connect(self.btnClosedclicked)
 
     @pyqtSlot()
     def btnClosedclicked(self):
         self.close()
+
     @pyqtSlot()
     def btnSaveClicked(self):
         people = []
@@ -32,6 +33,11 @@ class AddFamily(QMainWindow,Ui_AddFamily):
                 exist_f_id = f_id
         if exist_f_id is -1:
             DBConnectSingleton.instance.addFamily()
+            exist_f_id = DBConnectSingleton.instance.getHighestFamilyID()
+        for person in people:
+            DBConnectSingleton.instance.updateFamily(person[0],exist_f_id)
+
+
 
     @pyqtSlot()
     def btnSearchClicked(self):

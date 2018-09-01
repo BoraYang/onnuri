@@ -22,7 +22,7 @@ class ViewMember(QMainWindow, Ui_ViewMember):
         self.tb_email.setText(DBConnectSingleton.instance.getEmail(self.p_id))
         self.tb_phone.setText(str(DBConnectSingleton.instance.getPhone(self.p_id)))
         self.tb_address.setText(DBConnectSingleton.instance.getPhysicalAddress(self.p_id))
-        self.tb_baptism_place.setText(self.showBaptismSite)
+        self.tb_baptism_place.setText(self.showBaptismSite())
         self.tb_baptism_by.setText(self.showBaptizer())
         self.de_dob.setDate(QDate.fromString(DBConnectSingleton.instance.getBDate(self.p_id), "MM/dd/yyyy"))
         self.de_bap.setDate(QDate.fromString(self.showBaptismDate(), "MM/dd/yyyy"))
@@ -49,6 +49,8 @@ class ViewMember(QMainWindow, Ui_ViewMember):
         else:
             self.rb_gender_male.setChecked(False)
             self.rb_gender_female.setChecked(True)
+        self.rb_gender_male.setEnabled(False)
+        self.rb_gender_female.setEnabled(False)
         self.btn_show_bible_study.released.connect(self.bStudyClicked)
 
     @pyqtSlot()
@@ -84,16 +86,22 @@ class ViewMember(QMainWindow, Ui_ViewMember):
     @property
     def showBaptismSite(self):
         baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
+        if(len(baptism) is 0):
+            return ""
         baptismSite = baptism[1]
         return baptismSite
 
     def showBaptizer(self):
         baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
+        if(len(baptism) is 0):
+            return ""
         baptizer = baptism[2]
         return baptizer
 
     def showBaptismDate(self):
         baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
+        if(len(baptism) is 0):
+            return ""
         baptismDate = baptism[0]
         return baptismDate
 
@@ -117,3 +125,6 @@ class ViewMember(QMainWindow, Ui_ViewMember):
             img_h *= scale_factor
         image = img.scaledToHeight(img_h)
         self.lbl_pic_view.setPixmap(QPixmap.fromImage(image))
+
+
+
