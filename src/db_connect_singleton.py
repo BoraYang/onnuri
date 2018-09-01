@@ -144,6 +144,13 @@ class DBConnectSingleton:
             if not query.exec_():
                 return -1
 
+        # Update Korean name for the given Person ID
+        def updateKorName(self, input_id, kor_name):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("UPDATE Person SET kor_name = '" + kor_name + "' WHERE id = " + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
         # Update gender for the given Person ID
         def updateGender(self, input_id, gender):
             query = QtSql.QSqlQuery(self.db)
