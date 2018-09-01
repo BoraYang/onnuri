@@ -5,6 +5,8 @@ from PyQt5.QtCore import QDate , Qt
 from db_connect_singleton import *
 from PyQt5.Qt import QImage, QFile, QFileDialog, QPixmap
 from person import *
+from add_family import *
+
 file_dir = "../../onnuri_photo"
 
 
@@ -17,22 +19,30 @@ class NewMember(QMainWindow, Ui_NewMember):
         self.img = None
         self.btn_cancel.released.connect(self.closeClicked)
         self.btn_save.released.connect(self.saveClicked)
-        self.btn_show_bible_study.released.connect(self.showClicked)
+        self.btn_show_bible_study.released.connect(self.btnBibleStudyShowClicked)
         self.btn_sel_photo.released.connect(self.btn_sel_photo_clicked)
+        self.btn_show_family.setEnabled(False)
         self.photo = None
 
         self.rb_gender_male.setChecked(True)
+        self.chk_baptism.stateChanged.connect(self.baptism_enable)
+
+        if not self.chk_baptism.isChecked():
+            self.de_bap.setEnabled(False)
+            self.tb_baptism_by.setEnabled(False)
+            self.tb_baptism_place.setEnabled(False)
+
         self.de_bap.setDate(QDate.currentDate())
         self.de_dob.setDate(QDate.currentDate())
         self.de_reg.setDate(QDate.currentDate())
         for i in self.getDutyListFromDB():
             self.cb_duty.addItem(i)
 
-        list = DBConnectSingleton.instance.getGroupList()
+
         for i in DBConnectSingleton.instance.getGroupList():
             self.cb_group.addItem(i)
 
-        list = DBConnectSingleton.instance.getDeptName()
+
         for i in DBConnectSingleton.instance.getDeptName():
             self.cb_dept.addItem(i)
         self.btn_show_bible_study.setEnabled(False)
@@ -71,6 +81,16 @@ class NewMember(QMainWindow, Ui_NewMember):
         self.myWindowCloseSignal.emit()
         event.accept()
 
+    @pyqtSlot(int)
+    def baptism_enable(self,checked):
+        if(checked == Qt.Checked):
+            self.de_bap.setEnabled(True)
+            self.tb_baptism_by.setEnabled(True)
+            self.tb_baptism_place.setEnabled(True)
+        else:
+            self.de_bap.setEnabled(False)
+            self.tb_baptism_by.setEnabled(False)
+            self.tb_baptism_place.setEnabled(False)
 
     @pyqtSlot()
     def closeClicked(self):
@@ -82,8 +102,13 @@ class NewMember(QMainWindow, Ui_NewMember):
         print("save button clicked.")
 
     @pyqtSlot()
-    def showClicked(self):
-        print("show button clicked.")
+    def btnBibleStudyShowClicked(self):
+        pass
+
+    @pyqtSlot()
+    def btnFamilyShowClicked(self):
+        pass
+
 
     def saveToDb(self):
         first_name = self.tb_first_name.text()
@@ -221,9 +246,10 @@ class EditMember(NewMember):
 
 
         #  will be fix to get data from DB
-        self.de_bap.setDate(QDate.currentDate())
-        self.de_dob.setDate(QDate.currentDate())
-        self.de_reg.setDate(QDate.currentDate())
+        # if()
+        #     self.de_bap.setDate(QDate.currentDate())
+        self.de_dob.setDate(bod_date)
+        self.de_reg.setDate(reg_date)
 
         img_file_path = DBConnectSingleton.instance.getPicPath(id_)
 

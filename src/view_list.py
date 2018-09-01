@@ -1,5 +1,5 @@
 from PyQt5.QtCore import *
-from PyQt5.QtWidgets import QMainWindow , QHeaderView
+from PyQt5.QtWidgets import QMainWindow , QHeaderView , QAbstractItemView
 from ui_view_list import *
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtSql import QSqlTableModel
@@ -41,8 +41,15 @@ class ViewList(QMainWindow , Ui_ViewList):
             index+=1
 
         self.tv_list.setSortingEnabled(True)
-
+        self.tv_list.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.tv_list.show()
+        self.tv_list.doubleClicked.connect(self.itemDoubleClicked)
+
+    @pyqtSlot(QModelIndex)
+    def itemDoubleClicked(self,index):
+        row_index = index.row()
+        print(self.tv_list.model().index(row_index,0).data())
+        # View 연결 할 것
 
     @pyqtSlot()
     def btnCancelClicked(self):
