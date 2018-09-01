@@ -65,7 +65,7 @@ class EditGroup(QMainWindow, Ui_EditGroup):
         self.tv_group.setSortingEnabled(True)
         self.tv_group.horizontalHeader.setSectionResizeMode(QHeaderView.Stretch)
         self.tv_group.show()
-sdsdfsdfdfsfsdf
+sdsdfsdfdfsfsdfdfd
     @pyqtSlot(QModelIndex)
     def tableViewClicked(self, index):
         print('hi')
