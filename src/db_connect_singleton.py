@@ -139,7 +139,7 @@ class DBConnectSingleton:
                 return -1
 
         # Update last name for the given Person ID
-        def updateFirstName(self, input_id, l_name):
+        def updateLastName(self, input_id, l_name):
             query = QtSql.QSqlQuery(self.db)
             query.prepare("UPDATE Person SET last_name = '" + l_name + "' WHERE id = " + str(input_id) + "';")
             if not query.exec_():
