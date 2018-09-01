@@ -1,4 +1,6 @@
 from PyQt5.QtWidgets import *
+
+from BibleStudyWindow import BibleStudyWindow
 from ui_newmember import *
 from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.QtCore import QDate , Qt
@@ -228,42 +230,155 @@ class NewMember(QMainWindow, Ui_NewMember):
         duties = DBConnectSingleton.instance.getDutyName()
         return duties
 
+class EditMember(QMainWindow, Ui_NewMember):
+    myWindowCloseSignal = pyqtSignal()
 
-class EditMember(NewMember):
-    def __init__(self, id_ , person:Person):
-        pass
+    def __init__(self, p_id):
         super().__init__()
         self.setupUi(self)
+        self.p_id = p_id
+
         self.btn_cancel.released.connect(self.closeClicked)
         self.btn_save.released.connect(self.saveClicked)
-        self.btn_show_bible_study.released.connect(self.showClicked)
+        # self.btn_show.released.connect(self.showClicked)
+        self.tb_first_name.setText(DBConnectSingleton.instance.getFirstName(self.p_id))
+        self.tb_mid_name.setText(DBConnectSingleton.instance.getMidName(self.p_id))
+        self.tb_last_name.setText(DBConnectSingleton.instance.getLastName(self.p_id))
         self.btn_sel_photo.released.connect(self.btn_sel_photo_clicked)
 
-        bod_date = QDate.fromString(person.birth_day, "MM/dd/yyyy")
-        reg_date = QDate.fromString(person.reg_date, "MM/dd/yyyy")
+        self.tb_kor_name.setText(DBConnectSingleton.instance.getKorName(self.p_id))
+        self.tb_email.setText(DBConnectSingleton.instance.getEmail(self.p_id))
+        self.tb_phone.setText(str(DBConnectSingleton.instance.getPhone(self.p_id)))
+        self.tb_address.setText(DBConnectSingleton.instance.getPhysicalAddress(self.p_id))
+        self.tb_baptism_place.setText(self.showBaptismSite)
+        self.tb_baptism_by.setText(self.showBaptizer())
+        self.de_dob.setDate(QDate.fromString(DBConnectSingleton.instance.getBDate(self.p_id), "MM/dd/yyyy"))
+        self.de_bap.setDate(QDate.fromString(self.showBaptismDate(), "MM/dd/yyyy"))
+        self.de_reg.setDate(QDate.fromString(DBConnectSingleton.instance.getRDate(self.p_id), "MM/dd/yyyy"))
+        self.cb_duty.addItem(DBConnectSingleton.instance.getDuty(self.p_id))
+        new_comer_study = DBConnectSingleton.instance.getCStudy(self.p_id)
+        if new_comer_study == 'True':
+            self.chk_new_comer_study.setCheckState(QtCore.Qt.Checked)
+        else:
+            self.chk_new_comer_study.setCheckState(QtCore.Qt.Unchecked)
+        new_family_study = DBConnectSingleton.instance.getMStudy(self.p_id)
+        if new_family_study == 'True':
+            self.chk_new_family_study.setCheckState(QtCore.Qt.Checked)
+        else:
+            self.chk_new_family_study.setCheckState(QtCore.Qt.Unchecked)
 
-        # bept_date = QDate.fromString(, "MM/dd/yyyy")
-
-
-        #  will be fix to get data from DB
-        # if()
-        #     self.de_bap.setDate(QDate.currentDate())
-        self.de_dob.setDate(bod_date)
-        self.de_reg.setDate(reg_date)
-
-        img_file_path = DBConnectSingleton.instance.getPicPath(id_)
-
-        self.img = QImage(img_file_path)
-
-        gender = person.gender
-        if (gender == "Male"):
+        self.cb_group.addItem(DBConnectSingleton.instance.getGroup(self.p_id))
+        self.cb_dept.addItem(DBConnectSingleton.instance.getDept(self.p_id))
+        gender = DBConnectSingleton.instance.getGender(self.p_id)
+        if gender == 'Male':
             self.rb_gender_male.setChecked(True)
             self.rb_gender_female.setChecked(False)
         else:
             self.rb_gender_male.setChecked(False)
             self.rb_gender_female.setChecked(True)
+        self.btn_show_bible_study.released.connect(self.bStudyClicked)
+        self.showPicture()
+        self.btn_show_family.released.connect(self.btnFamilyEditClicked)
+    @pyqtSlot()
+    def btnFamilyEditClicked(self):
+        self.fmaily_window = AddFamily()
+        self.fmaily_window.show()
+    @property
+    def showBaptismSite(self):
+        baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
+        if (len(baptism) is 0):
+            return ""
+        baptismSite = baptism[1]
+        return baptismSite
 
-        self.setGroup(id_)
-        self.setDept(person.department)
-        self.setDuty(id_)
-        self.tb_address.setText(person.address)
+    def showBaptizer(self):
+        baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
+        if (len(baptism) is 0):
+            return ""
+        baptizer = baptism[2]
+        return baptizer
+
+    def showBaptismDate(self):
+        baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
+        if (len(baptism) is 0):
+            return ""
+        self.chk_baptism.setChecked(True)
+        baptismDate = baptism[0]
+        return baptismDate
+
+    def showPicture(self):
+        fileName = DBConnectSingleton.instance.getPicPath(self.p_id)
+        self.lbl_photo_loc.setText(fileName)
+        if (len(fileName) is not 0):
+            print(fileName)
+        img = QImage(fileName)
+        h = self.lbl_photo_view.height()
+        w = self.lbl_photo_view.width()
+
+        img_h = img.height()
+        img_w = img.width()
+        if (img_h > img_w):
+            scale_factor = h / img_h
+            img_h = h
+            img_w *= scale_factor
+        else:
+            scale_factor = w / img_w
+            img_w = w
+            img_h *= scale_factor
+        image = img.scaledToHeight(img_h)
+        self.lbl_photo_view.setPixmap(QPixmap.fromImage(image))
+
+
+    @pyqtSlot()
+    def bStudyClicked(self):
+        first_name = DBConnectSingleton.instance.getFirstName(self.p_id)
+        mid_name = DBConnectSingleton.instance.getMidName(self.p_id)
+        last_name = DBConnectSingleton.instance.getLastName(self.p_id)
+        name = first_name + " " + mid_name + " " + last_name
+        self.ch_window = BibleStudyWindow(name, self.p_id, True)
+        self.ch_window.show()
+
+    def setPhototoView(self,img):
+        h = self.lbl_photo_view.height()
+        w = self.lbl_photo_view.width()
+
+        img_h = img.height()
+        img_w = img.width()
+        if (img_h > img_w):
+            scale_factor = h / img_h
+            img_h = h
+            img_w *= scale_factor
+        else:
+            scale_factor = w / img_w
+            img_w = w
+            img_h *= scale_factor
+        image = img.scaledToHeight(img_h)
+        # img.scaledToWidth(img_w)
+        self.lbl_photo_view.setPixmap(QPixmap.fromImage(image))
+
+
+    @pyqtSlot()
+    def btn_sel_photo_clicked(self):
+        fileName = QFileDialog.getOpenFileName(self, caption="Select Photo", filter="Image Files (*.png *.jpg *.bmp)")
+        if (len(fileName) is not 0):
+            print(fileName[0])
+        self.file_path = fileName[0]
+        img = QImage(fileName[0])
+        self.img = img.copy()
+
+        self.setPhototoView(img)
+        arr = fileName[0].split("/")
+        index = len(arr) - 1
+
+        self.lbl_photo_loc.setText("" + arr[index])
+
+    def update_info(self):
+        pass
+        # DBConnectSingleton.instance
+    @pyqtSlot()
+    def closeClicked(self):
+        self.close()
+
+    @pyqtSlot()
+    def saveClicked(self):
+        pass

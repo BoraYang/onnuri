@@ -5,6 +5,9 @@ from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtSql import QSqlTableModel
 from db_connect_singleton import *
 from newmember import NewMember
+from view_member import ViewMember
+
+
 class ViewList(QMainWindow , Ui_ViewList):
 
     def __init__(self):
@@ -44,12 +47,14 @@ class ViewList(QMainWindow , Ui_ViewList):
         self.tv_list.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.tv_list.show()
         self.tv_list.doubleClicked.connect(self.itemDoubleClicked)
+
+
     @pyqtSlot(QModelIndex)
     def itemDoubleClicked(self,index):
         row_index = index.row()
         print(self.tv_list.model().index(row_index,0).data())
-        # View 연결 할 것
-
+        self.viwer_window = ViewMember(self.tv_list.model().index(row_index,0).data())
+        self.viwer_window.show()
     @pyqtSlot()
     def btnCancelClicked(self):
         self.close()
