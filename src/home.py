@@ -1,9 +1,4 @@
-from PyQt5.QtWidgets import *
 from ui_home import *
-from PyQt5.QtCore import pyqtSlot, pyqtSignal
-from PyQt5.QtCore import QDate
-from db_connect_singleton import *
-from PyQt5.Qt import QImage, QFile, QFileDialog, QPixmap
 from view_list import *
 from edit_group import *
 from BibleStudyWindow import *

@@ -5,10 +5,6 @@ from PyQt5 import QtSql
 from view_list import *
 from BibleStudyWindow import *
 from home import *
-from edit_group import *
-
-
-
 from add_group import *
 from view_member import *
 if __name__ == "__main__":
@@ -24,6 +20,6 @@ if __name__ == "__main__":
 
     # mywin = BibleStudyWindow("youngtak cho",editable=True)
     # mywin = ViewMember(1)
-    mywin = EditGroup()
+    mywin = AddGroup()
     mywin.show()
     app.exec_()

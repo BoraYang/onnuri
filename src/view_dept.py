@@ -30,7 +30,7 @@ class ViewDept(QMainWindow, Ui_ViewDept):
         id_ = DBConnectSingleton.instance.getDeptID(name)
         self.model = QSqlTableModel(self, DBConnectSingleton.instance.getDB())
         self.model.setTable('Person')
-        self.model.setFilter("department = '" + str(id_) + "';")
+        self.model.setFilter("department like "+str(id_))
         self.model.select()
         self.tv_list.setModel(self.model)
 
