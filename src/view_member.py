@@ -17,13 +17,13 @@ class ViewMember(QMainWindow, Ui_ViewMember):
         self.btn_save.released.connect(self.saveClicked)
         self.btn_show.released.connect(self.showClicked)
         self.tb_eng_name.setText(self.showEngName())
-        self.tb_kor_name.setText(DBConnectSingleton.instance.getKorname(self.p_id))
+        self.tb_kor_name.setText(DBConnectSingleton.instance.getKorName(self.p_id))
         self.tb_email.setText(DBConnectSingleton.instance.getEmail(self.p_id))
-        self.tb_phone.setText(DBConnectSingleton.instance.getPhone(self.p_id))
+        self.tb_phone.setText(str(DBConnectSingleton.instance.getPhone(self.p_id)))
         self.tb_address.setText(DBConnectSingleton.instance.getPhysicalAddress(self.p_id))
         self.tb_baptism_place.setText(self.showBaptismSite())
         self.tb_baptism_by.setText(self.showBaptizer())
-        self.de_dob.setDate(DBConnectSingleton.instance.getBDate(self.p_id))
+        self.de_dob.setDate(QDate(DBConnectSingleton.instance.getBDate(self.p_id),"MM/dd/yyyy"))
         self.de_bap.setDate(self.showBaptismDate())
         self.de_reg.setDate(DBConnectSingleton.instance.getRDate(self.p_id))
         self.cb_duty.setCurrentText(DBConnectSingleton.instance.getDuty(self.p_id))
@@ -56,17 +56,17 @@ class ViewMember(QMainWindow, Ui_ViewMember):
 
     def showBaptismSite(self):
         baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
-        baptismSite = baptism[3]
+        baptismSite = baptism[1]
         return baptismSite
 
     def showBaptizer(self):
         baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
-        baptizer = baptism[4]
+        baptizer = baptism[2]
         return baptizer
 
     def showBaptismDate(self):
         baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
-        baptismDate = baptism[2]
+        baptismDate = baptism[0]
         return baptismDate
 
     def showPicture(self):

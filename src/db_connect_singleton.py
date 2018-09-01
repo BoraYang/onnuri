@@ -105,6 +105,7 @@ class DBConnectSingleton:
             if not query.exec_():
                 return -1
 
+
         # Add data to Family Table
         def addFamily(self):
             query = QtSql.QSqlQuery(self.db)
@@ -199,6 +200,7 @@ class DBConnectSingleton:
             while query.next():
                 returnVal.append(query.value(0))
             return returnVal
+
 
         # Convert Duty ID into duty name
         def getDutyID(self, input_duty):
@@ -370,7 +372,6 @@ class DBConnectSingleton:
             duty_id = None
             while query.next():
                 duty_id = query.value(0)
-
             query.prepare("SELECT name FROM Duty WHERE num = '" + str(duty_id) + "';")
             query.exec_()
             returnVal = None

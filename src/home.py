@@ -21,6 +21,10 @@ class Home(QMainWindow, Ui_Home):
         self.btn_bible_study.released.connect(self.bibleStudyClicked)
         self.btn_department.released.connect(self.deptClicked)
 
+        # Back ground
+        # ui.frame->setStyleSheet("background-image: url(:/images/menu_background.png);" "background-repeat: repeat;");
+
+
     @pyqtSlot()
     def closeClicked(self):
         self.close()

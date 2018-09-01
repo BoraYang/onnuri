@@ -9,17 +9,24 @@ class Person:
     reg_date = ""
     email = ""
     phone = 0
-    group = 0
-    duty = 0
     family = 0
     newcomer = ""
     newFamily = ""
     address = ""
-    dept = ""
+    picture_path = ""
+    # 조회해야함
+    church_group = 0
+    # 조회해야함
+    duty = 0
+    # 조회해야함
+    department = 0
+    # 조회해야함
+    baptism = 0
+
     def __init__(self, first_name="", last_name="", mid_name="", kor_name="", gender="", birth_day="", reg_date="",
                  email="",dept = "" ,  phone=0, group=0, duty=0, family=0, newcomer="", newFamily="" , address = ""):
         self.address = address
-        self.dept = dept
+        self.department = dept
         self.id = id
         self.first_name = first_name
         self.last_name = last_name
@@ -38,3 +45,8 @@ class Person:
 
     def toSqlQurey(self):
         return "(" + self.id + "," + self.first_name + "," + self.last_name + "," + self.mid_name + "," + self.kor_name + "," + self.gender + "," + self.birth_day + "," + self.reg_date + "," + self.email + "," + self.phone + "," + self.group + "," + self.duty + "," + self.family + "," + self.newcomer + "," + self.newFamily + "," + self.b_study+")"
+
+
+
+
+

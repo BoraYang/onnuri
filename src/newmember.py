@@ -18,13 +18,13 @@ class NewMember(QMainWindow, Ui_NewMember):
         self.btn_cancel.released.connect(self.closeClicked)
         self.btn_save.released.connect(self.saveClicked)
         self.btn_show_bible_study.released.connect(self.showClicked)
+        self.btn_sel_photo.released.connect(self.btn_sel_photo_clicked)
+        self.photo = None
+
         self.rb_gender_male.setChecked(True)
         self.de_bap.setDate(QDate.currentDate())
         self.de_dob.setDate(QDate.currentDate())
         self.de_reg.setDate(QDate.currentDate())
-        self.btn_sel_photo.released.connect(self.btn_sel_photo_clicked)
-        self.photo = None
-
         for i in self.getDutyListFromDB():
             self.cb_duty.addItem(i)
 
@@ -37,42 +37,35 @@ class NewMember(QMainWindow, Ui_NewMember):
             self.cb_dept.addItem(i)
         self.btn_show_bible_study.setEnabled(False)
 
-    def __init__(self , id_ , person:Person):
-        super().__init__()
-        self.setupUi(self)
-        self.btn_cancel.released.connect(self.closeClicked)
-        self.btn_save.released.connect(self.saveClicked)
-        self.btn_show_bible_study.released.connect(self.showClicked)
-        self.de_bap.setDate(QDate.currentDate())
-        self.de_dob.setDate(QDate.currentDate())
-        self.de_reg.setDate(QDate.currentDate())
-        self.btn_sel_photo.released.connect(self.btn_sel_photo_clicked)
 
-        img_file_path = DBConnectSingleton.instance.getPicPath(id_)
-
-        self.img = QImage(img_file_path)
-
-        gender = person.gender
-        if(gender == "Male"):
-            self.rb_gender_male.setChecked(True)
-            self.rb_gender_female.setChecked(False)
-        else:
-            self.rb_gender_male.setChecked(False)
-            self.rb_gender_female.setChecked(True)
-
-        self.tb_address.setText(person.address)
-
+    def setDuty(self,id_):
+        index = 0;
+        duty_name = DBConnectSingleton.instance.getDuty(id_)
         for i in self.getDutyListFromDB():
             self.cb_duty.addItem(i)
+            if(i != duty_name):
+                self.cb_duty.setCurrentIndex(index)
+            index +=1
 
-        list = DBConnectSingleton.instance.getGroupList()
+    def setGroup(self,id_):
+        index = 0
+        group_name = DBConnectSingleton.instance.getGroup(id_)
         for i in DBConnectSingleton.instance.getGroupList():
             self.cb_group.addItem(i)
+            if (i != group_name):
+                self.cb_group.setCurrentIndex(index)
+            index += 1
 
-        list = DBConnectSingleton.instance.getDeptName()
+    def setDept(self,dept_id):
+        index = 0
+        dept_name = DBConnectSingleton.instance.getDeptName(dept_id)
         for i in DBConnectSingleton.instance.getDeptName():
             self.cb_dept.addItem(i)
+            if(dept_name == i):
+                self.cb_dept.setCurrentIndex(index)
+            index+=1
         self.btn_show_bible_study.setEnabled(False)
+
 
     def closeEvent(self, event):
         self.myWindowCloseSignal.emit()
@@ -104,13 +97,18 @@ class NewMember(QMainWindow, Ui_NewMember):
         gender = self.getGender()
         address =self.tb_address.text()
         email = self.tb_email.text()
-        dob = self.de_dob.date().toString()  # birth
-        doreg = self.de_reg.date().toString()  # register
-        dobap = self.de_bap.date().toString()  # baptism
-        biptism_site = self.tb_baptism_place.text()
-        biptism_by = self.tb_baptism_by.text()
+        dob = self.de_dob.date().toString("MM/dd/yyyy")  # birth
+        doreg = self.de_reg.date().toString("MM/dd/yyyy")  # register
+        dobap = ""
+        biptism_site =""
+        biptism_by = ""
+        if(self.chk_baptism.isChecked()):
+            dobap = self.de_bap.date().toString("MM/dd/yyyy")  # baptism
+            biptism_site = self.tb_baptism_place.text()
+            biptism_by = self.tb_baptism_by.text()
         duty = self.cb_duty.currentText()
         group = self.cb_group.currentText()
+        group = DBConnectSingleton.instance.getGroupID(group)
         new_c_s = self.chk_new_comer_study.isChecked()
         new_f_s = self.chk_new_comer_study.isChecked()
 
@@ -127,11 +125,12 @@ class NewMember(QMainWindow, Ui_NewMember):
                                                      b_date=dob, r_date=doreg, email = email,phone=phone,
                                                      group=group,department=dept_id,duty=duty_id, baptism=-1,
                                                      family=-1, c_study=new_c_s, m_study=new_f_s , pic_path=file_path)
-        # add baptism id to db anf get baptism id
-        b_id = DBConnectSingleton.instance.addBaptism(input_id=p_id, bap_date=dobap, location=biptism_site,
-                                                      admin=biptism_by)
-        # update personal information with baptism id
-        DBConnectSingleton.instance.updateBaptism(input_id=p_id, baptism_num=b_id)
+        if(self.chk_baptism.isChecked()):
+            # add baptism id to db anf get baptism id
+            b_id = DBConnectSingleton.instance.addBaptism(input_id=p_id, bap_date=dobap, location=biptism_site,
+                                                          admin=biptism_by)
+            # update personal information with baptism id
+            DBConnectSingleton.instance.updateBaptism(input_id=p_id, baptism_num=b_id)
 
 
 
@@ -203,3 +202,42 @@ class NewMember(QMainWindow, Ui_NewMember):
     def getDutyListFromDB(self):
         duties = DBConnectSingleton.instance.getDutyName()
         return duties
+
+
+class EditMember(NewMember):
+    def __init__(self, id_ , person:Person):
+        pass
+        super().__init__()
+        self.setupUi(self)
+        self.btn_cancel.released.connect(self.closeClicked)
+        self.btn_save.released.connect(self.saveClicked)
+        self.btn_show_bible_study.released.connect(self.showClicked)
+        self.btn_sel_photo.released.connect(self.btn_sel_photo_clicked)
+
+        bod_date = QDate.fromString(person.birth_day, "MM/dd/yyyy")
+        reg_date = QDate.fromString(person.reg_date, "MM/dd/yyyy")
+
+        # bept_date = QDate.fromString(, "MM/dd/yyyy")
+
+
+        #  will be fix to get data from DB
+        self.de_bap.setDate(QDate.currentDate())
+        self.de_dob.setDate(QDate.currentDate())
+        self.de_reg.setDate(QDate.currentDate())
+
+        img_file_path = DBConnectSingleton.instance.getPicPath(id_)
+
+        self.img = QImage(img_file_path)
+
+        gender = person.gender
+        if (gender == "Male"):
+            self.rb_gender_male.setChecked(True)
+            self.rb_gender_female.setChecked(False)
+        else:
+            self.rb_gender_male.setChecked(False)
+            self.rb_gender_female.setChecked(True)
+
+        self.setGroup(id_)
+        self.setDept(person.department)
+        self.setDuty(id_)
+        self.tb_address.setText(person.address)
