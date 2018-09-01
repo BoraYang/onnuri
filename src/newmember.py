@@ -230,6 +230,7 @@ class NewMember(QMainWindow, Ui_NewMember):
         duties = DBConnectSingleton.instance.getDutyName()
         return duties
 
+
 class EditMember(QMainWindow, Ui_NewMember):
     myWindowCloseSignal = pyqtSignal()
 
@@ -237,7 +238,7 @@ class EditMember(QMainWindow, Ui_NewMember):
         super().__init__()
         self.setupUi(self)
         self.p_id = p_id
-
+        self.bapsite = False
         self.btn_cancel.released.connect(self.closeClicked)
         self.btn_save.released.connect(self.saveClicked)
         # self.btn_show.released.connect(self.showClicked)
@@ -253,7 +254,10 @@ class EditMember(QMainWindow, Ui_NewMember):
         self.tb_baptism_place.setText(self.showBaptismSite)
         self.tb_baptism_by.setText(self.showBaptizer())
         self.de_dob.setDate(QDate.fromString(DBConnectSingleton.instance.getBDate(self.p_id), "MM/dd/yyyy"))
-        self.de_bap.setDate(QDate.fromString(self.showBaptismDate(), "MM/dd/yyyy"))
+        if len(self.tb_baptism_place.text()) is not 0:
+            self.no_baptism = False
+            self.de_bap.setDate(QDate.fromString(self.showBaptismDate(), "MM/dd/yyyy"))
+
         self.de_reg.setDate(QDate.fromString(DBConnectSingleton.instance.getRDate(self.p_id), "MM/dd/yyyy"))
         self.cb_duty.addItem(DBConnectSingleton.instance.getDuty(self.p_id))
         new_comer_study = DBConnectSingleton.instance.getCStudy(self.p_id)
@@ -279,10 +283,12 @@ class EditMember(QMainWindow, Ui_NewMember):
         self.btn_show_bible_study.released.connect(self.bStudyClicked)
         self.showPicture()
         self.btn_show_family.released.connect(self.btnFamilyEditClicked)
+
     @pyqtSlot()
     def btnFamilyEditClicked(self):
         self.fmaily_window = AddFamily()
         self.fmaily_window.show()
+
     @property
     def showBaptismSite(self):
         baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
@@ -312,6 +318,11 @@ class EditMember(QMainWindow, Ui_NewMember):
         if (len(fileName) is not 0):
             print(fileName)
         img = QImage(fileName)
+        if(img.width() is 0 or img.height() is 0):
+            msgBox = QMessageBox()
+            msgBox.setText("The file is not exist.");
+            msgBox.exec();
+            return
         h = self.lbl_photo_view.height()
         w = self.lbl_photo_view.width()
 
@@ -327,7 +338,6 @@ class EditMember(QMainWindow, Ui_NewMember):
             img_h *= scale_factor
         image = img.scaledToHeight(img_h)
         self.lbl_photo_view.setPixmap(QPixmap.fromImage(image))
-
 
     @pyqtSlot()
     def bStudyClicked(self):
@@ -365,12 +375,10 @@ class EditMember(QMainWindow, Ui_NewMember):
         self.file_path = fileName[0]
         img = QImage(fileName[0])
         self.img = img.copy()
-
         self.setPhototoView(img)
         arr = fileName[0].split("/")
         index = len(arr) - 1
-
-        self.lbl_photo_loc.setText("" + arr[index])
+        self.lbl_photo_loc.setText(file_dir+"/"+arr[index])
 
     def update_info(self):
         pass
@@ -381,4 +389,56 @@ class EditMember(QMainWindow, Ui_NewMember):
 
     @pyqtSlot()
     def saveClicked(self):
-        pass
+        DBConnectSingleton.instance.updateFirstName(self.p_id, self.tb_first_name.text())
+        DBConnectSingleton.instance.updateMidName(self.p_id, self.tb_mid_name.text())
+        DBConnectSingleton.instance.updateLastName(self.p_id, self.tb_last_name.text())
+        DBConnectSingleton.instance.updateKorName(self.p_id,self.tb_kor_name.text())
+        DBConnectSingleton.instance.updateBDate(self.p_id, self.de_dob.date().toString("MM/dd/yyyy"))
+        DBConnectSingleton.instance.updateGender(self.p_id,self.getGender())
+        DBConnectSingleton.instance.updateEmail(self.p_id,self.tb_email.text())
+        DBConnectSingleton.instance.updatePhone(self.p_id,self.tb_phone.text())
+        DBConnectSingleton.instance.updatePhysicalAddress(self.p_id,self.tb_address.text())
+
+        DBConnectSingleton.instance.updateBDate(self.p_id, self.de_dob.date().toString("MM/dd/yyyy"))
+
+        if(len(self.lbl_photo_loc.text()) is not 0):
+            DBConnectSingleton.instance.updatePath(self.p_id,self.lbl_photo_loc.text())
+        DBConnectSingleton.instance.updateBDate(self.p_id, self.de_dob.date().toString("MM/dd/yyyy"))
+
+        dept = DBConnectSingleton.instance.getDeptID(self.cb_dept.currentText())
+        DBConnectSingleton.instance.updateDept(self.p_id,dept)
+        if(self.no_baptism):
+
+            if (len(self.tb_baptism_place.text()) is not 0):
+                dobap = self.de_dob.date().toString("MM/dd/yyyy")
+                biptism_site = self.tb_baptism_place.text()
+                biptism_by = self.tb_baptism_by
+                b_id = DBConnectSingleton.instance.addBaptism(input_id=self.p_id, bap_date=dobap, location=biptism_site,
+                                                              admin=biptism_by)
+                # update personal information with baptism id
+                DBConnectSingleton.instance.updateBaptism(input_id=self.p_id, baptism_num=b_id)
+        else:
+            DBConnectSingleton.instance.updateBapAdmin(self.p_id,self.tb_baptism_by.text())
+            DBConnectSingleton.instance.updateBapLocation(self.p_id, self.tb_baptism_by.text())
+            DBConnectSingleton.instance.updateBapDate(self.p_id, self.de_bap.date().toString("MM/dd/yyyy"))
+
+        duty_id = DBConnectSingleton.instance.getDutyID(self.cb_duty.currentText())
+        DBConnectSingleton.instance.updateDuty(self.p_id, duty_id)
+
+        dept_id = DBConnectSingleton.instance.getDeptID(self.cb_dept.currentText())
+        DBConnectSingleton.instance.updateDept(self.p_id, dept_id)
+
+        group_id = DBConnectSingleton.instance.getGroupID(self.cb_group.currentText())
+        DBConnectSingleton.instance.updateGroup(self.p_id, group_id)
+        3
+        new_c_s = self.chk_new_comer_study.isChecked()
+        new_f_s = self.chk_new_comer_study.isChecked()
+        DBConnectSingleton.instance.updateCStudy(self.p_id, new_c_s)
+        DBConnectSingleton.instance.updateMStudy(self.p_id, new_f_s)
+
+
+    def getGender(self):
+        if (self.rb_gender_male):
+            return "Male"
+        else:
+            return "Female"

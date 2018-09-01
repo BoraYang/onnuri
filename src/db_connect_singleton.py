@@ -217,14 +217,14 @@ class DBConnectSingleton:
         # Update Newcomer study status for the given Person ID
         def updateCStudy(self, input_id, status):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Person SET c_study = '" + status + "' WHERE id =" + str(input_id) + ";")
+            query.prepare("UPDATE Person SET c_study = '" + str(status) + "' WHERE id =" + str(input_id) + ";")
             if not query.exec_():
                 return -1
 
         # Update New Family study status for the given Person ID
         def updateMStudy(self, input_id, status):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Person SET m_study = '" + status + "' WHERE id =" + str(input_id) + ";")
+            query.prepare("UPDATE Person SET m_study = '" + str(status) + "' WHERE id =" + str(input_id) + ";")
             if not query.exec_():
                 return -1
 
@@ -266,7 +266,7 @@ class DBConnectSingleton:
         # Update picture file path for the given Person ID
         def updatePath(self, input_id, path):
             query = QtSql.QSqlQuery(self.db)
-            query.preparE("UPDATE Person SET picture_path = '" + path + "' WHERE id = " + str(input_id) + ";")
+            query.prepare("UPDATE Person SET picture_path = '" + path + "' WHERE id = " + str(input_id) + ";")
             if not query.exec_():
                 return -1
 
