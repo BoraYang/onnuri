@@ -4,8 +4,7 @@ from PyQt5.Qt import QSqlDatabase
 class DBConnectSingleton:
     class __DBConnectSingleton:
         def __init__(self, db):
-            self.db = db
-
+            self.db:QSqlDatabase = db
         def __str__(self):
             return repr(self) + self.val
 
@@ -17,25 +16,28 @@ class DBConnectSingleton:
             query = QtSql.QSqlQuery(self.db)
             query.prepare("SELECT * FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec()
-            returnVal = []
+            returnVal = {}
             while query.next():
-                returnVal.append(query.value(1))
-                returnVal.append(query.value(2))
-                returnVal.append(query.value(3))
-                returnVal.append(query.value(4))
-                returnVal.append(query.value(5))
-                returnVal.append(query.value(6))
-                returnVal.append(query.value(7))
-                returnVal.append(query.value(8))
-                returnVal.append(query.value(9))
-                returnVal.append(query.value(10))
-                returnVal.append(query.value(11))
-                returnVal.append(query.value(12))
-                returnVal.append(query.value(13))
-                returnVal.append(query.value(14))
-                returnVal.append(query.value(15))
-                returnVal.append(query.value(16))
+                row = query.record()
+                for i in range(0,row.count()):
+                    returnVal[row.fieldName(i)] = row.value(i)
             return returnVal
+
+        # Get data from Person table
+        def getPeopleByName(self, p_name):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT * FROM Person WHERE last_name = '" + str(p_name) + "';")
+            query.exec()
+            index = 0
+            people = {}
+            while query.next():
+                row = query.record()
+                returnVal = {}
+                for i in range(0,row.count()):
+                    returnVal[row.fieldName(i)] = row.value(i)
+                people[index] = returnVal
+                index +=1
+            return people
 
         def verifyIdAndPasswd(self, id_, passwd):
             query = QtSql.QSqlQuery(self.db)

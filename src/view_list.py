@@ -44,7 +44,6 @@ class ViewList(QMainWindow , Ui_ViewList):
         self.tv_list.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.tv_list.show()
         self.tv_list.doubleClicked.connect(self.itemDoubleClicked)
-
     @pyqtSlot(QModelIndex)
     def itemDoubleClicked(self,index):
         row_index = index.row()
