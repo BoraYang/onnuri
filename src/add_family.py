@@ -74,3 +74,6 @@ class AddFamily(QMainWindow,Ui_AddFamily):
     def beAddedItemDoubleClicked(self, item: QListWidgetItem):
         index = self.lv_be_added_family.indexFromItem(item)
         self.lv_be_added_family.takeItem(index.row())
+        text = item.text().split(" : ")
+        p_id = text[0]
+        DBConnectSingleton.instance.updateFamily(p_id,-1)

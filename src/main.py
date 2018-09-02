@@ -1,6 +1,6 @@
 import sys
 
-from family_view import FamilyView
+
 from sign_in import *
 from db_connect_singleton import *
 from PyQt5 import QtSql

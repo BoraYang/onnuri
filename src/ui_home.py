@@ -20,6 +20,7 @@ class Ui_Home(object):
         self.verticalLayout.setSpacing(6)
         self.verticalLayout.setObjectName("verticalLayout")
         self.homeFrame = QtWidgets.QFrame(self.centralWidget)
+        self.homeFrame.setStyleSheet("background-color:rgb(255, 255, 255)")
         self.homeFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.homeFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.homeFrame.setObjectName("homeFrame")
