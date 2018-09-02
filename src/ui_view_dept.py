@@ -76,7 +76,7 @@ class Ui_ViewDept(object):
 
     def retranslateUi(self, ViewDept):
         _translate = QtCore.QCoreApplication.translate
-        ViewDept.setWindowTitle(_translate("ViewDept", "Add New Member"))
+        ViewDept.setWindowTitle(_translate("ViewDept", "View Department List"))
         self.label.setText(_translate("ViewDept", "Department Name"))
         self.btn_go_back.setText(_translate("ViewDept", "Go Back"))
         self.menuMenu.setTitle(_translate("ViewDept", "Menu"))

@@ -76,12 +76,12 @@ class Ui_AddFamily(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.btn_cancel = QtWidgets.QPushButton(self.frame_3)
-        self.btn_cancel.setObjectName("btn_cancel")
-        self.horizontalLayout.addWidget(self.btn_cancel)
         self.btn_add = QtWidgets.QPushButton(self.frame_3)
         self.btn_add.setObjectName("btn_add")
         self.horizontalLayout.addWidget(self.btn_add)
+        self.btn_cancel = QtWidgets.QPushButton(self.frame_3)
+        self.btn_cancel.setObjectName("btn_cancel")
+        self.horizontalLayout.addWidget(self.btn_cancel)
         self.verticalLayout_2.addWidget(self.frame_3)
         self.verticalLayout.addWidget(self.frame)
         AddFamily.setCentralWidget(self.centralWidget)
@@ -98,12 +98,12 @@ class Ui_AddFamily(object):
 
     def retranslateUi(self, AddFamily):
         _translate = QtCore.QCoreApplication.translate
-        AddFamily.setWindowTitle(_translate("AddFamily", "Add Family"))
+        AddFamily.setWindowTitle(_translate("AddFamily", "Family"))
         self.lbl_fam_name.setText(_translate("AddFamily", "Name of Family Member"))
         self.btn_search.setText(_translate("AddFamily", "Search"))
         self.groupBox.setTitle(_translate("AddFamily", "Search Result"))
         self.groupBox_2.setTitle(_translate("AddFamily", "Be added to Family"))
-        self.btn_cancel.setText(_translate("AddFamily", "Cancel"))
         self.btn_add.setText(_translate("AddFamily", "Add"))
+        self.btn_cancel.setText(_translate("AddFamily", "Cancel"))
         self.menuMenu.setTitle(_translate("AddFamily", "Menu"))
 

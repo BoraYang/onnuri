@@ -30,24 +30,24 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
+       <item row="0" column="1">
+        <widget class="QPushButton" name="btn_remove_group">
+         <property name="text">
+          <string>Remove Group</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
         <widget class="QPushButton" name="btn_cancel">
          <property name="text">
           <string>Cancel</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="2">
+       <item row="0" column="0">
         <widget class="QPushButton" name="btn_add_group">
          <property name="text">
           <string>Add Group</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="btn_remove_group">
-         <property name="text">
-          <string>Remove Group</string>
          </property>
         </widget>
        </item>
@@ -76,9 +76,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
   <tabstop>tv_group</tabstop>
-  <tabstop>btn_cancel</tabstop>
   <tabstop>btn_remove_group</tabstop>
-  <tabstop>btn_add_group</tabstop>
  </tabstops>
  <resources/>
  <connections/>

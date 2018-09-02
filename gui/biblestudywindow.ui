@@ -36,24 +36,24 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="1">
-        <widget class="QPushButton" name="btn_save">
+       <item row="0" column="3">
+        <widget class="QPushButton" name="btn_close">
          <property name="text">
-          <string>save</string>
+          <string>Close</string>
          </property>
         </widget>
        </item>
        <item row="0" column="0">
         <widget class="QPushButton" name="btn_add">
          <property name="text">
-          <string>add</string>
+          <string>Add</string>
          </property>
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QPushButton" name="btn_close">
+        <widget class="QPushButton" name="btn_save">
          <property name="text">
-          <string>close</string>
+          <string>Save</string>
          </property>
         </widget>
        </item>
@@ -66,7 +66,6 @@
  <tabstops>
   <tabstop>lv_bs_list</tabstop>
   <tabstop>btn_add</tabstop>
-  <tabstop>btn_save</tabstop>
   <tabstop>btn_close</tabstop>
  </tabstops>
  <resources/>

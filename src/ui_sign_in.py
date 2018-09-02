@@ -50,12 +50,12 @@ class Ui_SignIn(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.btn_cancel = QtWidgets.QPushButton(self.frame_2)
-        self.btn_cancel.setObjectName("btn_cancel")
-        self.horizontalLayout.addWidget(self.btn_cancel)
         self.btn_sign_in = QtWidgets.QPushButton(self.frame_2)
         self.btn_sign_in.setObjectName("btn_sign_in")
         self.horizontalLayout.addWidget(self.btn_sign_in)
+        self.btn_cancel = QtWidgets.QPushButton(self.frame_2)
+        self.btn_cancel.setObjectName("btn_cancel")
+        self.horizontalLayout.addWidget(self.btn_cancel)
         self.verticalLayout.addWidget(self.frame_2)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem1)
@@ -73,10 +73,10 @@ class Ui_SignIn(object):
 
     def retranslateUi(self, SignIn):
         _translate = QtCore.QCoreApplication.translate
-        SignIn.setWindowTitle(_translate("SignIn", "Add New Member"))
+        SignIn.setWindowTitle(_translate("SignIn", "Sign in"))
         self.lbl_id.setText(_translate("SignIn", "ID"))
         self.lbl_password.setText(_translate("SignIn", "Password"))
-        self.btn_cancel.setText(_translate("SignIn", "Cancel"))
         self.btn_sign_in.setText(_translate("SignIn", "Sign in"))
+        self.btn_cancel.setText(_translate("SignIn", "Cancel"))
         self.menuMenu.setTitle(_translate("SignIn", "Menu"))
 

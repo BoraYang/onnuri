@@ -71,7 +71,7 @@ class Ui_Home(object):
 
     def retranslateUi(self, Home):
         _translate = QtCore.QCoreApplication.translate
-        Home.setWindowTitle(_translate("Home", "Add New Member"))
+        Home.setWindowTitle(_translate("Home", "Onnuri All Nations Baptist Church Register"))
         self.btn_bible_study.setText(_translate("Home", "Bible Study"))
         self.btn_quit.setText(_translate("Home", "Quit"))
         self.btn_group.setText(_translate("Home", "Group"))
