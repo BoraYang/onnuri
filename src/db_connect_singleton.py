@@ -608,6 +608,16 @@ class DBConnectSingleton:
             #     returnVal.append(sublist)
             # return returnVal
 
+        # Return family member IDs for the given Family ID
+        def getFamilyMembers(self, f_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT id FROM Person WHERE family = " + str(f_id) + ";")
+            query.exec_()
+            returnVal = []
+            while query.next():
+                returnVal.append(query.value(0))
+            return returnVal
+
         # Return the highest ID number in Family Table
         def getHighestFamilyID(self):
             query = QtSql.QSqlQuery(self.db)
@@ -702,7 +712,7 @@ class DBConnectSingleton:
             return returnVal
 
 
-    instance:__DBConnectSingleton = None
+    instance = None
 
 
     def __init__(self, db):

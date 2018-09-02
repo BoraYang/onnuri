@@ -30,7 +30,7 @@
        <item row="0" column="0">
         <widget class="QLabel" name="lbl_name_input">
          <property name="text">
-          <string>Enter name:</string>
+          <string>Enter Last Name:</string>
          </property>
         </widget>
        </item>
@@ -59,10 +59,10 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="3">
-        <widget class="QPushButton" name="btn_edit">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="btn_cancel">
          <property name="text">
-          <string>Edit</string>
+          <string>Cancel</string>
          </property>
         </widget>
        </item>
@@ -73,17 +73,17 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="btn_add">
+       <item row="0" column="3">
+        <widget class="QPushButton" name="btn_edit">
          <property name="text">
-          <string>Add</string>
+          <string>Edit</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QPushButton" name="btn_cancel">
+       <item row="0" column="4">
+        <widget class="QPushButton" name="btn_add">
          <property name="text">
-          <string>Cancel</string>
+          <string>Add</string>
          </property>
         </widget>
        </item>
