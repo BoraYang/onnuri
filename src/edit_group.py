@@ -20,7 +20,7 @@ class EditGroup(QMainWindow, Ui_EditGroup):
         self.btn_cancel.released.connect(self.closeClicked)
         self.btn_add_group.released.connect(self.addClicked)
         self.btn_remove_group.released.connect(self.removeClicked)
-        self.tv_group.doubleClicked.connect(self.tableViewClicked)
+        self.tv_group.clicked.connect(self.tableViewClicked)
         self.viewTable()
 
     @pyqtSlot()
@@ -34,19 +34,20 @@ class EditGroup(QMainWindow, Ui_EditGroup):
 
     @pyqtSlot()
     def removeClicked(self):
-        if self.self.selected_group_id == -1:
+        print(self.selected_group_id)
+        if self.selected_group_id == -1:
             return
 
         DBConnectSingleton.instance.updateGroupToBeRemoved(self.selected_group_id)
+        DBConnectSingleton.instance.removeGroup(self.selected_group_id)
 
-
-
-
+        self.tv_group.model().select()
+        self.tv_group.show()
 
     def viewTable(self):
         # group_list = DBConnectSingleton.instance.getGroupList()
         self.model = QSqlTableModel(self, DBConnectSingleton.instance.getDB())
-        self.model.setTable('Department')
+        self.model.setTable('ChurchGroup')
         # self.model.setFilter("department = '" + str(id_) + "';")
         self.model.select()
         self.tv_group.setModel(self.model)
@@ -80,3 +81,4 @@ class EditGroup(QMainWindow, Ui_EditGroup):
     def tableViewClicked(self, index):
         self.idx = index.row()
         self.selected_group_id = self.tv_group.model().index(self.idx, 0).data()
+

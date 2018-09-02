@@ -82,7 +82,7 @@ class Ui_AddGroup(object):
 
     def retranslateUi(self, AddGroup):
         _translate = QtCore.QCoreApplication.translate
-        AddGroup.setWindowTitle(_translate("AddGroup", "Add New Member"))
+        AddGroup.setWindowTitle(_translate("AddGroup", "Add Group"))
         self.lbl_group_name.setText(_translate("AddGroup", "Group Name"))
         self.lbl_leader_id.setText(_translate("AddGroup", "Leader ID Number"))
         self.btn_save.setText(_translate("AddGroup", "Save"))

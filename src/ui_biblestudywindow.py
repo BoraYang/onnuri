@@ -47,7 +47,7 @@ class Ui_BibleStudyWindow(object):
 
     def retranslateUi(self, BibleStudyWindow):
         _translate = QtCore.QCoreApplication.translate
-        BibleStudyWindow.setWindowTitle(_translate("BibleStudyWindow", "MainWindow"))
+        BibleStudyWindow.setWindowTitle(_translate("Bible Study", "MainWindow"))
         self.gb_bible.setTitle(_translate("BibleStudyWindow", "Manage"))
         self.btn_save.setText(_translate("BibleStudyWindow", "save"))
         self.btn_add.setText(_translate("BibleStudyWindow", "add"))

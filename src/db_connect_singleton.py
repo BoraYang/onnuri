@@ -284,7 +284,26 @@ class DBConnectSingleton:
             if not query.exec_():
                 return -1
 
-        # Return boolean value to check whether
+        # Remove info from Baptism for the given Person ID
+        def removeBaptism(self, input_id):
+            query= QtSql.QSqlQuery(self.db)
+            query.preprare("DELETE FROM Baptism WHERE id LIKE " + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Remove a member for the given Person ID
+        def removePerson(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("DELETE FROM Person WHERE id LIKE " + str(input_id) + ";")
+            if not query.exec_():
+                return -1
+
+        # Remove info from BibleStudyHistory for the given Person ID
+        def removeBStudyHistory(self, input_id):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("DELETE FROM BibleStudyHistory WHERE p_id LIKE " + str(input_id) + ";")
+            if not query.exec_():
+                return -1
 
         # Add data to BibleStudy Table
         def addBStudy(self, input_name):
@@ -679,7 +698,7 @@ class DBConnectSingleton:
             return returnVal
 
 
-    instance :__DBConnectSingleton= None
+    instance = None
 
 
     def __init__(self, db):

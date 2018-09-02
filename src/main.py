@@ -9,6 +9,10 @@ from BibleStudyWindow import *
 from home import *
 from add_group import *
 from view_member import *
+from edit_group import *
+
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     db_driver = QtSql.QSqlDatabase.addDatabase('QSQLITE')
@@ -22,6 +26,6 @@ if __name__ == "__main__":
 
     # mywin = BibleStudyWindow("youngtak cho",editable=True)
     # mywin = ViewMember(1)
-    mywin = EditMember(1)
+    mywin = EditGroup()
     mywin.show()
     app.exec_()

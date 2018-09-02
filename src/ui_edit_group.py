@@ -57,7 +57,7 @@ class Ui_EditGroup(object):
 
     def retranslateUi(self, EditGroup):
         _translate = QtCore.QCoreApplication.translate
-        EditGroup.setWindowTitle(_translate("EditGroup", "Add New Member"))
+        EditGroup.setWindowTitle(_translate("EditGroup", "Edit Group"))
         self.btn_cancel.setText(_translate("EditGroup", "Cancel"))
         self.btn_add_group.setText(_translate("EditGroup", "Add Group"))
         self.btn_remove_group.setText(_translate("EditGroup", "Remove Group"))

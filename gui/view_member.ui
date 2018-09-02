@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>599</width>
-    <height>826</height>
+    <height>832</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Add New Member</string>
+   <string>View Member Info</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
