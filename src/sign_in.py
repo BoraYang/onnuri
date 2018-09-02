@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot
+
+from home import Home
 from ui_sign_in import Ui_SignIn
 from db_connect_singleton import *
 from view_list import *
@@ -47,7 +49,7 @@ class Signin(QMainWindow,Ui_SignIn):
         self.window = None
         if ischeck == 1 or ischeck == 0: # for Test
         # if ischeck == 1 # for release
-            self.window = ViewList()
+            self.window = Home()
             self.window.show()
             self.close()
             print("log in")

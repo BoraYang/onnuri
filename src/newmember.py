@@ -309,7 +309,7 @@ class EditMember(QMainWindow, Ui_NewMember):
 
     @pyqtSlot()
     def btnFamilyEditClicked(self):
-        self.fmaily_window = AddFamily()
+        self.fmaily_window = AddFamily(self.p_id,self.tb_last_name.text(),DBConnectSingleton.instance.getBDate(self.p_id))
         self.fmaily_window.show()
 
     @property

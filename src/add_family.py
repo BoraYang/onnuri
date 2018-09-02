@@ -5,14 +5,32 @@ from db_connect_singleton import *
 
 class AddFamily(QMainWindow,Ui_AddFamily):
 
-    def __init__(self):
+    def __init__(self,id_ = -1 ,last_name="" , first_name = "",b_date="",show = False):
         super().__init__()
         self.setupUi(self)
-        self.btn_search.released.connect(self.btnSearchClicked)
-        self.lv_search_result.itemDoubleClicked.connect(self.searchItemDoubleClicked)
-        self.lv_be_added_family.itemDoubleClicked.connect(self.beAddedItemDoubleClicked)
-        self.btn_add.released.connect(self.btnSaveClicked)
+        if(not show):
+            self.btn_search.released.connect(self.btnSearchClicked)
+            self.lv_search_result.itemDoubleClicked.connect(self.searchItemDoubleClicked)
+            self.lv_be_added_family.itemDoubleClicked.connect(self.beAddedItemDoubleClicked)
+            self.btn_add.released.connect(self.btnSaveClicked)
+        else:
+            self.btn_search.setEnabled(False)
+            self.btn_add.setEnabled(False)
+            self.groupBox_2.setTitle("Family Member")
         self.btn_cancel.released.connect(self.btnClosedclicked)
+        if id_ is not -1:
+            self.lv_be_added_family.addItem(str(id_) + " : " + first_name +", "+last_name+ " : " + b_date)
+            f_id = DBConnectSingleton.instance.getFamily(id_)
+            if(f_id is not -1):
+                people_ids = DBConnectSingleton.instance.getFamilyMembers(f_id)
+                for i in people_ids:
+                    if(id_ is i):
+                        continue
+                    person = DBConnectSingleton.instance.getInfo(i)
+                    self.lv_be_added_family.addItem(
+                        str(person['id']) + " : " + person['first_name'] + ", " + person[
+                            'last_name'] + " : " + str(person['b_date']))
+
 
     @pyqtSlot()
     def btnClosedclicked(self):
@@ -41,11 +59,11 @@ class AddFamily(QMainWindow,Ui_AddFamily):
 
     @pyqtSlot()
     def btnSearchClicked(self):
-        f_name = self.tb_fam_name.text()
+        l_name = self.tb_fam_name.text()
         self.lv_search_result.clear()
-        people = DBConnectSingleton.instance.getPeopleByName(f_name)
+        people = DBConnectSingleton.instance.getPeopleByName(l_name)
         for i in people:
-            self.lv_search_result.addItem(people[i]['id']+" : "+people[i]['last_name']+" : "+people[i]['b_date'])
+            self.lv_search_result.addItem(str(people[i]['id'])+" : "+people[i]['first_name']+", "+people[i]['last_name']+" : "+str(people[i]['b_date']))
 
     @pyqtSlot(QListWidgetItem)
     def searchItemDoubleClicked(self, item: QListWidgetItem):

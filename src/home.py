@@ -36,7 +36,7 @@ class Home(QMainWindow, Ui_Home):
 
     @pyqtSlot()
     def bibleStudyClicked(self):
-        self.childWindow = BibleStudyWindow('manage', p_id = -1 , editable=True)
+        self.childWindow = BibleStudyWindow('manage', p_id = -1 , editable=True , manage=True)
         self.childWindow.show()
 
     @pyqtSlot()

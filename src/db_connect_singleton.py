@@ -589,7 +589,7 @@ class DBConnectSingleton:
         # Return family ID for the given Person ID
         def getFamily(self, input_id):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("SELECT family FROM Person WHERE id = '" + input_id + "';")
+            query.prepare("SELECT family FROM Person WHERE id = '" + str(input_id) + "';")
             query.exec_()
             family_id = None
             while query.next():
@@ -672,7 +672,7 @@ class DBConnectSingleton:
             b_list = []
             for x in b_id_list:
                 query.clear()
-                query.prepare("SELECT name FROM BibleStudy WHERE num = '" + x + "';")
+                query.prepare("SELECT name FROM BibleStudy WHERE num = '" + str(x) + "';")
                 query.exec_()
                 while query.next():
                     b_list.append(query.value(0))
@@ -701,6 +701,15 @@ class DBConnectSingleton:
                 returnVal.append(query.value(0))
             return returnVal
 
+        # Return list of bible study ID
+        def getBStudyIDByName(self,name):
+            query = QtSql.QSqlQuery(self.db)
+            query.prepare("SELECT num FROM BibleStudy WHERE name like '"+ name +"'")
+            query.exec_()
+            while query.next():
+                return query.value(0)
+
+
         # Return picture file path
         def getPicPath(self, input_id):
             query = QtSql.QSqlQuery(self.db)
@@ -712,7 +721,7 @@ class DBConnectSingleton:
             return returnVal
 
 
-    instance = None
+    instance:__DBConnectSingleton = None
 
 
     def __init__(self, db):

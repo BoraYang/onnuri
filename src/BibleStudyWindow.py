@@ -7,7 +7,7 @@ from db_connect_singleton import *
 
 
 class BibleStudyWindow(QMainWindow, Ui_BibleStudyWindow):
-    def __init__(self , p_name , p_id = -1 , editable=True):
+    def __init__(self , p_name , p_id = -1 , editable=True,manage = False):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("Bible Study")
@@ -16,8 +16,10 @@ class BibleStudyWindow(QMainWindow, Ui_BibleStudyWindow):
         self.p_id = p_id
         for i in self.getBibleStudyListFromDB():
             self.lv_bs_list.addItem(i)
-        if p_name.lower() != "Manage":
+        if not manage:
             self.list_bible = self.getAttendedBibleStudy(self.p_id)
+            self.btn_add.setEnabled(False)
+            self.btn_add.setVisible(False)
             for i in range(0, self.lv_bs_list.count()):
                 item = self.lv_bs_list.item(i)
                 class_name = item.text()
@@ -33,13 +35,14 @@ class BibleStudyWindow(QMainWindow, Ui_BibleStudyWindow):
                         item.setText(class_name + ": Complete")
                     else:
                         item.setText(class_name + ": Incomplete")
-                    self.btn_add.setDisabled(True)
-                    self.btn_save.setDisabled(True)
-
-
+                    self.btn_add.setEnabled(False)
+                    self.btn_save.setEnabled(False)
         else:
-            self.btn_add.setDisabled(False)
-            self.btn_save.setDisabled(True)
+            self.btn_save.setEnabled(False)
+            self.btn_save.setVisible(False)
+
+            self.btn_add.setEnabled(True)
+            self.btn_add.setVisible(True)
         self.lv_bs_list.itemChanged.connect(self.listItemChanged)
         self.btn_add.released.connect(self.btnAddClicked)
         self.btn_close.released.connect(self.btnCloseClicked)
@@ -57,6 +60,8 @@ class BibleStudyWindow(QMainWindow, Ui_BibleStudyWindow):
     def btnSaveClicked(self):
         for i in range(0, self.lv_bs_list.count()):
             item = self.lv_bs_list.item(i)
+            if(item.checkState() != QtCore.Qt.Checked):
+                continue
             class_name = item.text()
             if class_name not in self.list_bible:
                 self.updateBibleStudyDb(self.p_id,self.getBibleIdFromDB(class_name))
@@ -78,7 +83,7 @@ class BibleStudyWindow(QMainWindow, Ui_BibleStudyWindow):
         return DBConnectSingleton.instance.getBStudyList()
 
     def updateBibleStudyDb(self,p_id,b_id):
-        pass
+        DBConnectSingleton.instance.addBStudyHistory(p_id,b_id)
 
     def getAttendedBibleStudy(self,p_id):
         return DBConnectSingleton.instance.getBStudy(self.p_id)
@@ -87,7 +92,7 @@ class BibleStudyWindow(QMainWindow, Ui_BibleStudyWindow):
         DBConnectSingleton.instance.updateBibleClass(name)
 
     def getBibleIdFromDB(self,bible_name):
-        return 2
+        return DBConnectSingleton.instance.getBStudyIDByName(bible_name)
 
 
 

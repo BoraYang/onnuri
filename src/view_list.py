@@ -17,7 +17,7 @@ class ViewList(QMainWindow , Ui_ViewList):
         self.btn_add.released.connect(self.btnAddClicked)
         self.btn_delete.released.connect(self.btnDeleteClicked)
         self.btn_edit.released.connect(self.btnEditClicked)
-        # self.btn_search.released.connect()
+        self.btn_search.released.connect(self.btnSearchClicked)
         self.model = QSqlTableModel(self,DBConnectSingleton.instance.getDB())
         self.model.setTable("Person")
         # self.model.
@@ -92,6 +92,8 @@ class ViewList(QMainWindow , Ui_ViewList):
     @pyqtSlot()
     def btnSearchClicked(self):
         target = self.tb_name_input.text()
+        self.tv_list.model().setFilter("last_name like '"+target+"'")
+        self.tableViewUpdate()
         return
 
     @pyqtSlot()

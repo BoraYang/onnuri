@@ -1,4 +1,6 @@
 from PyQt5.QtWidgets import *
+
+from add_family import AddFamily
 from ui_view_member import *
 from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.QtCore import QDate
@@ -73,12 +75,16 @@ class ViewMember(QMainWindow, Ui_ViewMember):
 
     @pyqtSlot()
     def showClicked(self):
-        print("show button clicked.")
+        self.family_viwer = AddFamily(self.p_id,self.last_name ,self.first_name ,DBConnectSingleton.instance.getBDate(self.p_id),True)
+        self.family_viwer.show()
+
 
     def showEngName(self):
         first_name = DBConnectSingleton.instance.getFirstName(self.p_id)
         mid_name = DBConnectSingleton.instance.getMidName(self.p_id)
         last_name = DBConnectSingleton.instance.getLastName(self.p_id)
+        self.last_name = last_name
+        self.first_name = first_name
         if mid_name == None:
             return first_name + " " + last_name
         else:
