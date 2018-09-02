@@ -91,7 +91,7 @@ class ViewList(QMainWindow , Ui_ViewList):
 
     @pyqtSlot()
     def btnSearchClicked(self):
-        print("search btn click")
+        target = self.tb_name_input.text()
         return
 
     @pyqtSlot()
