@@ -4,7 +4,7 @@ from ui_view_list import *
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtSql import QSqlTableModel
 from db_connect_singleton import *
-from newmember import NewMember
+from newmember import *
 from view_member import ViewMember
 
 
@@ -16,7 +16,7 @@ class ViewList(QMainWindow , Ui_ViewList):
         self.btn_cancel.released.connect(self.btnCancelClicked)
         self.btn_add.released.connect(self.btnAddClicked)
         # self.btn_delete.released.connect()
-        # self.btn_edit.released.connect()
+        self.btn_edit.released.connect(self.btnEditClicked)
         # self.btn_search.released.connect()
         self.model = QSqlTableModel(self,DBConnectSingleton.instance.getDB())
         self.model.setTable("Person")
@@ -45,9 +45,15 @@ class ViewList(QMainWindow , Ui_ViewList):
 
         self.tv_list.setSortingEnabled(True)
         self.tv_list.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tv_list.clicked.connect(self.selecteditem)
         self.tv_list.show()
         self.tv_list.doubleClicked.connect(self.itemDoubleClicked)
+        self.selected_id = -1
 
+    @pyqtSlot(QModelIndex)
+    def selecteditem(self,index:QModelIndex):
+        select = self.tv_list.model().index(index.row(),0).data()
+        self.selected_id = select
 
     @pyqtSlot(QModelIndex)
     def itemDoubleClicked(self,index):
@@ -74,7 +80,11 @@ class ViewList(QMainWindow , Ui_ViewList):
 
     @pyqtSlot()
     def btnEditClicked(self):
-        print("del btn click")
+        if self.selected_id == -1:
+            return
+        self.edit_view = EditMember(self.selected_id)
+        self.edit_view.myWindowCloseSignal.connect(self.tableViewUpdate)
+        self.edit_view.show()
         return
 
     @pyqtSlot()
@@ -85,3 +95,5 @@ class ViewList(QMainWindow , Ui_ViewList):
     @pyqtSlot()
     def tableViewUpdate(self):
         self.tv_list.model().select()
+        self.tv_list.show()
+

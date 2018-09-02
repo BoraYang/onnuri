@@ -158,7 +158,8 @@ class NewMember(QMainWindow, Ui_NewMember):
                                                           admin=biptism_by)
             # update personal information with baptism id
             DBConnectSingleton.instance.updateBaptism(input_id=p_id, baptism_num=b_id)
-
+        self.myWindowCloseSignal.emit()
+        self.close()
 
 
 
@@ -241,12 +242,10 @@ class EditMember(QMainWindow, Ui_NewMember):
         self.bapsite = False
         self.btn_cancel.released.connect(self.closeClicked)
         self.btn_save.released.connect(self.saveClicked)
-        # self.btn_show.released.connect(self.showClicked)
         self.tb_first_name.setText(DBConnectSingleton.instance.getFirstName(self.p_id))
         self.tb_mid_name.setText(DBConnectSingleton.instance.getMidName(self.p_id))
         self.tb_last_name.setText(DBConnectSingleton.instance.getLastName(self.p_id))
         self.btn_sel_photo.released.connect(self.btn_sel_photo_clicked)
-
         self.tb_kor_name.setText(DBConnectSingleton.instance.getKorName(self.p_id))
         self.tb_email.setText(DBConnectSingleton.instance.getEmail(self.p_id))
         self.tb_phone.setText(str(DBConnectSingleton.instance.getPhone(self.p_id)))
@@ -257,9 +256,11 @@ class EditMember(QMainWindow, Ui_NewMember):
         if len(self.tb_baptism_place.text()) is not 0:
             self.no_baptism = False
             self.de_bap.setDate(QDate.fromString(self.showBaptismDate(), "MM/dd/yyyy"))
+        else:
+            self.no_baptism = True
 
         self.de_reg.setDate(QDate.fromString(DBConnectSingleton.instance.getRDate(self.p_id), "MM/dd/yyyy"))
-        self.cb_duty.addItem(DBConnectSingleton.instance.getDuty(self.p_id))
+
         new_comer_study = DBConnectSingleton.instance.getCStudy(self.p_id)
         if new_comer_study == 'True':
             self.chk_new_comer_study.setCheckState(QtCore.Qt.Checked)
@@ -271,8 +272,29 @@ class EditMember(QMainWindow, Ui_NewMember):
         else:
             self.chk_new_family_study.setCheckState(QtCore.Qt.Unchecked)
 
-        self.cb_group.addItem(DBConnectSingleton.instance.getGroup(self.p_id))
-        self.cb_dept.addItem(DBConnectSingleton.instance.getDept(self.p_id))
+        d_index = 0
+        duty_name = DBConnectSingleton.instance.getDuty(self.p_id)
+        for i in DBConnectSingleton.instance.getDutyName():
+            self.cb_duty.addItem(i)
+            if (i == duty_name):
+                self.cb_duty.setCurrentIndex(d_index)
+            d_index += 1
+        g_index = 0
+        group_name = DBConnectSingleton.instance.getGroup(self.p_id)
+        for i in DBConnectSingleton.instance.getGroupList():
+            self.cb_group.addItem(i)
+            if(i == group_name):
+                self.cb_group.setCurrentIndex(g_index)
+            g_index+=1
+
+
+        d_index = 0
+        dept_name = DBConnectSingleton.instance.getDept(self.p_id)
+        for i in DBConnectSingleton.instance.getDeptName():
+            self.cb_dept.addItem(i)
+            if (i == dept_name):
+                self.cb_dept.setCurrentIndex(d_index)
+            d_index += 1
         gender = DBConnectSingleton.instance.getGender(self.p_id)
         if gender == 'Male':
             self.rb_gender_male.setChecked(True)
@@ -283,6 +305,7 @@ class EditMember(QMainWindow, Ui_NewMember):
         self.btn_show_bible_study.released.connect(self.bStudyClicked)
         self.showPicture()
         self.btn_show_family.released.connect(self.btnFamilyEditClicked)
+
 
     @pyqtSlot()
     def btnFamilyEditClicked(self):
@@ -380,11 +403,10 @@ class EditMember(QMainWindow, Ui_NewMember):
         index = len(arr) - 1
         self.lbl_photo_loc.setText(file_dir+"/"+arr[index])
 
-    def update_info(self):
-        pass
-        # DBConnectSingleton.instance
+
     @pyqtSlot()
     def closeClicked(self):
+        self.myWindowCloseSignal.emit()
         self.close()
 
     @pyqtSlot()
@@ -410,16 +432,16 @@ class EditMember(QMainWindow, Ui_NewMember):
         if(self.no_baptism):
 
             if (len(self.tb_baptism_place.text()) is not 0):
-                dobap = self.de_dob.date().toString("MM/dd/yyyy")
+                dobap = self.de_bap.date().toString("MM/dd/yyyy")
                 biptism_site = self.tb_baptism_place.text()
-                biptism_by = self.tb_baptism_by
+                biptism_by = self.tb_baptism_by.text()
                 b_id = DBConnectSingleton.instance.addBaptism(input_id=self.p_id, bap_date=dobap, location=biptism_site,
                                                               admin=biptism_by)
                 # update personal information with baptism id
                 DBConnectSingleton.instance.updateBaptism(input_id=self.p_id, baptism_num=b_id)
         else:
             DBConnectSingleton.instance.updateBapAdmin(self.p_id,self.tb_baptism_by.text())
-            DBConnectSingleton.instance.updateBapLocation(self.p_id, self.tb_baptism_by.text())
+            DBConnectSingleton.instance.updateBapLocation(self.p_id, self.tb_baptism_place.text())
             DBConnectSingleton.instance.updateBapDate(self.p_id, self.de_bap.date().toString("MM/dd/yyyy"))
 
         duty_id = DBConnectSingleton.instance.getDutyID(self.cb_duty.currentText())
@@ -435,7 +457,8 @@ class EditMember(QMainWindow, Ui_NewMember):
         new_f_s = self.chk_new_comer_study.isChecked()
         DBConnectSingleton.instance.updateCStudy(self.p_id, new_c_s)
         DBConnectSingleton.instance.updateMStudy(self.p_id, new_f_s)
-
+        self.myWindowCloseSignal.emit()
+        self.close()
 
     def getGender(self):
         if (self.rb_gender_male):

@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_ViewMember(object):
     def setupUi(self, ViewMember):
         ViewMember.setObjectName("ViewMember")
-        ViewMember.resize(599, 826)
+        ViewMember.resize(599, 832)
         self.centralWidget = QtWidgets.QWidget(ViewMember)
         self.centralWidget.setObjectName("centralWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralWidget)
@@ -97,6 +97,11 @@ class Ui_ViewMember(object):
         self.horizontalLayout.addWidget(self.rb_gender_female)
         self.gridLayout.addWidget(self.frame_3, 7, 1, 1, 1)
         self.lbl_pic_view = QtWidgets.QLabel(self.groupBox)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.lbl_pic_view.sizePolicy().hasHeightForWidth())
+        self.lbl_pic_view.setSizePolicy(sizePolicy)
         self.lbl_pic_view.setText("")
         self.lbl_pic_view.setObjectName("lbl_pic_view")
         self.gridLayout.addWidget(self.lbl_pic_view, 0, 2, 6, 1)

@@ -54,6 +54,8 @@ class Ui_NewMember(object):
         self.lbl_last_name.setObjectName("lbl_last_name")
         self.gridLayout.addWidget(self.lbl_last_name, 4, 3, 1, 1)
         self.lbl_photo_loc = QtWidgets.QLabel(self.groupBox)
+        self.lbl_photo_loc.setMaximumSize(QtCore.QSize(253, 16))
+        self.lbl_photo_loc.setScaledContents(True)
         self.lbl_photo_loc.setObjectName("lbl_photo_loc")
         self.gridLayout.addWidget(self.lbl_photo_loc, 9, 3, 1, 2)
         self.lbl_mid_name = QtWidgets.QLabel(self.groupBox)

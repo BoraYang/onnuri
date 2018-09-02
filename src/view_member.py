@@ -52,6 +52,7 @@ class ViewMember(QMainWindow, Ui_ViewMember):
         self.rb_gender_male.setEnabled(False)
         self.rb_gender_female.setEnabled(False)
         self.btn_show_bible_study.released.connect(self.bStudyClicked)
+        self.showPicture()
 
     @pyqtSlot()
     def bStudyClicked(self):
@@ -83,7 +84,7 @@ class ViewMember(QMainWindow, Ui_ViewMember):
         else:
             return first_name + " " + mid_name + " " + last_name
 
-    @property
+
     def showBaptismSite(self):
         baptism = DBConnectSingleton.instance.getBaptism(self.p_id)
         if(len(baptism) is 0):
@@ -108,10 +109,16 @@ class ViewMember(QMainWindow, Ui_ViewMember):
     def showPicture(self):
         fileName = DBConnectSingleton.instance.getPicPath(self.p_id)
         if (len(fileName) is not 0):
-            print(fileName[0])
-        img = QImage(fileName[0])
-        h = self.lbl_photo_view.height()
-        w = self.lbl_photo_view.width()
+            print(fileName)
+        img = QImage(fileName)
+        if(img.height() is 0 or img.width() is 0):
+            msg = QMessageBox()
+            msg.setWindowTitle("ERROR")
+            msg.setText("File open ERROR")
+            msg.exec()
+            return
+        h = 155
+        w = 201
 
         img_h = img.height()
         img_w = img.width()

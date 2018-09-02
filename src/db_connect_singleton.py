@@ -238,21 +238,21 @@ class DBConnectSingleton:
         # Update Baptism location for the given Person ID
         def updateBapLocation(self, b_id, b_location):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Baptism SET location = '" + b_location + "' WHERE num ='" + str(b_id) + "';")
+            query.prepare("UPDATE Baptism SET location = '" + b_location + "' WHERE id ='" + str(b_id) + "';")
             if not query.exec_():
                 return -1
 
         # Update Baptism date for the given Person ID
         def updateBapDate(self, b_id, b_date):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Baptism SET bap_date = '" + b_date + "' WHERE num ='" + str(b_id) + "';")
+            query.prepare("UPDATE Baptism SET bap_date = '" + b_date + "' WHERE id ='" + str(b_id) + "';")
             if not query.exec_():
                 return -1
 
         # Update Baptism administrator for the given Person ID
         def updateBapAdmin(self, b_id, b_admin):
             query = QtSql.QSqlQuery(self.db)
-            query.prepare("UPDATE Baptism SET admin = '" + b_admin + "' WHERE num ='" + str(b_id) + "';")
+            query.prepare("UPDATE Baptism SET admin = '" + b_admin + "' WHERE id ='" + str(b_id) + "';")
             if not query.exec_():
                 return -1
 
