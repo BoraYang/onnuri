@@ -15,19 +15,19 @@ class ViewList(QMainWindow , Ui_ViewList):
         self.setupUi(self)
         self.btn_cancel.released.connect(self.btnCancelClicked)
         self.btn_add.released.connect(self.btnAddClicked)
-        # self.btn_delete.released.connect()
+        self.btn_delete.released.connect(self.btnDeleteClicked)
         self.btn_edit.released.connect(self.btnEditClicked)
         # self.btn_search.released.connect()
         self.model = QSqlTableModel(self,DBConnectSingleton.instance.getDB())
         self.model.setTable("Person")
-
+        # self.model.
         self.model.select()
 
 
         # self.model.EditStrategy(QSqlTableModel.OnManualSubmit)
         h_list = ["First Name","Middle Name","Last Name","Korean Name","Gender","Address" ,"BirthDay","Day of Register","E-Mail","Phone","Group","Dept","Duty","Baptism","Family","NewComer Study","New Member Study","Picture"]
         # h_visible = [1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0]
-        h_visible = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1]
+        h_visible = [0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]
         index = 1;
         for s in h_list:
             self.model.setHeaderData(index, QtCore.Qt.Horizontal, s)
@@ -61,6 +61,7 @@ class ViewList(QMainWindow , Ui_ViewList):
         print(self.tv_list.model().index(row_index,0).data())
         self.viwer_window = ViewMember(self.tv_list.model().index(row_index,0).data())
         self.viwer_window.show()
+
     @pyqtSlot()
     def btnCancelClicked(self):
         self.close()
@@ -75,7 +76,8 @@ class ViewList(QMainWindow , Ui_ViewList):
 
     @pyqtSlot()
     def btnDeleteClicked(self):
-        print("del btn click")
+        DBConnectSingleton.instance.removePerson(self.selected_id)
+        self.tableViewUpdate()
         return
 
     @pyqtSlot()

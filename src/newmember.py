@@ -222,7 +222,7 @@ class NewMember(QMainWindow, Ui_NewMember):
         return id_
 
     def getGender(self):
-        if (self.rb_gender_male):
+        if (self.rb_gender_male.isChecked()):
             return "Male"
         else:
             return "Female"
@@ -461,7 +461,7 @@ class EditMember(QMainWindow, Ui_NewMember):
         self.close()
 
     def getGender(self):
-        if (self.rb_gender_male):
+        if (self.rb_gender_male.isChecked()):
             return "Male"
         else:
             return "Female"
